@@ -2214,8 +2214,8 @@ export const genAIResponse = createServerFn({ method: 'GET', response: 'raw' })
 
     try {
       const response = await anthropic.messages.stream({
-        model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 20000,
+        model="claude-sonnet-4-20250514",
+    max_tokens=30000,
         system: systemPrompt,
         messages: formattedMessages,
       })
