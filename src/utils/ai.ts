@@ -2179,7 +2179,7 @@ export const genAIResponse = createServerFn({ method: 'GET', response: 'raw' })
     const anthropic = new Anthropic({
       apiKey,
       // Add proper timeout to avoid connection issues
-      timeout: 30000 // 30 seconds timeout
+      timeout: 120000 // 30 seconds timeout
     })
 
     // Filter out error messages and empty messages
