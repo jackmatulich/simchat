@@ -2221,15 +2221,7 @@ export const genAIResponse = createServerFn({ method: 'GET', response: 'raw' })
         messages: formattedMessages,
       })
 
-      let fullText = '';
-for await (const chunk of response) {
-  if (chunk.type === 'content_block_delta' && chunk.delta?.text) {
-    fullText += chunk.delta.text;
-  }
-}
-return new Response(JSON.stringify({ result: fullText }), {
-  headers: { 'Content-Type': 'application/json' },
-});
+      return new Response(response.toReadableStream())
     } catch (error) {
       console.error('Error in genAIResponse:', error)
       
