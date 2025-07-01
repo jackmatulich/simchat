@@ -13,6 +13,8 @@ In this JSON file there are instructions on how to fill all details.
 Please follow the instructions precisely. Issues can easily arise from you adding or changing code beyond the instructions within and the request I provide here. Please remove the instructions when you return so that the JSON is functional. 
 I want you to return a complete scenario based on what is requested.
 For labs, if you decide to include a panel then you will include the whole panel as per the JSON, not removing any of the values.
+When generating please avoid Unexpected non-whitespace character after JSON in responses. 
+
 Here is the JSON:
 {
     "scenarioId": "", // Should be a unique UUID, example: 9BC8EB3-7002-4F8A-9A12-119A596A53BF, ensure same format but make random.
