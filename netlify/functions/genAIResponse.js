@@ -107,7 +107,7 @@ exports.handler = async (event) => {
     // For background functions, we'll use non-streaming to avoid timeout issues
     const response = await anthropic.messages.create({
       model: 'claude-opus-4-20250514',
-      max_tokens: 30000,
+      max_tokens: 4096,
       system: finalSystemPrompt,
       messages: formattedMessages,
     });
