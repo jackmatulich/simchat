@@ -1,2 +1,14 @@
 [template.environment]
 VITE_ANTHROPIC_API_KEY="Add your Anthropic API key here"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[functions."genAIResponse"]
+  timeout = 900
+
+[[redirects]]
+  from = "/api/genAIResponse"
+  to = "/.netlify/functions/genAIResponse"
+  status = 200
