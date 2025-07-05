@@ -74,10 +74,8 @@ function Home() {
 
       // Get AI response
       const response = await genAIResponse({
-        data: {
-          messages: [...messages, userMessage],
-          systemPrompt,
-        },
+        messages: [...messages, userMessage],
+        systemPrompt,
       })
 
       const reader = response.body?.getReader()
