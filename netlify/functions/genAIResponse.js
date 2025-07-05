@@ -45,6 +45,9 @@ exports.handler = async (event) => {
 
     // Add debug logging
     console.log('Received request body:', JSON.stringify(body, null, 2));
+    console.log('Messages type:', typeof messages);
+    console.log('Messages value:', messages);
+    console.log('Is array?', Array.isArray(messages));
 
     // Check for API key in environment variables
     const apiKey = process.env.ANTHROPIC_API_KEY;
