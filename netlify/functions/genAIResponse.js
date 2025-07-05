@@ -43,6 +43,9 @@ exports.handler = async (event) => {
     const body = event.body ? JSON.parse(event.body) : {};
     const { messages, systemPrompt } = body;
 
+    // Add debug logging
+    console.log('Received request body:', JSON.stringify(body, null, 2));
+
     // Check for API key in environment variables
     const apiKey = process.env.ANTHROPIC_API_KEY;
 
@@ -52,6 +55,18 @@ exports.handler = async (event) => {
         headers,
         body: JSON.stringify({
           error: 'Missing API key: Please set ANTHROPIC_API_KEY in your environment variables.',
+        }),
+      };
+    }
+
+    // Validate messages parameter
+    if (!messages || !Array.isArray(messages)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: 'Invalid request: messages parameter is required and must be an array',
+          received: typeof messages,
         }),
       };
     }
@@ -66,7 +81,7 @@ exports.handler = async (event) => {
     const formattedMessages = messages
       .filter(
         (msg) =>
-          msg.content.trim() !== '' &&
+          msg.content && msg.content.trim() !== '' &&
           !msg.content.startsWith('Sorry, I encountered an error'),
       )
       .map((msg) => ({
@@ -104,6 +119,7 @@ exports.handler = async (event) => {
     };
   } catch (error) {
     console.error('Error in genAIResponse:', error);
+    console.error('Error stack:', error.stack);
     
     let errorMessage = 'Failed to get AI response';
     let statusCode = 500;
@@ -127,7 +143,8 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({ 
         error: errorMessage,
-        details: error instanceof Error ? error.name : undefined
+        details: error instanceof Error ? error.name : undefined,
+        stack: error.stack
       }),
     };
   }
