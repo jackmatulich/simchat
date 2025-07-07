@@ -2160,6 +2160,7 @@ Here is the JSON:
 export const genAIResponse = async (data: {
   messages: Array<Message>
   systemPrompt?: { value: string; enabled: boolean }
+  conversationId: string
 }) => {
   try {
     const response = await fetch('/.netlify/functions/genAIResponse-background', {
@@ -2170,46 +2171,24 @@ export const genAIResponse = async (data: {
       body: JSON.stringify(data),
     })
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || 'Failed to get AI response')
+    if (response.status === 202) {
+      // Background function accepted, response will appear in Convex
+      return;
     }
 
-    const result = await response.json()
-    
-    // Create a ReadableStream to maintain compatibility with existing code
-    const encoder = new TextEncoder()
-    const stream = new ReadableStream({
-      start(controller) {
-        // Simulate streaming by sending the content in chunks
-        const content = result.content || ''
-        const chunkSize = 100
-        let index = 0
-        
-        const sendChunk = () => {
-          if (index >= content.length) {
-            controller.close()
-            return
-          }
-          
-          const chunk = content.slice(index, index + chunkSize)
-          const jsonChunk = JSON.stringify({
-            type: 'content_block_delta',
-            delta: { text: chunk }
-          })
-          
-          controller.enqueue(encoder.encode(jsonChunk + '\n'))
-          index += chunkSize
-          
-          // Send next chunk after a small delay to simulate streaming
-          setTimeout(sendChunk, 10)
+    if (!response.ok) {
+      let errorMsg = 'Failed to queue AI response';
+      try {
+        const errorData = await response.json();
+        if (errorData && typeof errorData === 'object' && 'error' in errorData) {
+          errorMsg = errorData.error;
         }
-        
-        sendChunk()
-      }
-    })
+      } catch {}
+      throw new Error(errorMsg);
+    }
 
-    return new Response(stream)
+    // For non-background (should not happen), just return
+    return;
   } catch (error) {
     console.error('Error calling Netlify function:', error)
     throw error
