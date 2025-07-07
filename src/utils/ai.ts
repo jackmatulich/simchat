@@ -41,7 +41,7 @@ Here is the JSON:
           "", "" //Outline key reflective or feedback topics aligned to learning objectives
         ],
         "handover": {
-          "time_of_day": "", //Time at which scenario begins (e.g., “0730h”)
+          "time_of_day": "", //Time at which scenario begins (e.g., "0730h")
           "handover_reason": "", //Reason for handover (e.g., shift change, admission, ward round)
           "confederate_role": "", //Role of confederate providing handover (e.g., night shift nurse)
           "what_is_about_to_happen": "", //Describe what the participants will soon observe or respond to
@@ -240,7 +240,6 @@ Here is the JSON:
                 "sinusArrhythmiaInterference": 1, // ECG Sinus Arrhythmia scale 1-5, default 1 unless good reason to change
                 "ventilated": false, // Patient ventilated
                 "electrodeStatus": [
-                    true,
                     true,
                     true,
                     true,
@@ -2163,7 +2162,7 @@ export const genAIResponse = async (data: {
   systemPrompt?: { value: string; enabled: boolean }
 }) => {
   try {
-    const response = await fetch('/.netlify/functions/genAIResponse', {
+    const response = await fetch('/.netlify/functions/genAIResponse-background', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
