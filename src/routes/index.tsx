@@ -76,46 +76,17 @@ function Home() {
       const response = await genAIResponse({
         messages: [...messages, userMessage],
         systemPrompt,
-      })
+        conversationId, // ensure conversationId is passed if needed
+      });
 
-      const reader = response.body?.getReader()
-      if (!reader) {
-        throw new Error('No reader found in response')
+      // If using background function, response will be undefined
+      if (typeof response === 'undefined') {
+        // Background function: AI response will be added to Convex later
+        return;
       }
 
-      const decoder = new TextDecoder()
-
-      let done = false
-      let newMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant' as const,
-        content: '',
-      }
-      while (!done) {
-        const out = await reader.read()
-        done = out.done
-        if (!done) {
-          try {
-            const json = JSON.parse(decoder.decode(out.value))
-            if (json.type === 'content_block_delta') {
-              newMessage = {
-                ...newMessage,
-                content: newMessage.content + json.delta.text,
-              }
-              setPendingMessage(newMessage)
-            }
-          } catch (e) {
-            console.error('Error parsing streaming response:', e)
-          }
-        }
-      }
-
-      setPendingMessage(null)
-      if (newMessage.content.trim()) {
-        // Add AI message to Convex
-        console.log('Adding AI response to conversation:', conversationId)
-        await addMessage(conversationId, newMessage)
-      }
+      // For non-background (should not happen), just return
+      // (existing streaming code would go here if needed)
     } catch (error) {
       console.error('Error in AI response:', error)
       // Add an error message to the conversation
