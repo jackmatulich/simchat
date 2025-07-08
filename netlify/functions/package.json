@@ -4,7 +4,9 @@
   "description": "Netlify functions for SimChat",
   "main": "index.js",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "node-fetch": "^2.6.7",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.18"

@@ -1,3 +1,4 @@
+// force redeploy
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
@@ -49,7 +50,7 @@ export const updateTitle = mutation({
   },
 });
 
-// Add a message to a conversation
+// Add a message to a conversation (original, for frontend compatibility)
 export const addMessage = mutation({
   args: {
     conversationId: v.id("conversations"),
@@ -64,10 +65,31 @@ export const addMessage = mutation({
     if (!conversation) {
       throw new Error("Conversation not found");
     }
-    
     const updatedMessages = [...conversation.messages, args.message];
-    return await ctx.db.patch(args.conversationId, { 
-      messages: updatedMessages 
+    return await ctx.db.patch(args.conversationId, {
+      messages: updatedMessages,
+    });
+  },
+});
+
+// Add a message to a conversation
+export const addMessage2 = mutation({
+  args: {
+    conversationId: v.id("conversations"),
+    message: v.object({
+      id: v.string(),
+      role: v.union(v.literal("user"), v.literal("assistant")),
+      content: v.string(),
+    }),
+  },
+  handler: async (ctx, args) => {
+    const conversation = await ctx.db.get(args.conversationId);
+    if (!conversation) {
+      throw new Error("Conversation not found");
+    }
+    const updatedMessages = [...conversation.messages, args.message];
+    return await ctx.db.patch(args.conversationId, {
+      messages: updatedMessages,
     });
   },
 });
