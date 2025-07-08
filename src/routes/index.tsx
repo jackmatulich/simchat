@@ -249,7 +249,7 @@ function Home() {
                   .map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
-                {isLoading && <LoadingIndicator />}
+                {isLoading && <LoadingIndicator message="Generating scenario..." />}
               </div>
             </div>
 

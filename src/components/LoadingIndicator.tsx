@@ -1,4 +1,4 @@
-export const LoadingIndicator = () => (
+export const LoadingIndicator = ({ message = 'Thinking' }: { message?: string }) => (
   <div className="px-6 py-6 bg-gradient-to-r from-orange-500/5 to-red-600/5">
     <div className="flex items-start w-full max-w-3xl gap-4 mx-auto">
       <div className="relative flex-shrink-0 w-8 h-8">
@@ -14,7 +14,7 @@ export const LoadingIndicator = () => (
       </div>
       <div className="flex items-center gap-3">
         <div className="text-lg font-medium text-gray-400">
-          Thinking
+          {message}
         </div>
         <div className="flex gap-2">
           <div
