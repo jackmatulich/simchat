@@ -31,7 +31,10 @@ async function addMessageToConvex(conversationId, message) {
   }
   // Force .convex.site domain if .convex.cloud is present
   convexUrl = convexUrl.replace('.convex.cloud', '.convex.site');
-  const convex = new ConvexHttpClient(convexUrl, { adminKey: convexAdminKey });
+  const convex = new ConvexHttpClient(convexUrl, {
+    adminKey: convexAdminKey,
+    skipConvexDeploymentUrlCheck: true
+  });
   return await convex.mutation("conversations:addMessage", {
     conversationId,
     message,
