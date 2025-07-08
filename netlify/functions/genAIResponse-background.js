@@ -2220,7 +2220,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const anthropic = new Anthropic({ apiKey, timeout: 120000 });
+    const anthropic = new Anthropic({ apiKey, timeout: 240000 });
     const formattedMessages = messages
       .filter((msg) => msg.content && msg.content.trim() !== '' && !msg.content.startsWith('Sorry, I encountered an error'))
       .map((msg) => ({ role: msg.role, content: msg.content.trim() }));
