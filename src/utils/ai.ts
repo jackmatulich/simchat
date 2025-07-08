@@ -12,8 +12,6 @@ In this JSON file there are instructions on how to fill all details.
 Please follow the instructions precisely. Issues can easily arise from you adding or changing code beyond the instructions within and the request I provide here. Please remove the instructions when you return so that the JSON is functional. 
 I want you to return a complete scenario based on what is requested.
 For labs, if you decide to include a panel then you will include the whole panel as per the JSON, not removing any of the values.
-When generating please avoid Unexpected non-whitespace character after JSON in responses. 
-
 Here is the JSON:
 {
     "scenarioId": "", // Should be a unique UUID, example: 9BC8EB3-7002-4F8A-9A12-119A596A53BF, ensure same format but make random.
@@ -41,7 +39,7 @@ Here is the JSON:
           "", "" //Outline key reflective or feedback topics aligned to learning objectives
         ],
         "handover": {
-          "time_of_day": "", //Time at which scenario begins (e.g., "0730h")
+          "time_of_day": "", //Time at which scenario begins (e.g., “0730h”)
           "handover_reason": "", //Reason for handover (e.g., shift change, admission, ward round)
           "confederate_role": "", //Role of confederate providing handover (e.g., night shift nurse)
           "what_is_about_to_happen": "", //Describe what the participants will soon observe or respond to
@@ -240,6 +238,7 @@ Here is the JSON:
                 "sinusArrhythmiaInterference": 1, // ECG Sinus Arrhythmia scale 1-5, default 1 unless good reason to change
                 "ventilated": false, // Patient ventilated
                 "electrodeStatus": [
+                    true,
                     true,
                     true,
                     true,
