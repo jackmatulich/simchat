@@ -26,7 +26,7 @@ export const ChatInput = ({
                 handleSubmit(e)
               }
             }}
-            placeholder="Type something clever (or don't, we won't judge)..."
+            placeholder="Ask away..."
             className="w-full py-3 pl-4 pr-12 overflow-hidden text-sm text-white placeholder-gray-400 border rounded-lg shadow-lg resize-none border-orange-500/20 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent"
             rows={1}
             style={{ minHeight: '44px', maxHeight: '200px' }}
