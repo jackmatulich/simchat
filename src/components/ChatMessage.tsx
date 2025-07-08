@@ -80,7 +80,7 @@ export const ChatMessage = ({ message }: { message: Message }) => {
                 onClick={handleDownload}
                 className="px-3 py-1 text-xs font-semibold text-white bg-orange-500 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
               >
-                Download JSON
+                Download Realiti File
               </button>
               {downloadError && <span className="text-red-500 text-xs">{downloadError}</span>}
             </div>
