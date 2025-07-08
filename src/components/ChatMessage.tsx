@@ -11,12 +11,21 @@ export const ChatMessage = ({ message }: { message: Message }) => {
   // Helper to check if content is valid JSON and extract scenarioName
   let jsonData: any = null;
   let scenarioName: string | null = null;
-  try {
-    jsonData = JSON.parse(message.content);
-    scenarioName = jsonData?.scenarioName || null;
-  } catch {
-    // Not valid JSON, do nothing
+  function tryParseJson(content: string): any {
+    // Remove code block markers if present
+    let cleaned = content.trim();
+    // Match ```json ... ``` or ``` ... ```
+    if (cleaned.startsWith('```')) {
+      cleaned = cleaned.replace(/^```(json)?/i, '').replace(/```$/, '').trim();
+    }
+    try {
+      return JSON.parse(cleaned);
+    } catch {
+      return null;
+    }
   }
+  jsonData = tryParseJson(message.content);
+  scenarioName = jsonData?.scenarioName || null;
 
   const handleDownload = () => {
     if (!jsonData || !scenarioName) return;
