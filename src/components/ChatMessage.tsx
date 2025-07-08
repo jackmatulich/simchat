@@ -8,23 +8,32 @@ import { useState } from 'react';
 export const ChatMessage = ({ message }: { message: Message }) => {
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
-  // Helper to check if content is valid JSON and extract scenarioName
-  let jsonData: any = null;
-  let scenarioName: string | null = null;
-  function tryParseJson(content: string): any {
-    // Remove code block markers if present
+  // Helper to robustly extract JSON from message content
+  function extractJson(content: string): any {
     let cleaned = content.trim();
-    // Match ```json ... ``` or ``` ... ```
-    if (cleaned.startsWith('```')) {
-      cleaned = cleaned.replace(/^```(json)?/i, '').replace(/```$/, '').trim();
+    // Try to extract the first code block (```json ... ``` or ``` ... ```)
+    const codeBlockMatch = cleaned.match(/```(?:json)?([\s\S]*?)```/i);
+    if (codeBlockMatch) {
+      try {
+        return JSON.parse(codeBlockMatch[1].trim());
+      } catch {}
     }
+    // If no code block, try to find the first {...} block
+    const curlyMatch = cleaned.match(/({[\s\S]*})/);
+    if (curlyMatch) {
+      try {
+        return JSON.parse(curlyMatch[1]);
+      } catch {}
+    }
+    // As a last resort, try the whole content
     try {
       return JSON.parse(cleaned);
-    } catch {
-      return null;
-    }
+    } catch {}
+    return null;
   }
-  jsonData = tryParseJson(message.content);
+  let jsonData: any = null;
+  let scenarioName: string | null = null;
+  jsonData = extractJson(message.content);
   scenarioName = jsonData?.scenarioName || null;
 
   const handleDownload = () => {
