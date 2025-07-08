@@ -1,5 +1,6 @@
 const { Anthropic } = require('@anthropic-ai/sdk');
 const fetch = require('node-fetch');
+const { ConvexHttpClient } = require("convex/browser");
 
 const DEFAULT_SYSTEM_PROMPT = `
 You are SimChat, a comprehensive clinical scenario generator for the iSimulate Realiti Environment. Your role is to create detailed, realistic, and educational clinical scenarios that can be used for simulation training.
@@ -21,30 +22,20 @@ Scenario Structure:
 Always maintain a professional, educational tone and focus on creating scenarios that enhance clinical decision-making skills.
 `;
 
-// Helper to add a message to Convex
+// Helper to add a message to Convex using the backend client
 async function addMessageToConvex(conversationId, message) {
-  const convexUrl = process.env.CONVEX_URL;
+  let convexUrl = process.env.CONVEX_URL;
   const convexAdminKey = process.env.CONVEX_ADMIN_KEY;
   if (!convexUrl || !convexAdminKey) {
     throw new Error('Missing Convex URL or admin key in environment variables.');
   }
-  const url = `${convexUrl}/api/functions/conversations:addMessage`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${convexAdminKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      conversationId,
-      message,
-    }),
+  // Force .convex.site domain if .convex.cloud is present
+  convexUrl = convexUrl.replace('.convex.cloud', '.convex.site');
+  const convex = new ConvexHttpClient(convexUrl, { adminKey: convexAdminKey });
+  return await convex.mutation("conversations:addMessage", {
+    conversationId,
+    message,
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Failed to add message to Convex: ${res.status} ${text}`);
-  }
-  return await res.json();
 }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -121,15 +112,13 @@ exports.handler = async (event) => {
       messages: formattedMessages,
     });
     const aiContent = response.content[0]?.text || '';
-    console.log('AI content:', aiContent); // <-- Log AI content
     const aiMessage = {
       id: Date.now().toString(),
       role: 'assistant',
       content: aiContent,
     };
     // Store the AI response in Convex
-    const result = await addMessageToConvex(conversationId, aiMessage);
-    console.log('addMessageToConvex result:', result); // <-- Log Convex mutation result
+    await addMessageToConvex(conversationId, aiMessage);
     // Return 202 Accepted for background function
     return {
       statusCode: 202,
@@ -137,7 +126,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ status: 'AI response queued and will appear in chat when ready.' }),
     };
   } catch (error) {
-    console.error('Error in genAIResponse-background:', error, error?.stack); // <-- Log full error stack
+    console.error('Error in genAIResponse-background:', error);
     return {
       statusCode: 500,
       headers,
