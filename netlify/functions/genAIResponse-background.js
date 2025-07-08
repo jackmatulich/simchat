@@ -24,17 +24,16 @@ Always maintain a professional, educational tone and focus on creating scenarios
 
 // Helper to add a message to Convex using the backend client
 async function addMessageToConvex(conversationId, message) {
-  let convexUrl = process.env.CONVEX_URL;
+  const convexUrl = process.env.CONVEX_URL;
   const convexAdminKey = process.env.CONVEX_ADMIN_KEY;
   if (!convexUrl || !convexAdminKey) {
     throw new Error('Missing Convex URL or admin key in environment variables.');
   }
-  // Force .convex.site domain if .convex.cloud is present
-  convexUrl = convexUrl.replace('.convex.cloud', '.convex.site');
-  const convex = new ConvexHttpClient(convexUrl, {
-    adminKey: convexAdminKey,
-    skipConvexDeploymentUrlCheck: true
-  });
+  // Use only .convex.cloud for backend client
+  if (!convexUrl.endsWith('.convex.cloud')) {
+    throw new Error('CONVEX_URL must end with .convex.cloud for backend client calls.');
+  }
+  const convex = new ConvexHttpClient(convexUrl, { adminKey: convexAdminKey });
   return await convex.mutation("conversations:addMessage", {
     conversationId,
     message,
