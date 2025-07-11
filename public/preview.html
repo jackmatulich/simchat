@@ -545,7 +545,7 @@
     <template id="logo-template">
         <!-- ... SVG ... -->
     </template>
-    <!-- Scenario Content -->
+    <!-- Scenario Content (no upload UI) -->
     <div id="scenarioContent">
         <!-- Page 1: Overview -->
         <section class="sheet padding-10mm">
@@ -726,10 +726,6 @@
         <!-- Laboratory Results Pages (dynamically generated) -->
         <div id="labPagesContainer"></div>
     </div>
-    <div id="preview-wait-message" style="text-align:center; margin-top:40px; color:#888; font-size:1.1em;">
-      Waiting for scenario data...<br/>
-      (Open this page from the chat app's Preview button)
-    </div>
     <script>
         let scenarioData = null;
         // ECG Rhythm lookup from scenario JSON
@@ -858,25 +854,15 @@
         }
 
         // --- Show scenario and postMessage listener ---
-        function showScenario(data) {
-            scenarioData = data;
-            populateTemplate(scenarioData);
-            document.getElementById('scenarioContent').classList.add('active');
-            document.getElementById('preview-wait-message').style.display = 'none';
-        }
-
         window.addEventListener('message', (event) => {
-            console.log('Received postMessage:', event.data);
             try {
-                if (typeof event.data === 'string') {
-                    const data = JSON.parse(event.data);
-                    showScenario(data);
-                } else if (typeof event.data === 'object' && event.data !== null) {
-                    showScenario(event.data);
-                }
+                let data = event.data;
+                if (typeof data === 'string') data = JSON.parse(data);
+                scenarioData = data;
+                populateTemplate(scenarioData);
+                document.getElementById('scenarioContent').classList.add('active');
             } catch (e) {
-                document.getElementById('preview-wait-message').innerText = 'Error loading scenario data.';
-                console.error('Error parsing scenario data:', e);
+                alert('Error loading scenario data: ' + e);
             }
         }, false);
 
