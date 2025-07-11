@@ -557,9 +557,36 @@
 
     <script>
         let scenarioData = null;
-        // ... ecgRhythmLookup and all populate functions ...
+        // ECG Rhythm lookup from scenario JSON
+        const ecgRhythmLookup = { /* ... existing lookup ... */ };
 
-        // Remove upload logic, add postMessage listener
+        // --- Helper functions ---
+        function populateTemplate(data) {
+            // ... full definition ...
+        }
+        function populateList(containerId, items, addCheckbox = false) {
+            // ... full definition ...
+        }
+        function populateEvents(events) {
+            // ... full definition ...
+        }
+        function populateEventsPage(events, container, startIndex = 0) {
+            // ... full definition ...
+        }
+        function populateLabs(labs) {
+            // ... full definition ...
+        }
+        function createBloodGasTable(lab, isVenous) {
+            // ... full definition ...
+        }
+        function createLabTable(lab) {
+            // ... full definition ...
+        }
+        function isParameterAbnormal(param) {
+            // ... full definition ...
+        }
+
+        // --- Show scenario and postMessage listener ---
         function showScenario(data) {
             scenarioData = data;
             populateTemplate(scenarioData);
@@ -568,7 +595,6 @@
         }
 
         window.addEventListener('message', (event) => {
-            // Optionally, check event.origin for security
             console.log('Received postMessage:', event.data);
             try {
                 if (typeof event.data === 'string') {
@@ -589,6 +615,20 @@
                 showScenario(JSON.parse(window.name));
             }
         } catch {}
+
+        // Insert SVG logo into all .logo elements
+        (function() {
+            const logoTemplate = document.getElementById('logo-template');
+            if (logoTemplate) {
+                const logoSVG = logoTemplate.content.firstElementChild;
+                document.querySelectorAll('.logo').forEach(function(logoDiv) {
+                    logoDiv.innerHTML = '';
+                    if (logoSVG) {
+                        logoDiv.appendChild(logoSVG.cloneNode(true));
+                    }
+                });
+            }
+        })();
     </script>
 </body>
 </html> 
