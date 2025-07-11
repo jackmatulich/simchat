@@ -962,6 +962,7 @@
                     populateEventsPage(eventPages[pageIndex], pageContainer, pageIndex * eventsPerPage);
                 }
             }
+            insertLogos();
         }
         function populateEventsPage(events, container, startIndex = 0) {
             events.forEach((event, index) => {
@@ -1070,6 +1071,7 @@
                     labContentContainer.appendChild(createLabTable(lab));
                 }
             });
+            insertLogos();
         }
         function createBloodGasTable(lab, isVenous) {
             const table = document.createElement('table');
@@ -1282,8 +1284,7 @@
             }
         } catch {}
 
-        // Insert SVG logo into all .logo elements
-        (function() {
+        function insertLogos() {
             const logoTemplate = document.getElementById('logo-template');
             if (logoTemplate) {
                 const logoSVG = logoTemplate.content.firstElementChild;
@@ -1294,7 +1295,7 @@
                     }
                 });
             }
-        })();
+        }
 
         window.addEventListener('DOMContentLoaded', () => {
           if (window.opener) {
