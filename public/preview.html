@@ -832,25 +832,363 @@
             console.log('[populateTemplate] End');
         }
         function populateList(containerId, items, addCheckbox = false) {
-            // ... full definition ...
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            if (items.length === 0) {
+                container.innerHTML = '<li style="color: #666; font-style: italic;">No items specified</li>';
+                return;
+            }
+            items.forEach(item => {
+                const li = document.createElement('li');
+                if (addCheckbox) {
+                    li.className = 'checkbox-item';
+                }
+                li.textContent = item;
+                container.appendChild(li);
+            });
         }
         function populateEvents(events) {
-            // ... full definition ...
+            const container = document.getElementById('eventsContainer');
+            container.innerHTML = '';
+            if (events.length === 0) {
+                container.innerHTML = '<p style="color: #666; font-style: italic;">No events specified</p>';
+                return;
+            }
+            // Split events into pages of 6
+            const eventsPerPage = 6;
+            const eventPages = [];
+            for (let i = 0; i < events.length; i += eventsPerPage) {
+                eventPages.push(events.slice(i, i + eventsPerPage));
+            }
+            // Create first events page (replace existing content)
+            populateEventsPage(eventPages[0], container);
+            // Create additional events pages if needed
+            if (eventPages.length > 1) {
+                const labPagesContainer = document.getElementById('labPagesContainer');
+                for (let pageIndex = 1; pageIndex < eventPages.length; pageIndex++) {
+                    const pageDiv = document.createElement('section');
+                    pageDiv.className = 'sheet padding-10mm';
+                    pageDiv.innerHTML = `
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>Event Timeline (Page ${pageIndex + 1})</h1>
+                                <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h2>Scenario Events (Continued)</h2>
+                            <div class="events-container" id="eventsContainer${pageIndex}"></div>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    `;
+                    // Insert before lab pages
+                    labPagesContainer.insertBefore(pageDiv, labPagesContainer.firstChild);
+                    // Populate this page with events
+                    const pageContainer = document.getElementById(`eventsContainer${pageIndex}`);
+                    populateEventsPage(eventPages[pageIndex], pageContainer, pageIndex * eventsPerPage);
+                }
+            }
         }
         function populateEventsPage(events, container, startIndex = 0) {
-            // ... full definition ...
+            events.forEach((event, index) => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event-card';
+                const params = event.parameters || {};
+                // Try different possible ECG parameter names
+                const ecgRhythmValue = params.ecgRhythm || params.ecg || params.ecgId || params.rhythm || 9; // default to sinus
+                const ecgRhythm = ecgRhythmLookup[ecgRhythmValue] || `Unknown (${ecgRhythmValue})`;
+                const vitalsHtml = `
+                    <div class="vitals-grid">
+                        <div class="vital-item ecg-item">
+                            <span class="vital-label">ECG Rhythm</span>
+                            <span class="vital-value">${ecgRhythm}</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">HR</span>
+                            <span class="vital-value">${params.hr || '-'} bpm</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">BP</span>
+                            <span class="vital-value">${params.bpSys || '-'}/${params.bpDia || '-'} mmHg</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">SpO2</span>
+                            <span class="vital-value">${params.spo2 || '-'}%</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">EtCO2</span>
+                            <span class="vital-value">${params.etco2 || '-'} mmHg</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">RR</span>
+                            <span class="vital-value">${params.respRate || '-'}/min</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">Temp</span>
+                            <span class="vital-value">${params.temp || '-'}°C</span>
+                        </div>
+                    </div>
+                `;
+                // Add checklist for this event
+                let checklistHtml = '';
+                if (event.relatedChecklist && scenarioData.checklist) {
+                    checklistHtml = '<div class="event-checklist"><h4>Checklist:</h4><ul>';
+                    event.relatedChecklist.forEach(checklistIndex => {
+                        if (scenarioData.checklist[checklistIndex]) {
+                            checklistHtml += `<li>${scenarioData.checklist[checklistIndex].title}</li>`;
+                        }
+                    });
+                    checklistHtml += '</ul></div>';
+                }
+                eventDiv.innerHTML = `
+                    <div class="event-header">
+                        Event ${startIndex + index + 1}: ${event.name || 'Unnamed Event'}
+                    </div>
+                    <div class="event-content">
+                        <div class="event-main">
+                            <div class="event-description">${event.description || 'No description provided'}</div>
+                            ${vitalsHtml}
+                        </div>
+                        ${checklistHtml}
+                    </div>
+                `;
+                container.appendChild(eventDiv);
+            });
         }
         function populateLabs(labs) {
-            // ... full definition ...
+            const labPagesContainer = document.getElementById('labPagesContainer');
+            labPagesContainer.innerHTML = '';
+            if (labs.length === 0) {
+                return;
+            }
+            labs.forEach((lab, index) => {
+                const labName = lab.name || '';
+                const isBloodGas = labName.toLowerCase().includes('blood gas') || 
+                                 labName.toLowerCase().includes('abg') || 
+                                 labName.toLowerCase().includes('vbg');
+                // Create a new page for each lab test
+                const pageDiv = document.createElement('section');
+                pageDiv.className = 'sheet padding-10mm';
+                const isVenous = labName.toLowerCase().includes('venous');
+                const gasType = isVenous ? 'VBG' : 'ABG';
+                const pageTitle = isBloodGas ? `${gasType} Results` : `${labName} Results`;
+                pageDiv.innerHTML = `
+                    <div class="header">
+                        <div class="logo"></div>
+                        <div>
+                            <h1>${pageTitle}</h1>
+                            <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div id="labContent${index}"></div>
+                    </div>
+                    <div class="footer">
+                        <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                    </div>
+                `;
+                labPagesContainer.appendChild(pageDiv);
+                // Populate the lab content
+                const labContentContainer = document.getElementById(`labContent${index}`);
+                if (isBloodGas) {
+                    labContentContainer.appendChild(createBloodGasTable(lab, isVenous));
+                } else {
+                    labContentContainer.appendChild(createLabTable(lab));
+                }
+            });
         }
         function createBloodGasTable(lab, isVenous) {
-            // ... full definition ...
+            const table = document.createElement('table');
+            table.className = 'bloodgas';
+            const gasType = isVenous ? 'Venous' : 'Arterial';
+            const params = lab.parameters || {};
+            // Get patient name from scenario data and split into first/last names
+            const patientName = scenarioData?.patientInformation?.patientName || 'Sim Patient';
+            const nameParts = patientName.trim().split(/\s+/);
+            const firstName = nameParts[0] || 'Sim';
+            const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'Patient';
+            // Helper function to get parameter value and determine if abnormal
+            function getParamInfo(paramName) {
+                const param = params.find(p => p.name === paramName || p.name === paramName + '(T)' || 
+                    p.name === paramName + '+' || p.name === paramName + '++' || p.name === paramName + '–');
+                if (!param) return { value: '-', unit: '', arrow: '' };
+                const isAbnormal = isParameterAbnormal(param);
+                let arrow = '';
+                if (isAbnormal && param.healthy_min !== undefined && param.healthy_max !== undefined) {
+                    const value = parseFloat(param.value);
+                    const min = parseFloat(param.healthy_min);
+                    const max = parseFloat(param.healthy_max);
+                    if (!isNaN(value) && !isNaN(min) && !isNaN(max)) {
+                        arrow = value < min ? '↓' : value > max ? '↑' : '';
+                    }
+                }
+                return {
+                    value: param.value || '-',
+                    unit: param.unit || '',
+                    arrow: arrow
+                };
+            }
+            let html = `
+                <colgroup>
+                    <col style="width: 38%;">
+                    <col style="width: 17%; text-align: center;">
+                    <col style="width: 22%;">
+                    <col style="width: 13%;">
+                </colgroup>
+                <tr style="text-align: center !important;"><td colspan="4" style="text-align: center !important;font-size: 15px; padding-top:10% !important;"><strong>iSimuLab<sup>®</sup> 700x</strong></td></tr>
+                <tr><td>SAMPLE TYPE:</td><td colspan="3" style="text-align: left !important;">${gasType}</td></tr>
+                <tr><td>System Name:</td><td colspan="3" style="text-align: left !important;">St Elswhere</td></tr>
+                <tr><td>System ID:</td><td colspan="3" style="text-align: left !important;">0500-53992</td></tr>
+                <tr><td>Patient ID:</td><td colspan="3" style="text-align: left !important;">123456789</td></tr>
+                <tr><td>Lst Name:</td><td colspan="3" style="text-align: left !important;">${lastName}</td></tr>
+                <tr><td>Fst Name:</td><td colspan="3" style="text-align: left !important;">${firstName}</td></tr>
+                <tr><td colspan="4"><strong>ACID/BASE 37.0°C</strong></td></tr>
+            `;
+            // Add acid/base parameters
+            const acidBaseParams = [
+                { name: 'pH', display: 'pH' },
+                { name: 'pCO2', display: 'pCO2' },
+                { name: 'pO2', display: 'pO2' },
+                { name: 'HCO3', display: 'HCO3–' },
+                { name: 'BE', display: 'BE(B)' }
+            ];
+            acidBaseParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add Co-Oximetry section if arterial
+            if (!isVenous) {
+                html += `<tr><td colspan="4"><strong>CO-OXIMETRY</strong></td></tr>`;
+                const coOxParams = [
+                    { name: 'Hct', display: 'Hct' },
+                    { name: 'tHb', display: 'tHb' },
+                    { name: 'sO2', display: 'sO2' },
+                    { name: 'FO2Hb', display: 'FO2 Hb' },
+                    { name: 'FCOHb', display: 'FCO Hb' },
+                    { name: 'FMetHb', display: 'FMet Hb' },
+                    { name: 'FHHb', display: 'FHHb' }
+                ];
+                coOxParams.forEach(param => {
+                    const info = getParamInfo(param.name);
+                    if (info.value !== '-') {
+                        html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                    }
+                });
+                // Add corrected section
+                html += `<tr><td colspan="4"><strong>CORRECTED 37.0°</strong></td></tr>`;
+                const correctedParams = [
+                    { name: 'pH(T)', display: 'pH(T)' },
+                    { name: 'pCO2(T)', display: 'pCO2(T)' },
+                    { name: 'pO2(T)', display: 'pO2(T)' }
+                ];
+                correctedParams.forEach(param => {
+                    const info = getParamInfo(param.name);
+                    if (info.value !== '-') {
+                        html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                    }
+                });
+            }
+            // Add electrolytes section
+            html += `<tr><td colspan="4"><strong>ELECTROLYTES</strong></td></tr>`;
+            const electrolyteParams = [
+                { name: 'Na', display: 'Na+' },
+                { name: 'K', display: 'K+' },
+                { name: 'Ca', display: 'Ca++' },
+                { name: 'Cl', display: 'Cl–' }
+            ];
+            electrolyteParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add metabolites section
+            html += `<tr><td colspan="4"><strong>METABOLITES</strong></td></tr>`;
+            const metaboliteParams = [
+                { name: 'Glu', display: 'Glu' },
+                { name: 'Lac', display: 'Lac' }
+            ];
+            metaboliteParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add additional parameters
+            const additionalParams = [
+                { name: 'Temperature', display: 'Temperature' },
+                { name: 'FIO2', display: 'FIO2' },
+                { name: 'RespRate', display: 'Resp Rate' },
+                { name: 'PEEP', display: 'PEEP' },
+                { name: 'Vt', display: 'Vt' }
+            ];
+            additionalParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add custom demographics and footer
+            html += `
+                <tr><td colspan="4"><strong>CUSTOM DEMOGRAPHICS</strong></td></tr>
+                <tr><td>MODE</td><td colspan="3">N/A</td></tr>
+                <tr><td colspan="4" style="text-align: center !important; padding-bottom:10% !important;padding-top:10% !important;"><strong>******************************</strong></td></tr>
+            `;
+            table.innerHTML = html;
+            return table;
         }
         function createLabTable(lab) {
-            // ... full definition ...
+            const wrapper = document.createElement('div');
+            wrapper.style.marginBottom = '20px';
+            const title = document.createElement('h2');
+            title.textContent = lab.name || 'Laboratory Test';
+            wrapper.appendChild(title);
+            const table = document.createElement('table');
+            table.className = 'lab-table';
+            let html = `
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Unit</th>
+                        <th>Reference Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            const params = lab.parameters || [];
+            params.forEach(param => {
+                const isAbnormal = isParameterAbnormal(param);
+                const valueClass = isAbnormal ? 'abnormal' : '';
+                const referenceRange = param.healthy_min && param.healthy_max ? 
+                    `${param.healthy_min} - ${param.healthy_max}` : '-';
+                html += `
+                    <tr>
+                        <td>${param.name || '-'}</td>
+                        <td class="${valueClass}">${param.value || '-'}</td>
+                        <td>${param.unit || '-'}</td>
+                        <td>${referenceRange}</td>
+                    </tr>
+                `;
+            });
+            html += '</tbody>';
+            table.innerHTML = html;
+            wrapper.appendChild(table);
+            return wrapper;
         }
         function isParameterAbnormal(param) {
-            // ... full definition ...
+            if (!param.value || param.healthy_min === undefined || param.healthy_max === undefined) {
+                return false;
+            }
+            const value = parseFloat(param.value);
+            const min = parseFloat(param.healthy_min);
+            const max = parseFloat(param.healthy_max);
+            return !isNaN(value) && !isNaN(min) && !isNaN(max) && (value < min || value > max);
         }
 
         // --- Show scenario and postMessage listener ---
