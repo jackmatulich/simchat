@@ -900,6 +900,12 @@
                 });
             }
         })();
+
+        window.addEventListener('DOMContentLoaded', () => {
+          if (window.opener) {
+            window.opener.postMessage('previewer-ready', '*');
+          }
+        });
     </script>
 </body>
 </html> 

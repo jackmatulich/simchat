@@ -87,12 +87,14 @@ export const ChatMessage = ({ message }: { message: Message }) => {
                   console.log('Preview JSON data:', jsonData);
                   const previewWindow = window.open('/preview.html', '_blank');
                   if (previewWindow) {
-                    // Wait for the new window to load, then post the JSON
-                    const sendData = () => {
-                      console.log('Sending to preview:', JSON.stringify(jsonData));
-                      previewWindow.postMessage(JSON.stringify(jsonData), '*');
+                    const handleReady = (event: MessageEvent) => {
+                      if (event.data === 'previewer-ready') {
+                        console.log('Previewer is ready, sending scenario JSON');
+                        previewWindow.postMessage(JSON.stringify(jsonData), '*');
+                        window.removeEventListener('message', handleReady);
+                      }
                     };
-                    setTimeout(sendData, 400);
+                    window.addEventListener('message', handleReady);
                   }
                 }}
                 className="px-3 py-1 text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
