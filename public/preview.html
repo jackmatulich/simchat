@@ -925,11 +925,30 @@
                 container.innerHTML = '<p style="color: #666; font-style: italic;">No events specified</p>';
                 return;
             }
-            // Split events into pages of 6
-            const eventsPerPage = 6;
-            const eventPages = [];
-            for (let i = 0; i < events.length; i += eventsPerPage) {
-                eventPages.push(events.slice(i, i + eventsPerPage));
+            // Custom split logic
+            let eventPages = [];
+            if (events.length <= 5) {
+                eventPages = [events];
+            } else {
+                // First page: min(5, total-2)
+                const firstPageCount = Math.min(5, events.length - 2);
+                eventPages.push(events.slice(0, firstPageCount));
+                let remaining = events.slice(firstPageCount);
+                // All subsequent pages: max 5, but always at least 2 on the last page
+                while (remaining.length > 0) {
+                    if (remaining.length <= 5) {
+                        eventPages.push(remaining);
+                        break;
+                    } else if (remaining.length === 6) {
+                        // Special case: split as 4/2
+                        eventPages.push(remaining.slice(0, 4));
+                        eventPages.push(remaining.slice(4));
+                        break;
+                    } else {
+                        eventPages.push(remaining.slice(0, 5));
+                        remaining = remaining.slice(5);
+                    }
+                }
             }
             // Create first events page (replace existing content)
             populateEventsPage(eventPages[0], container);
@@ -959,7 +978,7 @@
                     labPagesContainer.insertBefore(pageDiv, labPagesContainer.firstChild);
                     // Populate this page with events
                     const pageContainer = document.getElementById(`eventsContainer${pageIndex}`);
-                    populateEventsPage(eventPages[pageIndex], pageContainer, pageIndex * eventsPerPage);
+                    populateEventsPage(eventPages[pageIndex], pageContainer, eventPages.slice(0, pageIndex).reduce((a, b) => a + b.length, 0));
                 }
             }
             insertLogos();
