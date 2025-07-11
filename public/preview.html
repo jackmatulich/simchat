@@ -974,8 +974,8 @@
                             <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
                         </div>
                     `;
-                    // Insert before lab pages
-                    labPagesContainer.insertBefore(pageDiv, labPagesContainer.firstChild);
+                    // Append event page at the end
+                    labPagesContainer.appendChild(pageDiv);
                     // Populate this page with events
                     const pageContainer = document.getElementById(`eventsContainer${pageIndex}`);
                     populateEventsPage(eventPages[pageIndex], pageContainer, eventPages.slice(0, pageIndex).reduce((a, b) => a + b.length, 0));
