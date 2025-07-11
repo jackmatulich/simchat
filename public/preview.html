@@ -569,6 +569,7 @@
 
         window.addEventListener('message', (event) => {
             // Optionally, check event.origin for security
+            console.log('Received postMessage:', event.data);
             try {
                 if (typeof event.data === 'string') {
                     const data = JSON.parse(event.data);
@@ -578,6 +579,7 @@
                 }
             } catch (e) {
                 document.getElementById('preview-wait-message').innerText = 'Error loading scenario data.';
+                console.error('Error parsing scenario data:', e);
             }
         }, false);
 
