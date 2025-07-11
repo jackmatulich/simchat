@@ -545,7 +545,6 @@
     <template id="logo-template">
         <!-- ... SVG ... -->
     </template>
-
     <!-- Scenario Content -->
     <div id="scenarioContent">
         <!-- Page 1: Overview -->
@@ -557,15 +556,180 @@
                     <div class="scenario-id" id="scenarioId">Scenario ID</div>
                 </div>
             </div>
-            <!-- ... rest of the section ... -->
+            <div class="content">
+                <h1>Scenario Overview</h1>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Basic Information</h3>
+                        <div class="info-item">
+                            <div class="info-label">Scenario Type</div>
+                            <div class="info-value" id="scenarioType">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Duration</div>
+                            <div class="info-value" id="scenarioDuration">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Patient</div>
+                            <div class="info-value" id="patientName">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Condition</div>
+                            <div class="info-value" id="patientCondition">-</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Purpose</h3>
+                        <div id="scenarioPurpose" style="font-size: 11px; line-height: 1.4;">-</div>
+                    </div>
+                </div>
+                <h2>Intended Participants</h2>
+                <ul class="scenario-list" id="participantsList"></ul>
+                <h2>Learning Objectives</h2>
+                <ul class="scenario-list" id="objectivesList"></ul>
+                <h2>Required Simulation Tools</h2>
+                <ul class="scenario-list" id="toolsList"></ul>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
         </section>
-        <!-- ... other sections ... -->
+        <!-- Page 2: Patient Information -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Patient Information</h1>
+                    <div class="scenario-id" id="scenarioNameHeader">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Demographics</h3>
+                        <div class="info-item">
+                            <div class="info-label">Name</div>
+                            <div class="info-value" id="patientNameDetail">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Age</div>
+                            <div class="info-value" id="patientAge">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Sex</div>
+                            <div class="info-value" id="patientSex">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Weight</div>
+                            <div class="info-value" id="patientWeight">-</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Clinical Context</h3>
+                        <div class="info-item">
+                            <div class="info-label">Condition</div>
+                            <div class="info-value" id="patientConditionDetail">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Days Admitted</div>
+                            <div class="info-value" id="patientAdmitted">-</div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Handover Information</h2>
+                <div class="info-card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Time of Day</div>
+                            <div class="info-value" id="handoverTime">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Handover Reason</div>
+                            <div class="info-value" id="handoverReason">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Confederate Role</div>
+                            <div class="info-value" id="confederateRole">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">What's About to Happen</div>
+                            <div class="info-value" id="aboutToHappen">-</div>
+                        </div>
+                    </div>
+                </div>
+                <h2>SBAR Handover</h2>
+                <div class="sbar-section">
+                    <div class="sbar-item">
+                        <div class="sbar-label">Situation</div>
+                        <div class="sbar-content" id="sbarSituation">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Background</div>
+                        <div class="sbar-content" id="sbarBackground">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Assessment</div>
+                        <div class="sbar-content" id="sbarAssessment">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Recommendation</div>
+                        <div class="sbar-content" id="sbarRecommendation">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Page 3: Events Timeline -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Event Timeline</h1>
+                    <div class="scenario-id" id="scenarioNameHeader2">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2>Scenario Events</h2>
+                <div class="events-container" id="eventsContainer"></div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Page 4: Debriefing Points -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Debriefing Points</h1>
+                    <div class="scenario-id" id="scenarioNameHeader4">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content" id="debriefingContent">
+                <div class="debriefing-layout">
+                    <div class="debriefing-points-section">
+                        <h2>Debriefing Points</h2>
+                        <ul class="scenario-list" id="debriefList"></ul>
+                    </div>
+                    <div class="notes-section">
+                        <div class="notes-title">Notes</div>
+                        <div class="notes-lines"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Laboratory Results Pages (dynamically generated) -->
+        <div id="labPagesContainer"></div>
     </div>
     <div id="preview-wait-message" style="text-align:center; margin-top:40px; color:#888; font-size:1.1em;">
       Waiting for scenario data...<br/>
       (Open this page from the chat app's Preview button)
     </div>
-
     <script>
         let scenarioData = null;
         // ECG Rhythm lookup from scenario JSON
