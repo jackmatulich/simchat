@@ -976,8 +976,8 @@
                     `;
                     // Append event page at the end
                     labPagesContainer.appendChild(pageDiv);
-                    // Populate this page with events
-                    const pageContainer = document.getElementById(`eventsContainer${pageIndex}`);
+                    // Use querySelector to get the container in the new section
+                    const pageContainer = pageDiv.querySelector('.events-container');
                     populateEventsPage(eventPages[pageIndex], pageContainer, eventPages.slice(0, pageIndex).reduce((a, b) => a + b.length, 0));
                 }
             }
