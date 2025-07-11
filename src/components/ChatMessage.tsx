@@ -78,9 +78,25 @@ export const ChatMessage = ({ message }: { message: Message }) => {
             <div className="mb-2 flex items-center gap-2">
               <button
                 onClick={handleDownload}
-                className="px-3 py-1 text-xs font-semibold text-white bg-orange-500 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="px-3 py-1 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 rounded"
               >
                 Download Realiti File
+              </button>
+              <button
+                onClick={() => {
+                  const previewWindow = window.open('/preview', '_blank');
+                  if (previewWindow) {
+                    // Wait for the new window to load, then post the JSON
+                    const sendData = () => {
+                      previewWindow.postMessage(JSON.stringify(jsonData), '*');
+                    };
+                    // Try to send after a short delay (in case the window is not ready)
+                    setTimeout(sendData, 400);
+                  }
+                }}
+                className="px-3 py-1 text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+              >
+                Preview
               </button>
               {downloadError && <span className="text-red-500 text-xs">{downloadError}</span>}
             </div>

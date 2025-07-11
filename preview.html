@@ -541,6 +541,52 @@
     </style>
 </head>
 <body class="A4">
-<!-- ... rest of the HTML ... -->
+    <!-- Logo SVG Template (hidden) -->
+    <template id="logo-template">
+        <!-- ... SVG ... -->
+    </template>
+
+    <!-- Scenario Content -->
+    <div id="scenarioContent">
+        <!-- ... scenario sections ... -->
+    </div>
+    <div id="preview-wait-message" style="text-align:center; margin-top:40px; color:#888; font-size:1.1em;">
+      Waiting for scenario data...<br/>
+      (Open this page from the chat app's Preview button)
+    </div>
+
+    <script>
+        let scenarioData = null;
+        // ... ecgRhythmLookup and all populate functions ...
+
+        // Remove upload logic, add postMessage listener
+        function showScenario(data) {
+            scenarioData = data;
+            populateTemplate(scenarioData);
+            document.getElementById('scenarioContent').classList.add('active');
+            document.getElementById('preview-wait-message').style.display = 'none';
+        }
+
+        window.addEventListener('message', (event) => {
+            // Optionally, check event.origin for security
+            try {
+                if (typeof event.data === 'string') {
+                    const data = JSON.parse(event.data);
+                    showScenario(data);
+                } else if (typeof event.data === 'object' && event.data !== null) {
+                    showScenario(event.data);
+                }
+            } catch (e) {
+                document.getElementById('preview-wait-message').innerText = 'Error loading scenario data.';
+            }
+        }, false);
+
+        // Optionally, support direct JSON in window.name for debugging
+        try {
+            if (window.name && window.name.startsWith('{')) {
+                showScenario(JSON.parse(window.name));
+            }
+        } catch {}
+    </script>
 </body>
 </html> 
