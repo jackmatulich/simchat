@@ -84,13 +84,12 @@ export const ChatMessage = ({ message }: { message: Message }) => {
               </button>
               <button
                 onClick={() => {
-                  const previewWindow = window.open('/preview', '_blank');
+                  const previewWindow = window.open('/preview.html', '_blank');
                   if (previewWindow) {
                     // Wait for the new window to load, then post the JSON
                     const sendData = () => {
                       previewWindow.postMessage(JSON.stringify(jsonData), '*');
                     };
-                    // Try to send after a short delay (in case the window is not ready)
                     setTimeout(sendData, 400);
                   }
                 }}
