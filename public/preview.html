@@ -562,7 +562,103 @@
 
         // --- Helper functions ---
         function populateTemplate(data) {
-            // ... full definition ...
+            console.log('[populateTemplate] Start', data);
+            // Basic scenario info
+            const scenarioNameEl = document.getElementById('scenarioName');
+            if (!scenarioNameEl) { console.warn('Missing #scenarioName'); return; }
+            scenarioNameEl.textContent = data.scenarioName || 'Clinical Scenario';
+            const scenarioIdEl = document.getElementById('scenarioId');
+            if (!scenarioIdEl) { console.warn('Missing #scenarioId'); return; }
+            scenarioIdEl.textContent = data.scenarioId || '';
+            const scenarioTypeEl = document.getElementById('scenarioType');
+            if (!scenarioTypeEl) { console.warn('Missing #scenarioType'); return; }
+            scenarioTypeEl.textContent = data.scenarioType || '';
+            const durationSeconds = data.scenarioTime || 0;
+            const durationMinutes = Math.round(durationSeconds / 60 * 10) / 10; 
+            const scenarioDurationEl = document.getElementById('scenarioDuration');
+            if (!scenarioDurationEl) { console.warn('Missing #scenarioDuration'); return; }
+            scenarioDurationEl.textContent = `${durationMinutes} minutes`;
+            // Update all header references
+            const scenarioNameHeaderEls = [
+                document.getElementById('scenarioNameHeader'),
+                document.getElementById('scenarioNameHeader2'),
+                document.getElementById('scenarioNameHeader4')
+            ];
+            scenarioNameHeaderEls.forEach((el, i) => {
+                if (!el) { console.warn(`Missing scenarioNameHeader${i ? i+1 : ''}`); return; }
+                el.textContent = data.scenarioName || 'Clinical Scenario';
+            });
+            // Patient info
+            const patient = data.patientInformation || {};
+            const patientNameEl = document.getElementById('patientName');
+            if (!patientNameEl) { console.warn('Missing #patientName'); return; }
+            patientNameEl.textContent = patient.patientName || '-';
+            const patientConditionEl = document.getElementById('patientCondition');
+            if (!patientConditionEl) { console.warn('Missing #patientCondition'); return; }
+            patientConditionEl.textContent = patient.patientCondition || '-';
+            const patientNameDetailEl = document.getElementById('patientNameDetail');
+            if (!patientNameDetailEl) { console.warn('Missing #patientNameDetail'); return; }
+            patientNameDetailEl.textContent = patient.patientName || '-';
+            const patientAgeEl = document.getElementById('patientAge');
+            if (!patientAgeEl) { console.warn('Missing #patientAge'); return; }
+            patientAgeEl.textContent = `${patient.patientAge || '-'} ${patient.patientAgeUnit || ''}`;
+            const patientSexEl = document.getElementById('patientSex');
+            if (!patientSexEl) { console.warn('Missing #patientSex'); return; }
+            patientSexEl.textContent = patient.patientSex === 1 ? 'Male' : patient.patientSex === 2 ? 'Female' : 'Unspecified';
+            const patientWeightEl = document.getElementById('patientWeight');
+            if (!patientWeightEl) { console.warn('Missing #patientWeight'); return; }
+            patientWeightEl.textContent = patient.patientWeight ? `${patient.patientWeight}kg` : '-';
+            const patientConditionDetailEl = document.getElementById('patientConditionDetail');
+            if (!patientConditionDetailEl) { console.warn('Missing #patientConditionDetail'); return; }
+            patientConditionDetailEl.textContent = patient.patientCondition || '-';
+            const patientAdmittedEl = document.getElementById('patientAdmitted');
+            if (!patientAdmittedEl) { console.warn('Missing #patientAdmitted'); return; }
+            patientAdmittedEl.textContent = patient.patientAdmitted ? `${patient.patientAdmitted} days` : '-';
+            // Purpose
+            const scenarioPurposeEl = document.getElementById('scenarioPurpose');
+            if (!scenarioPurposeEl) { console.warn('Missing #scenarioPurpose'); return; }
+            scenarioPurposeEl.textContent = data.purpose || '-';
+            // Handover info
+            const handover = data.handover || {};
+            const handoverTimeEl = document.getElementById('handoverTime');
+            if (!handoverTimeEl) { console.warn('Missing #handoverTime'); return; }
+            handoverTimeEl.textContent = handover.time_of_day || '-';
+            const handoverReasonEl = document.getElementById('handoverReason');
+            if (!handoverReasonEl) { console.warn('Missing #handoverReason'); return; }
+            handoverReasonEl.textContent = handover.handover_reason || '-';
+            const confederateRoleEl = document.getElementById('confederateRole');
+            if (!confederateRoleEl) { console.warn('Missing #confederateRole'); return; }
+            confederateRoleEl.textContent = handover.confederate_role || '-';
+            const aboutToHappenEl = document.getElementById('aboutToHappen');
+            if (!aboutToHappenEl) { console.warn('Missing #aboutToHappen'); return; }
+            aboutToHappenEl.textContent = handover.what_is_about_to_happen || '-';
+            // SBAR
+            const sbar = handover.SBAR || {};
+            const sbarSituationEl = document.getElementById('sbarSituation');
+            if (!sbarSituationEl) { console.warn('Missing #sbarSituation'); return; }
+            sbarSituationEl.textContent = sbar.situation || '-';
+            const sbarBackgroundEl = document.getElementById('sbarBackground');
+            if (!sbarBackgroundEl) { console.warn('Missing #sbarBackground'); return; }
+            sbarBackgroundEl.textContent = sbar.background || '-';
+            const sbarAssessmentEl = document.getElementById('sbarAssessment');
+            if (!sbarAssessmentEl) { console.warn('Missing #sbarAssessment'); return; }
+            sbarAssessmentEl.textContent = sbar.assessment || '-';
+            const sbarRecommendationEl = document.getElementById('sbarRecommendation');
+            if (!sbarRecommendationEl) { console.warn('Missing #sbarRecommendation'); return; }
+            sbarRecommendationEl.textContent = sbar.recommendation || '-';
+            // Lists
+            console.log('[populateTemplate] Populating lists');
+            populateList('participantsList', data.intended_participants || []);
+            populateList('objectivesList', data.learning_objectives || []);
+            populateList('toolsList', data.required_simulation_tools || [], true);
+            populateList('debriefList', data.debriefing_points || []);
+            // Events
+            console.log('[populateTemplate] Populating events');
+            populateEvents(data.events || data.scenarioEvents || []);
+            // Labs
+            console.log('[populateTemplate] Populating labs');
+            populateLabs(data.labs || []);
+            console.log('[populateTemplate] End');
         }
         function populateList(containerId, items, addCheckbox = false) {
             // ... full definition ...
