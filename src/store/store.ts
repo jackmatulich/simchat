@@ -189,8 +189,8 @@ export const actions = {
               ? { 
                   ...conv, 
                   scenarioInfo,
-                  // Update title to scenario name if it's still the default
-                  title: conv.title.includes('...') ? jsonData.scenarioName : conv.title
+                  // Update title to scenario name
+                  title: jsonData.scenarioName
                 }
               : conv
           )

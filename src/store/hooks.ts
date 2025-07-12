@@ -61,11 +61,34 @@ export function useConversations() {
   // Convert Convex conversations to local format if available
   useEffect(() => {
     if (isConvexAvailable && convexConversations && convexConversations.length > 0) {
-      const formattedConversations: Conversation[] = convexConversations.map(conv => ({
-        id: conv._id,
-        title: conv.title,
-        messages: conv.messages as Message[],
-      }));
+      const formattedConversations: Conversation[] = convexConversations.map(conv => {
+        // Try to extract scenario info from the last assistant message
+        let scenarioInfo = undefined;
+        if (conv.messages && conv.messages.length > 0) {
+          const lastAssistantMessage = conv.messages
+            .filter((msg: any) => msg.role === 'assistant')
+            .pop();
+          
+          if (lastAssistantMessage) {
+            const jsonData = actions.extractJsonFromMessage(lastAssistantMessage.content);
+            if (jsonData && jsonData.scenarioName) {
+              scenarioInfo = {
+                scenarioName: jsonData.scenarioName,
+                scenarioId: jsonData.scenarioId,
+                scenarioType: jsonData.scenarioType,
+                jsonData
+              };
+            }
+          }
+        }
+        
+        return {
+          id: conv._id,
+          title: conv.title,
+          messages: conv.messages as Message[],
+          scenarioInfo
+        };
+      });
       
       actions.setConversations(formattedConversations);
     }

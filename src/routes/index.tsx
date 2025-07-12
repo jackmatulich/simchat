@@ -120,11 +120,11 @@ function Home() {
       
       let conversationId = currentConversationId
 
-      // If no current conversation, create one in Convex first
+      // If no current conversation, create one with the user's request as title
       if (!conversationId) {
         try {
           console.log('Creating new Convex conversation with title:', conversationTitle)
-          // Create a new conversation with our title
+          // Create a new conversation with the user's request as title
           const convexId = await createNewConversation(conversationTitle)
           
           if (convexId) {
@@ -186,8 +186,10 @@ function Home() {
   }, [input, isLoading, createTitleFromInput, currentConversationId, createNewConversation, addMessage, processAIResponse, setLoading]);
 
   const handleNewChat = useCallback(() => {
-    createNewConversation()
-  }, [createNewConversation]);
+    // Clear current conversation without creating a new one
+    // A new conversation will be created when the user sends their first message
+    setCurrentConversationId(null)
+  }, [setCurrentConversationId]);
 
   const handleDeleteChat = useCallback(async (id: string) => {
     await deleteConversation(id)
