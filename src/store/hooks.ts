@@ -146,6 +146,9 @@ export function useConversations() {
       // First update local state
       actions.addMessage(conversationId, message);
       
+      // Update scenario info if this is an assistant message with JSON
+      actions.updateScenarioInfo(conversationId, message);
+      
       // Then add to Convex if available
       if (isConvexAvailable && addMessageToConversation) {
         try {

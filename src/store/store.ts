@@ -10,10 +10,18 @@ export interface Prompt {
   created_at: number
 }
 
+export interface ScenarioInfo {
+  scenarioName: string
+  scenarioId?: string
+  scenarioType?: string
+  jsonData: any
+}
+
 export interface Conversation {
   id: string
   title: string
   messages: Message[]
+  scenarioInfo?: ScenarioInfo
 }
 
 export interface State {
@@ -136,6 +144,59 @@ export const actions = {
           : conv
       )
     }))
+  },
+
+  // Helper to extract JSON from message content
+  extractJsonFromMessage: (content: string): any => {
+    let cleaned = content.trim();
+    // Try to extract the first code block (```json ... ``` or ``` ... ```)
+    const codeBlockMatch = cleaned.match(/```(?:json)?([\s\S]*?)```/i);
+    if (codeBlockMatch) {
+      try {
+        return JSON.parse(codeBlockMatch[1].trim());
+      } catch {}
+    }
+    // If no code block, try to find the first {...} block
+    const curlyMatch = cleaned.match(/({[\s\S]*})/);
+    if (curlyMatch) {
+      try {
+        return JSON.parse(curlyMatch[1]);
+      } catch {}
+    }
+    // As a last resort, try the whole content
+    try {
+      return JSON.parse(cleaned);
+    } catch {}
+    return null;
+  },
+
+  // Update scenario info when a scenario is generated
+  updateScenarioInfo: (conversationId: string, message: Message) => {
+    if (message.role === 'assistant') {
+      const jsonData = actions.extractJsonFromMessage(message.content);
+      if (jsonData && jsonData.scenarioName) {
+        const scenarioInfo: ScenarioInfo = {
+          scenarioName: jsonData.scenarioName,
+          scenarioId: jsonData.scenarioId,
+          scenarioType: jsonData.scenarioType,
+          jsonData
+        };
+        
+        store.setState(state => ({
+          ...state,
+          conversations: state.conversations.map(conv =>
+            conv.id === conversationId
+              ? { 
+                  ...conv, 
+                  scenarioInfo,
+                  // Update title to scenario name if it's still the default
+                  title: conv.title.includes('...') ? jsonData.scenarioName : conv.title
+                }
+              : conv
+          )
+        }))
+      }
+    }
   },
 
   setLoading: (isLoading: boolean) => {

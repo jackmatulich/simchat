@@ -4,9 +4,11 @@ import rehypeSanitize from 'rehype-sanitize'
 import rehypeHighlight from 'rehype-highlight'
 import type { Message } from '../utils/ai'
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export const ChatMessage = ({ message }: { message: Message }) => {
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [isJsonExpanded, setIsJsonExpanded] = useState(false);
 
   // Helper to robustly extract JSON from message content
   function extractJson(content: string): any {
@@ -31,10 +33,26 @@ export const ChatMessage = ({ message }: { message: Message }) => {
     } catch {}
     return null;
   }
+
+  // Helper to truncate JSON content for collapsible display
+  function truncateJsonContent(content: string): { truncated: string; full: string; hasMore: boolean } {
+    const lines = content.split('\n');
+    if (lines.length <= 15) {
+      return { truncated: content, full: content, hasMore: false };
+    }
+    
+    const truncated = lines.slice(0, 15).join('\n') + '\n...';
+    return { truncated, full: content, hasMore: true };
+  }
+
   let jsonData: any = null;
   let scenarioName: string | null = null;
   jsonData = extractJson(message.content);
   scenarioName = jsonData?.scenarioName || null;
+
+  // Check if this message contains JSON that should be collapsible
+  const hasJsonContent = message.content.includes('```json') || message.content.includes('```') && jsonData;
+  const { truncated, full, hasMore } = hasJsonContent ? truncateJsonContent(message.content) : { truncated: message.content, full: message.content, hasMore: false };
 
   const handleDownload = () => {
     if (!jsonData || !scenarioName) return;
@@ -104,16 +122,40 @@ export const ChatMessage = ({ message }: { message: Message }) => {
               {downloadError && <span className="text-red-500 text-xs">{downloadError}</span>}
             </div>
           )}
-          <ReactMarkdown
-            className="prose dark:prose-invert max-w-none"
-            rehypePlugins={[
-              rehypeRaw,
-              rehypeSanitize,
-              rehypeHighlight,
-            ]}
-          >
-            {message.content}
-          </ReactMarkdown>
+          
+          {/* Collapsible content */}
+          <div className="relative">
+            <ReactMarkdown
+              className="prose dark:prose-invert max-w-none"
+              rehypePlugins={[
+                rehypeRaw,
+                rehypeSanitize,
+                rehypeHighlight,
+              ]}
+            >
+              {isJsonExpanded ? full : truncated}
+            </ReactMarkdown>
+            
+            {/* Expand/Collapse button for JSON content */}
+            {hasJsonContent && hasMore && (
+              <button
+                onClick={() => setIsJsonExpanded(!isJsonExpanded)}
+                className="flex items-center gap-1 mt-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+              >
+                {isJsonExpanded ? (
+                  <>
+                    <ChevronUp className="w-4 h-4" />
+                    Show Less
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    Show More
+                  </>
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
