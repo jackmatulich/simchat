@@ -955,6 +955,8 @@
             // Create additional events pages if needed
             if (eventPages.length > 1) {
                 const scenarioContent = document.getElementById('scenarioContent');
+                // Find the first events page to insert after it
+                const firstEventsPage = scenarioContent.querySelector('section:has(#eventsContainer)');
                 for (let pageIndex = 1; pageIndex < eventPages.length; pageIndex++) {
                     const pageDiv = document.createElement('section');
                     pageDiv.className = 'sheet padding-10mm';
@@ -974,8 +976,13 @@
                             <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
                         </div>
                     `;
-                    // Append event page as a sibling in scenarioContent
-                    scenarioContent.appendChild(pageDiv);
+                    // Insert event page after the first events page
+                    if (firstEventsPage) {
+                        firstEventsPage.parentNode.insertBefore(pageDiv, firstEventsPage.nextSibling);
+                    } else {
+                        // Fallback: append to scenarioContent
+                        scenarioContent.appendChild(pageDiv);
+                    }
                     // Use querySelector to get the container in the new section
                     const pageContainer = pageDiv.querySelector('.events-container');
                     populateEventsPage(eventPages[pageIndex], pageContainer, eventPages.slice(0, pageIndex).reduce((a, b) => a + b.length, 0));
