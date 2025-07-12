@@ -53,6 +53,17 @@ function Home() {
     scrollToBottom()
   }, [messages, isLoading, scrollToBottom])
 
+  // Hide loading indicator when a new assistant message is received
+  useEffect(() => {
+    if (isLoading && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.role === 'assistant') {
+        // AI response received, hide loading indicator
+        setLoading(false);
+      }
+    }
+  }, [messages, isLoading, setLoading]);
+
   const createTitleFromInput = useCallback((text: string) => {
     const words = text.trim().split(/\s+/)
     const firstThreeWords = words.slice(0, 3).join(' ')
@@ -163,6 +174,8 @@ function Home() {
       // Process with AI after message is stored
       await processAIResponse(conversationId, userMessage)
       
+      // Note: Don't set loading to false here - it will be set to false when the AI response is received
+      
     } catch (error) {
       console.error('Error:', error)
       const errorMessage: Message = {
@@ -180,7 +193,7 @@ function Home() {
           setError('An unknown error occurred.')
         }
       }
-    } finally {
+      // Set loading to false on error
       setLoading(false)
     }
   }, [input, isLoading, createTitleFromInput, currentConversationId, createNewConversation, addMessage, processAIResponse, setLoading]);
@@ -251,7 +264,7 @@ function Home() {
                   .map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
-                {isLoading && <LoadingIndicator message="Generating scenario..." />}
+                {isLoading && <LoadingIndicator message="Great! Let me work on it, give me a few minutes..." />}
               </div>
             </div>
 
