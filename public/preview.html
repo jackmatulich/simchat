@@ -1246,8 +1246,8 @@
                 { name: 'pH', display: 'pH' },
                 { name: 'pCO2', display: 'pCO2' },
                 { name: 'pO2', display: 'pO2' },
-                { name: 'HCO3', display: 'HCO3–' },
-                { name: 'BE', display: 'BE(B)' }
+                { name: 'HCO3-', display: 'HCO3-' },
+                { name: 'BE(B)', display: 'BE(B)' }
             ];
             acidBaseParams.forEach(param => {
                 const info = getParamInfo(param.name);
@@ -1262,9 +1262,9 @@
                     { name: 'Hct', display: 'Hct' },
                     { name: 'tHb', display: 'tHb' },
                     { name: 'sO2', display: 'sO2' },
-                    { name: 'FO2Hb', display: 'FO2 Hb' },
-                    { name: 'FCOHb', display: 'FCO Hb' },
-                    { name: 'FMetHb', display: 'FMet Hb' },
+                    { name: 'FO2 Hb', display: 'FO2 Hb' },
+                    { name: 'FCO Hb', display: 'FCO Hb' },
+                    { name: 'FMet Hb', display: 'FMet Hb' },
                     { name: 'FHHb', display: 'FHHb' }
                 ];
                 coOxParams.forEach(param => {
@@ -1290,10 +1290,10 @@
             // Add electrolytes section
             html += `<tr><td colspan="4"><strong>ELECTROLYTES</strong></td></tr>`;
             const electrolyteParams = [
-                { name: 'Na', display: 'Na+' },
-                { name: 'K', display: 'K+' },
-                { name: 'Ca', display: 'Ca++' },
-                { name: 'Cl', display: 'Cl–' }
+                { name: 'Na+', display: 'Na+' },
+                { name: 'K+', display: 'K+' },
+                { name: 'Ca++', display: 'Ca++' },
+                { name: 'Cl–', display: 'Cl–' }
             ];
             electrolyteParams.forEach(param => {
                 const info = getParamInfo(param.name);
