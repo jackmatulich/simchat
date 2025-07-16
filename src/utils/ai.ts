@@ -32,7 +32,7 @@ Here is the JSON:
           "", "" //List clear, action-oriented objectives using verbs like "identify", "perform", "demonstrate"
         ],
         "required_simulation_tools": [
-          "", ""  //List all essential equipment or resources needed (e.g., manikin, monitor, simulated meds)
+          "", ""  //List all essential equipment or resources needed, max 50 characters each and max of 8 items (e.g., manikin, monitor, simulated meds)
        
         ],
         "debriefing_points": [
