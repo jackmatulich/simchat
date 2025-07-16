@@ -538,6 +538,19 @@
             font-size: 20px;
             margin: 0 0 20px 0;
         }
+        .scenario-list.two-columns {
+            column-count: 2;
+            column-gap: 16px;
+        }
+        .scenario-list.two-columns li {
+            break-inside: avoid;
+        }
+        /* Fix the height of the tools list box (adjust as needed for your design) */
+        #toolsList {
+            max-height: 140px;
+            min-height: 80px;
+            overflow: auto;
+        }
     </style>
 </head>
 <body class="A4">
@@ -1002,7 +1015,16 @@
             container.innerHTML = '';
             if (items.length === 0) {
                 container.innerHTML = '<li style="color: #666; font-style: italic;">No items specified</li>';
+                container.classList.remove('two-columns');
                 return;
+            }
+            // For toolsList, add two-columns class if >4 items
+            if (containerId === 'toolsList') {
+                if (items.length > 4) {
+                    container.classList.add('two-columns');
+                } else {
+                    container.classList.remove('two-columns');
+                }
             }
             items.forEach(item => {
                 const li = document.createElement('li');
