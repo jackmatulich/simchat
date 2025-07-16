@@ -39,7 +39,7 @@ Here is the JSON:
           "", "" //Outline key reflective or feedback topics aligned to learning objectives
         ],
         "handover": {
-          "time_of_day": "", //Time at which scenario begins (e.g., “0730h”)
+          "time_of_day": "", //Time at which scenario begins (e.g., "0730h")
           "handover_reason": "", //Reason for handover (e.g., shift change, admission, ward round)
           "confederate_role": "", //Role of confederate providing handover (e.g., night shift nurse)
           "what_is_about_to_happen": "", //Describe what the participants will soon observe or respond to
@@ -75,6 +75,7 @@ Here is the JSON:
                 "bpDia": 0, // Diastolic blood pressure in mmHg
                 "spo2": 0, // SpO2 in %
                 "etco2": 0, // EtCO2 in mmHg
+                "obstruction":0, // Clinically relevant level of airway obstruction/resistance 0-100 as integer with 0 being no obstruction and 100 being complete obstruction and 50% being moderate. This will influence hardware devices to create airway resistance.
                 "respRate": 0, // Respiration rate per min
                 "temp": 0, // Temperature degrees celcius
                 "cust1": 0, // Do NOT change
