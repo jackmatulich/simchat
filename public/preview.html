@@ -1112,9 +1112,12 @@
                 const eventDiv = document.createElement('div');
                 eventDiv.className = 'event-card';
                 const params = event.parameters || {};
-                // Try different possible ECG parameter names
-                const ecgRhythmValue = params.ecgRhythm || params.ecg || params.ecgId || params.rhythm || 9; // default to sinus
-                const ecgRhythm = ecgRhythmLookup[ecgRhythmValue] || `Unknown (${ecgRhythmValue})`;
+                // Updated ECG rhythm extraction logic
+                let ecgRhythmValue = params.ecgWaveform ?? params.ecgRhythm ?? params.ecg ?? params.ecgId ?? params.rhythm;
+                if (ecgRhythmValue === undefined || ecgRhythmValue === null || ecgRhythmValue === '') {
+                    ecgRhythmValue = 9; // default to Sinus
+                }
+                const ecgRhythm = ecgRhythmLookup[Number(ecgRhythmValue)] || `Unknown (${ecgRhythmValue})`;
                 const vitalsHtml = `
                     <div class="vitals-grid">
                         <div class="vital-item ecg-item">
