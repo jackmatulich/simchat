@@ -253,7 +253,7 @@ Here is the JSON:
             },
             "relatedChecklist": [0], // Check list items from checklist object, referenced by number staring first at 0. If no checklist items, use object [0]
             
-            "relatedLabs": [0], // Reference number of lab/s relevant for this state, starting at 0 in order as per Labs object. If no labs items, use object [0]
+            "relatedLabs": [0], // This is a placeholder for future use. Remove this entirely for current use. 
         }
     ],
     "scenarioStory": {
@@ -375,61 +375,6 @@ Here is the JSON:
                     "interval": 10, // Do NOT edit this value
                     "unit": "ng/mL", // Do NOT edit this value
                     "abbreviation": "D-Dimer" // Do NOT edit this value
-                },
-                {
-                    "name": "Benzodiazepines", // Do NOT edit this value
-                    "absolute_min": 0, // Do NOT edit this value
-                    "absolute_max": 1000, // Do NOT edit this value
-                    "healthy_min": 0, // Do NOT edit this value
-                    "healthy_max": 0, // Do NOT edit this value
-                    "value": 0, // ONLY change this value
-                    "interval": 1, // Do NOT edit this value
-                    "unit": "ng/mL", // Do NOT edit this value
-                    "abbreviation": "Benzo" // Do NOT edit this value
-                },
-                {
-                    "name": "Opiates", // Do NOT edit this value
-                    "absolute_min": 0, // Do NOT edit this value
-                    "absolute_max": 1000, // Do NOT edit this value
-                    "healthy_min": 0, // Do NOT edit this value
-                    "healthy_max": 0, // Do NOT edit this value
-                    "value": 0, // ONLY change this value
-                    "interval": 1, // Do NOT edit this value
-                    "unit": "ng/mL", // Do NOT edit this value
-                    "abbreviation": "Opiates" // Do NOT edit this value
-                },
-                {
-                    "name": "Amphetamines", // Do NOT edit this value
-                    "absolute_min": 0, // Do NOT edit this value
-                    "absolute_max": 1000, // Do NOT edit this value
-                    "healthy_min": 0, // Do NOT edit this value
-                    "healthy_max": 0, // Do NOT edit this value
-                    "value": 0, // ONLY change this value
-                    "interval": 1, // Do NOT edit this value
-                    "unit": "ng/mL", // Do NOT edit this value
-                    "abbreviation": "AMP" // Do NOT edit this value
-                },
-                {
-                    "name": "Cocaine", // Do NOT edit this value
-                    "absolute_min": 0, // Do NOT edit this value
-                    "absolute_max": 1000, // Do NOT edit this value
-                    "healthy_min": 0, // Do NOT edit this value
-                    "healthy_max": 0, // Do NOT edit this value
-                    "value": 0, // ONLY change this value
-                    "interval": 1, // Do NOT edit this value
-                    "unit": "ng/mL", // Do NOT edit this value
-                    "abbreviation": "COC" // Do NOT edit this value
-                },
-                {
-                    "name": "Tricyclic Antidepressants", // Do NOT edit this value
-                    "absolute_min": 0, // Do NOT edit this value
-                    "absolute_max": 2000, // Do NOT edit this value
-                    "healthy_min": 0, // Do NOT edit this value
-                    "healthy_max": 0, // Do NOT edit this value
-                    "value": 0, // ONLY change this value
-                    "interval": 5, // Do NOT edit this value
-                    "unit": "ng/mL", // Do NOT edit this value
-                    "abbreviation": "TCA" // Do NOT edit this value
                 }
             ]
         },
@@ -1209,6 +1154,62 @@ Here is the JSON:
                     "interval": 1, // Do NOT edit this value
                     "unit": "ng/mL", // Do NOT edit this value
                     "abbreviation": "THC" // Do NOT edit this value
+                },
+                ,
+                {
+                    "name": "Benzodiazepines", // Do NOT edit this value
+                    "absolute_min": 0, // Do NOT edit this value
+                    "absolute_max": 1000, // Do NOT edit this value
+                    "healthy_min": 0, // Do NOT edit this value
+                    "healthy_max": 0, // Do NOT edit this value
+                    "value": 0, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "ng/mL", // Do NOT edit this value
+                    "abbreviation": "Benzo" // Do NOT edit this value
+                },
+                {
+                    "name": "Opiates", // Do NOT edit this value
+                    "absolute_min": 0, // Do NOT edit this value
+                    "absolute_max": 1000, // Do NOT edit this value
+                    "healthy_min": 0, // Do NOT edit this value
+                    "healthy_max": 0, // Do NOT edit this value
+                    "value": 0, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "ng/mL", // Do NOT edit this value
+                    "abbreviation": "Opiates" // Do NOT edit this value
+                },
+                {
+                    "name": "Amphetamines", // Do NOT edit this value
+                    "absolute_min": 0, // Do NOT edit this value
+                    "absolute_max": 1000, // Do NOT edit this value
+                    "healthy_min": 0, // Do NOT edit this value
+                    "healthy_max": 0, // Do NOT edit this value
+                    "value": 0, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "ng/mL", // Do NOT edit this value
+                    "abbreviation": "AMP" // Do NOT edit this value
+                },
+                {
+                    "name": "Cocaine", // Do NOT edit this value
+                    "absolute_min": 0, // Do NOT edit this value
+                    "absolute_max": 1000, // Do NOT edit this value
+                    "healthy_min": 0, // Do NOT edit this value
+                    "healthy_max": 0, // Do NOT edit this value
+                    "value": 0, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "ng/mL", // Do NOT edit this value
+                    "abbreviation": "COC" // Do NOT edit this value
+                },
+                {
+                    "name": "Tricyclic Antidepressants", // Do NOT edit this value
+                    "absolute_min": 0, // Do NOT edit this value
+                    "absolute_max": 2000, // Do NOT edit this value
+                    "healthy_min": 0, // Do NOT edit this value
+                    "healthy_max": 0, // Do NOT edit this value
+                    "value": 0, // ONLY change this value
+                    "interval": 5, // Do NOT edit this value
+                    "unit": "ng/mL", // Do NOT edit this value
+                    "abbreviation": "TCA" // Do NOT edit this value
                 }
             ]
         },
