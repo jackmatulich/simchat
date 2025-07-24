@@ -210,7 +210,11 @@ export const selectors = {
   getCurrentConversation: (state: State) => 
     state.conversations.find(c => c.id === state.currentConversationId),
   getPrompts: (state: State) => state.prompts,
-  getConversations: (state: State) => state.conversations,
+  getConversations: (state: State) => state.conversations.sort((a, b) => {
+    // Sort by ID in descending order (newest first)
+    // This works because IDs are typically chronological
+    return b.id.localeCompare(a.id);
+  }),
   getCurrentConversationId: (state: State) => state.currentConversationId,
   getIsLoading: (state: State) => state.isLoading
 } 

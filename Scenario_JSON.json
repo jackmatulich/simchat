@@ -1,0 +1,112 @@
+{
+  "scenarioId": "",
+  "scenarioType": "Vital Signs",
+  "scenarioVersion": 0,
+  "scenarioName": "",
+  "scenarioTime": 600,
+  "isDemo": false,
+  "isALSILegacy": false,
+  "scenarioMonitorType": 1,
+  "intended_participants": [
+    "",
+    ""
+  ],
+  "purpose": "",
+  "scenario_overview": "",
+  "learning_objectives": [
+    "",
+    ""
+  ],
+  "required_simulation_tools": [
+    "",
+    ""
+  ],
+  "debriefing_points": [
+    "",
+    ""
+  ],
+  "handover": {
+    "time_of_day": "",
+    "handover_reason": "",
+    "confederate_role": "",
+    "what_is_about_to_happen": "",
+    "SBAR": {
+      "situation": "",
+      "background": "",
+      "assessment": "",
+      "recommendation": ""
+    }
+  },
+  "scenarioEvents": [
+    {
+      "description": "",
+      "monitorType": 0,
+      "trendTime": 0,
+      "jumpTime": 0,
+      "defibShock": false,
+      "defibDisarm": false,
+      "type": "ScenarioEvent",
+      "name": "",
+      "parameters": {
+        "hr": 0,
+        "bpSys": 0,
+        "bpDia": 0,
+        "spo2": 0,
+        "etco2": 0,
+        "respRate": 0,
+        "temp": 0,
+        "cust1": 0,
+        "cust2": 0,
+        "cust3": 0,
+        "cvp": 10,
+        "cvpWaveform": 0,
+        "cvpVisible": false,
+        "cvpAmplitude": 2,
+        "cvpVariation": 1,
+        "icp": 10,
+        "icpWaveform": 0,
+        "icpVisible": false,
+        "icpAmplitude": 2,
+        "icpVariation": 1,
+        "icpLundbergAEnabled": false,
+        "icpLundbergBEnabled": false,
+        "papSys": 20,
+        "papDia": 10,
+        "papWaveform": 0,
+        "papVisible": false,
+        "papVariation": 2,
+        "ecgWaveform": 9,
+        "bpWaveform": 0,
+        "spo2Waveform": 0,
+        "etco2Waveform": 0,
+        "ecgVisible": false,
+        "bpVisible": false,
+        "spo2Visible": false,
+        "etco2Visible": false,
+        "rrVisible": false,
+        "tempVisible": false,
+        "custVisible1": false,
+        "custVisible2": false,
+        "custVisible3": false,
+        "custLabel1": "",
+        "custLabel2": "",
+        "custLabel3": "",
+        "custMeasureLabel1": "",
+        "custMeasureLabel2": "",
+        "custMeasureLabel3": "",
+        "ectopicsPac": 0,
+        "ectopicsPjc": 0,
+        "ectopicsPvc": 0,
+        "perfusion": 0,
+        "electricalInterference": false,
+        "articInterference": 0,
+        "svvInterference": 0,
+        "sinusArrhythmiaInterference": 1,
+        "ventilated": false,
+        "electrodeStatus": [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true],
+        "spo2Attached": true
+      },
+      "relatedChecklist": [0]
+    }
+  ]
+} 

@@ -5,7 +5,9 @@ import { v } from "convex/values";
 // Get all conversations
 export const list = query({
   handler: async (ctx) => {
-    return await ctx.db.query("conversations").collect();
+    return await ctx.db.query("conversations")
+      .order("desc")
+      .collect();
   },
 });
 
