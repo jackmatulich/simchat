@@ -18,7 +18,9 @@ Here is the JSON:
     "isDemo": false, // Do NOT change
     "isALSILegacy": false, // Do NOT change
     "scenarioMonitorType": 1, // monitor ID, must be licensed       // Do NOT change
-
+    "tags": [
+          "", "" //List tags to be used for user indexing, searchability and categorisation. Consider the utility to a clinical educator needing to rapidly find a scenario. Optimise for relevance and specificity.
+        ],
         "intended_participants": [
           "", "" //List intended participants making sure to cover: experience level, speciality (if relevant) and profession. eg. Junior Cardiology Nurses
         ],
@@ -55,11 +57,11 @@ Here is the JSON:
         //Duplicate, fill and follow comment instructions for the following Scenario Event object for each event in the scenario.
         { // Scenario Event
             "description": "", // Description of the event
-            "monitorType": 0, // Do NOT change
+            "monitorType": 20, // Do NOT change
             "trendTime": 0, // The trending time for the value changes in seconds
             "jumpTime": 0, // Do NOT change
             "defibShock": false, //If defbrilation should progress scenario to next event
-            "defibDisarm": false, //If defbrilation DISARM should progress scenario to next event
+            "defibDisarm": false, //If defbrilation DISARM should progress scenario to next event (most likely in Pulseless Electrical Activity situations or ROSC)
             "type" : "ScenarioEvent",//Do Not change
             "name": "", // Name of the event
             "parameters": {
@@ -93,7 +95,7 @@ Here is the JSON:
                 "papWaveform": 0, // PAP waveform ID Use only: 0=Right atrium, 1=Right ventricle, 2=Pulmonary artery, 3=Pulmonary artery wedge
                 "papVisible": false, // PAP visibility, unless relevant for the scenario & context then leave false
                 "papVariation": 2, // PAP variation
-                "ecgWaveform": 9, // ECG waveform ID // ECG waveform ID. Use ONLY one of the following valid values:
+                "ecgWaveform": 9, // ECG waveform ID // ECG waveform ID. IF the scenario involves transcutaenous pacing, keep the rhythm as whatever the underlying should be. Succesful pacing cpature and the resultant rhythm is handled by user input. Only using paced ECG rhythms from this list for existing epicardial, transvenous or internal pacer situation. Use ONLY one of the following valid values:
                 // 9  = Sinus
                 // 27 = Sinus 2
                 // 101 = Sinus P wave Inversion
@@ -246,13 +248,11 @@ Here is the JSON:
                     true,
                     true,
                     true,
-                    true,
                     true
                 ], // ECG 15 Leads connection status
                 "spo2Attached": true //Finger probe. True for backwards compatibility, do not change
             },
             "relatedChecklist": [0], // Check list items from checklist object, referenced by number staring first at 0. If no checklist items, use object [0]
-            
             "relatedLabs": [0], // This is a placeholder for future use. Remove this entirely for current use. 
         }
     ],
@@ -299,23 +299,20 @@ Here is the JSON:
         "medical_history": "" //Responses if asked about previous illnesses
       }
     },
-    "guidance_for_role_playing": {
+        "guidance_for_role_playing": {
       "what_to_emphasize": "", //Key symptoms or behaviors to portray
       "how_to_respond_to_care": "" //Guidance on patient cooperation or deterioration
     }
   },
-    "checklist": [
+  "checklist": [
         // Add expected participant actions as checklist items by duplicating and filling the object below, in order of occurence through sim. MAX 10 per event, aim <5. 
         { 
             "value" : 0,  // do not change.
             "title" : "text", // Check list item name.
             "icon" : 0, // do not change.
             "type" : "Check" // checklist item type, do not change.
-    }
-
-
-
-],
+        }
+    ],
     "labs": [ // For each state consider if any of the lab panels here are relevant.  If yes, keep/duplicate the panel and fill the values as appropriate. Remove all  PANEL objects that are not needed. You are not to remove any of the tests within the panels.  Ensure lab values are listed in order to inform the numerical value in each state for "relatedLabs". You are NOT to create new labs/panels beyond what is here UNLESS the user has SPECIFICALLY asked for these.
         {
             "name": "Coagulation Studies", // Do NOT edit this value
@@ -2142,8 +2139,7 @@ Here is the JSON:
     ], //end labs
     "scenarioDefaultEnergy": 200, // Default energy for the scenario, do not change
     "scenarioDefaultPacerThreshold": 50, // Default pacer threshold for the scenario, do not change
-
-"scenarioState": 0, // 0 - initial, 1 - running, 2 - paused, 3 - finished
+    "scenarioState": 0, // 0 - initial, 1 - running, 2 - paused, 3 - finished
 "studentInfo": {
     "studentName": "",
     "studentNumber": "",
