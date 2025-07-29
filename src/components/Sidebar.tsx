@@ -1,4 +1,5 @@
-import { PlusCircle, MessageCircle, Trash2, Edit2, Download, Eye, Clock, Users } from 'lucide-react';
+import { PlusCircle, MessageCircle, Trash2, Edit2, Download, Eye, Clock, Users, X } from 'lucide-react';
+import { useState, useMemo } from 'react';
 
 interface SidebarProps {
   conversations: Array<{ id: string; title: string; scenarioInfo?: any }>;
@@ -26,6 +27,9 @@ export const Sidebar = ({
   handleUpdateChatTitle 
 }: SidebarProps) => {
   
+  // Tag filter state
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
   // Helper function to extract participant level from intended_participants
   const getParticipantLevel = (participants: string[]): string => {
     if (!participants || participants.length === 0) return '';
@@ -41,6 +45,80 @@ export const Sidebar = ({
   const formatDuration = (seconds: number): string => {
     const minutes = Math.round(seconds / 60 * 10) / 10;
     return `${minutes}m`;
+  };
+
+  // Collect all unique tags from all conversations
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    
+    conversations.forEach(chat => {
+      if (chat.scenarioInfo) {
+        // Add scenario type
+        if (chat.scenarioInfo.scenarioType) {
+          tagSet.add(chat.scenarioInfo.scenarioType);
+        }
+        
+        // Add participant level
+        if (chat.scenarioInfo.jsonData?.intended_participants) {
+          const level = getParticipantLevel(chat.scenarioInfo.jsonData.intended_participants);
+          if (level) tagSet.add(level);
+        }
+        
+        // Add JSON tags
+        if (chat.scenarioInfo.jsonData?.tags) {
+          chat.scenarioInfo.jsonData.tags.forEach((tag: string) => {
+            if (tag.trim()) tagSet.add(tag.trim());
+          });
+        }
+      }
+    });
+    
+    return Array.from(tagSet).sort();
+  }, [conversations]);
+
+  // Filter conversations based on selected tags
+  const filteredConversations = useMemo(() => {
+    if (selectedTags.length === 0) return conversations;
+    
+    return conversations.filter(chat => {
+      if (!chat.scenarioInfo) return false;
+      
+      const chatTags = new Set<string>();
+      
+      // Add scenario type
+      if (chat.scenarioInfo.scenarioType) {
+        chatTags.add(chat.scenarioInfo.scenarioType);
+      }
+      
+      // Add participant level
+      if (chat.scenarioInfo.jsonData?.intended_participants) {
+        const level = getParticipantLevel(chat.scenarioInfo.jsonData.intended_participants);
+        if (level) chatTags.add(level);
+      }
+      
+      // Add JSON tags
+      if (chat.scenarioInfo.jsonData?.tags) {
+        chat.scenarioInfo.jsonData.tags.forEach((tag: string) => {
+          if (tag.trim()) chatTags.add(tag.trim());
+        });
+      }
+      
+      // Check if any selected tag matches any chat tag
+      return selectedTags.some(selectedTag => chatTags.has(selectedTag));
+    });
+  }, [conversations, selectedTags]);
+
+  // Tag selection handlers
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
+
+  const clearSelection = () => {
+    setSelectedTags([]);
   };
 
   const handleDownload = (scenarioInfo: any) => {
@@ -88,9 +166,52 @@ export const Sidebar = ({
         </button>
       </div>
 
+      {/* Tag Filter */}
+      <div className="p-2 border-b border-gray-700">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium text-gray-300">Filter by tags</span>
+          {selectedTags.length > 0 && (
+            <button
+              onClick={clearSelection}
+              className="flex items-center gap-1 px-2 py-1 text-xs text-gray-400 hover:text-white bg-gray-700 rounded-md hover:bg-gray-600 transition-colors"
+              title="Clear all filters"
+            >
+              <X className="w-3 h-3" />
+              Clear
+            </button>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-1">
+          {allTags.map((tag) => (
+            <span
+              key={tag}
+              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium cursor-pointer transition-colors ${
+                selectedTags.includes(tag)
+                  ? 'bg-orange-500 text-white shadow-md'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+              }`}
+              onClick={() => toggleTag(tag)}
+              title={selectedTags.includes(tag) ? `Remove ${tag} filter` : `Add ${tag} filter`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Chat List */}
       <div className="flex-1 overflow-y-auto">
-        {conversations.map((chat) => (
+        {/* Conversation count */}
+        <div className="px-3 py-2 text-xs text-gray-400 border-b border-gray-700">
+          {filteredConversations.length} conversation{filteredConversations.length !== 1 ? 's' : ''}
+          {selectedTags.length > 0 && (
+            <span className="ml-1">
+              (filtered by {selectedTags.length} tag{selectedTags.length !== 1 ? 's' : ''})
+            </span>
+          )}
+        </div>
+        
+        {filteredConversations.map((chat) => (
           <div
             key={chat.id}
             className={`group flex flex-col gap-1 px-3 py-2 cursor-pointer hover:bg-gray-700/50 ${
