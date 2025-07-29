@@ -17,7 +17,7 @@ Here is the JSON:
     "scenarioTime": 600, // In seconds. The duration of the scenario
     "isDemo": false, // Do NOT change
     "isALSILegacy": false, // Do NOT change
-    "scenarioMonitorType": 1, // monitor ID, must be licensed       // Do NOT change
+    "scenarioMonitorType": 20, // monitor ID, must be licensed       // Do NOT change
     "tags": [
           "", "" //List tags to be used for user indexing, searchability and categorisation. Consider the utility to a clinical educator needing to rapidly find a scenario. Optimise for relevance and specificity.
         ],
@@ -57,7 +57,7 @@ Here is the JSON:
         //Duplicate, fill and follow comment instructions for the following Scenario Event object for each event in the scenario.
         { // Scenario Event
             "description": "", // Description of the event
-            "monitorType": 20, // Do NOT change
+            "monitorType": 0, // Do NOT change
             "trendTime": 0, // The trending time for the value changes in seconds
             "jumpTime": 0, // Do NOT change
             "defibShock": false, //If defbrilation should progress scenario to next event

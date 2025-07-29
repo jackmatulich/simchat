@@ -1,4 +1,4 @@
-import { PlusCircle, MessageCircle, Trash2, Edit2, Download, Eye } from 'lucide-react';
+import { PlusCircle, MessageCircle, Trash2, Edit2, Download, Eye, Clock, Users } from 'lucide-react';
 
 interface SidebarProps {
   conversations: Array<{ id: string; title: string; scenarioInfo?: any }>;
@@ -26,6 +26,23 @@ export const Sidebar = ({
   handleUpdateChatTitle 
 }: SidebarProps) => {
   
+  // Helper function to extract participant level from intended_participants
+  const getParticipantLevel = (participants: string[]): string => {
+    if (!participants || participants.length === 0) return '';
+    
+    const participantText = participants.join(' ').toLowerCase();
+    if (participantText.includes('junior') || participantText.includes('student')) return 'Junior';
+    if (participantText.includes('senior') || participantText.includes('experienced')) return 'Senior';
+    if (participantText.includes('expert') || participantText.includes('specialist')) return 'Expert';
+    return 'All Levels';
+  };
+
+  // Helper function to format duration
+  const formatDuration = (seconds: number): string => {
+    const minutes = Math.round(seconds / 60 * 10) / 10;
+    return `${minutes}m`;
+  };
+
   const handleDownload = (scenarioInfo: any) => {
     if (!scenarioInfo?.scenarioName || !scenarioInfo?.jsonData) return;
     try {
@@ -136,6 +153,34 @@ export const Sidebar = ({
               </div>
             </div>
 
+            {/* Tags for scenarios */}
+            {chat.scenarioInfo && (
+              <div className="flex flex-wrap gap-1 ml-7 mb-1">
+                {/* Scenario Type Tag */}
+                {chat.scenarioInfo.scenarioType && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-900/50 text-blue-300 border border-blue-700/50">
+                    {chat.scenarioInfo.scenarioType}
+                  </span>
+                )}
+                
+                {/* Duration Tag */}
+                {chat.scenarioInfo.jsonData?.scenarioTime && (
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-900/50 text-green-300 border border-green-700/50">
+                    <Clock className="w-3 h-3" />
+                    {formatDuration(chat.scenarioInfo.jsonData.scenarioTime)}
+                  </span>
+                )}
+                
+                {/* Participant Level Tag */}
+                {chat.scenarioInfo.jsonData?.intended_participants && (
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-purple-900/50 text-purple-300 border border-purple-700/50">
+                    <Users className="w-3 h-3" />
+                    {getParticipantLevel(chat.scenarioInfo.jsonData.intended_participants)}
+                  </span>
+                )}
+              </div>
+            )}
+
             {/* Scenario action buttons */}
             {chat.scenarioInfo && (
               <div className="flex items-center gap-1 ml-7">
@@ -159,9 +204,6 @@ export const Sidebar = ({
                 >
                   <Download className="w-3 h-3" />
                 </button>
-                <span className="text-xs text-gray-500 ml-1">
-                  {chat.scenarioInfo.scenarioType || 'Scenario'}
-                </span>
               </div>
             )}
           </div>
