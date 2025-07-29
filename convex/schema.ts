@@ -11,5 +11,6 @@ export default defineSchema({
         content: v.string(),
       })
     ),
+    createdAt: v.number(),
   }),
 });

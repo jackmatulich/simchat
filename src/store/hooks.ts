@@ -86,7 +86,8 @@ export function useConversations() {
           id: conv._id,
           title: conv.title,
           messages: conv.messages as Message[],
-          scenarioInfo
+          scenarioInfo,
+          createdAt: conv.createdAt || conv._creationTime
         };
       });
       
@@ -105,10 +106,12 @@ export function useConversations() {
     
     createNewConversation: async (title: string = 'New Conversation') => {
       const id = uuidv4();
+      const now = Date.now();
       const newConversation: Conversation = {
         id,
         title,
         messages: [],
+        createdAt: now,
       };
       
       // First update local state for immediate UI feedback

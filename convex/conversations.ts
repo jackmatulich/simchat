@@ -37,6 +37,7 @@ export const create = mutation({
     return await ctx.db.insert("conversations", {
       title: args.title,
       messages: args.messages || [],
+      createdAt: Date.now(),
     });
   },
 });

@@ -22,6 +22,7 @@ export interface Conversation {
   title: string
   messages: Message[]
   scenarioInfo?: ScenarioInfo
+  createdAt?: number
 }
 
 export interface State {
@@ -103,7 +104,7 @@ export const actions = {
   addConversation: (conversation: Conversation) => {
     store.setState(state => ({
       ...state,
-      conversations: [...state.conversations, conversation],
+      conversations: [...state.conversations, { ...conversation, createdAt: conversation.createdAt || Date.now() }],
       currentConversationId: conversation.id
     }))
   },
@@ -211,9 +212,10 @@ export const selectors = {
     state.conversations.find(c => c.id === state.currentConversationId),
   getPrompts: (state: State) => state.prompts,
   getConversations: (state: State) => state.conversations.sort((a, b) => {
-    // Sort by ID in descending order (newest first)
-    // This works because IDs are typically chronological
-    return b.id.localeCompare(a.id);
+    // Sort by creation time in descending order (newest first)
+    const aTime = a.createdAt || 0;
+    const bTime = b.createdAt || 0;
+    return bTime - aTime;
   }),
   getCurrentConversationId: (state: State) => state.currentConversationId,
   getIsLoading: (state: State) => state.isLoading
