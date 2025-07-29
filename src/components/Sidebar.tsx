@@ -178,6 +178,20 @@ export const Sidebar = ({
                     {getParticipantLevel(chat.scenarioInfo.jsonData.intended_participants)}
                   </span>
                 )}
+
+                {/* JSON Tags */}
+                {chat.scenarioInfo.jsonData?.tags && chat.scenarioInfo.jsonData.tags.length > 0 && 
+                  chat.scenarioInfo.jsonData.tags.map((tag: string, index: number) => (
+                    tag.trim() && (
+                      <span 
+                        key={index}
+                        className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-900/50 text-orange-300 border border-orange-700/50"
+                      >
+                        {tag.trim()}
+                      </span>
+                    )
+                  ))
+                }
               </div>
             )}
 
