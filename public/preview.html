@@ -1411,17 +1411,31 @@
         }
 
         // --- Show scenario and postMessage listener ---
-        window.addEventListener('message', (event) => {
+        const messageHandler = (event) => {
             try {
                 let data = event.data;
                 if (typeof data === 'string') data = JSON.parse(data);
                 scenarioData = data;
+                if (scenarioData.payload && typeof scenarioData.payload.handshake !== 'undefined') {
+                    console.log('[messageHandler] Handshake received - will keep waiting for scenario data');
+                    return;
+                }
+                if (typeof scenarioData.hello !== 'undefined') {
+                    console.log('[messageHandler] "hello" received - will keep waiting for scenario data');
+                    return;
+                }
+                if (scenarioData.payload && typeof scenarioData.payload.settings !== 'undefined') {
+                    console.log('[messageHandler] settings received - will keep waiting for scenario data');
+                    return;
+                }
                 populateTemplate(scenarioData);
                 document.getElementById('scenarioContent').classList.add('active');
+                window.removeEventListener('message', messageHandler);
             } catch (e) {
                 alert('Error loading scenario data: ' + e);
             }
-        }, false);
+        };
+        window.addEventListener('message', messageHandler, false);
 
         // Optionally, support direct JSON in window.name for debugging
         try {
