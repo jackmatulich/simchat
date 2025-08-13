@@ -38,6 +38,11 @@
         }
 
         @media print {
+            /* Safari-specific page margin reset */
+            @page {
+                margin: 0 !important;
+                size: A4 !important;
+            }
             /* Reset body for printing */
             body { 
                 background: white !important; 
@@ -45,6 +50,12 @@
                 padding: 0 !important;
                 font-size: 12pt !important;
                 line-height: 1.4 !important;
+                /* Safari-specific body fixes */
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
             }
             
             /* Hide non-printable elements */
@@ -64,6 +75,11 @@
                 height: 297mm !important;
                 overflow: hidden !important;
                 position: relative !important;
+                /* Safari-specific fixes for clipping */
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
+                top: 0 !important;
+                left: 0 !important;
             }
             
             /* First sheet shouldn't have page break before */
@@ -81,12 +97,22 @@
                 padding: 15mm !important;
                 height: calc(297mm - 30mm) !important;
                 overflow: hidden !important;
+                /* Safari-specific content positioning */
+                position: relative !important;
+                top: 0 !important;
+                margin-top: 0 !important;
             }
             
             /* Header adjustments for print */
             .sheet .header {
                 padding: 5mm 15mm !important;
                 border-radius: 0 !important;
+                /* Safari-specific header positioning */
+                position: relative !important;
+                top: 0 !important;
+                margin-top: 0 !important;
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
             }
             
             /* Footer adjustments for print */
@@ -140,7 +166,7 @@
             }
             
             /* Hide print button when printing */
-            button[onclick*="print"], button:contains("🖨️") {
+            .print-button {
                 display: none !important;
             }
         }
@@ -1615,6 +1641,7 @@
         function addPrintButton() {
             const printButton = document.createElement('button');
             printButton.innerHTML = '🖨️ Print';
+            printButton.className = 'print-button';
             printButton.style.cssText = `
                 position: fixed;
                 top: 20px;
