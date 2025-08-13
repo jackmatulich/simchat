@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
     
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
         :root {
             --brand-dark: #224B8C;
@@ -165,21 +169,24 @@
                 height: calc(297mm - 80mm) !important;
             }
             
-            /* Hide print button when printing */
-            .print-button {
+            /* Hide action buttons when printing */
+            .action-buttons {
                 display: none !important;
             }
         }
         
-        /* Print button styles for screen */
-        .print-button {
+        /* Action button styles for screen */
+        .action-buttons {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .print-button, .pdf-button {
             padding: 10px 20px;
-            background: var(--brand-accent);
-            color: white;
             border: none;
             border-radius: 6px;
             font-weight: 600;
@@ -188,10 +195,32 @@
             transition: all 0.3s ease;
         }
         
+        .print-button {
+            background: var(--brand-accent);
+            color: white;
+        }
+        
+        .pdf-button {
+            background: var(--brand-dark);
+            color: white;
+        }
+        
         .print-button:hover {
             background: #e6851a;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .pdf-button:hover {
+            background: #1a3a6b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .print-button:disabled, .pdf-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
         
         /* Print-ready state */
@@ -1637,16 +1666,88 @@
             }, 100);
         }
 
-        // Add print button when content is loaded
-        function addPrintButton() {
-            const printButton = document.createElement('button');
-            printButton.innerHTML = '🖨️ Print';
-            printButton.className = 'print-button';
-            printButton.style.cssText = `
+        // PDF download function
+        async function downloadPDF() {
+            try {
+                // Show loading state
+                const pdfButton = document.querySelector('.pdf-button');
+                const originalText = pdfButton.innerHTML;
+                pdfButton.innerHTML = '⏳ Generating...';
+                pdfButton.disabled = true;
+                
+                // Get scenario name for filename
+                const scenarioName = scenarioData?.scenarioName || 'Clinical Scenario';
+                const filename = `${scenarioName.replace(/[^a-zA-Z0-9\s-]/g, '')}.pdf`;
+                
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                // Get all sheets
+                const sheets = document.querySelectorAll('.sheet');
+                
+                for (let i = 0; i < sheets.length; i++) {
+                    const sheet = sheets[i];
+                    
+                    // Convert sheet to canvas
+                    const canvas = await html2canvas(sheet, {
+                        scale: 2, // Higher quality
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff',
+                        width: 210 * 3.779527559, // Convert mm to pixels (210mm A4 width)
+                        height: 297 * 3.779527559, // Convert mm to pixels (297mm A4 height)
+                        scrollX: 0,
+                        scrollY: 0
+                    });
+                    
+                    // Add page to PDF (except for first page)
+                    if (i > 0) {
+                        pdf.addPage();
+                    }
+                    
+                    // Convert canvas to image and add to PDF
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                }
+                
+                // Save the PDF
+                pdf.save(filename);
+                
+                // Reset button state
+                pdfButton.innerHTML = originalText;
+                pdfButton.disabled = false;
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                
+                // Reset button state
+                const pdfButton = document.querySelector('.pdf-button');
+                pdfButton.innerHTML = '📄 PDF';
+                pdfButton.disabled = false;
+                
+                alert('Error generating PDF. Please try again.');
+            }
+        }
+
+        // Add print and PDF buttons when content is loaded
+        function addActionButtons() {
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'action-buttons';
+            buttonContainer.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
                 z-index: 1000;
+                display: flex;
+                gap: 10px;
+            `;
+            
+            // Print button
+            const printButton = document.createElement('button');
+            printButton.innerHTML = '🖨️ Print';
+            printButton.className = 'print-button';
+            printButton.style.cssText = `
                 padding: 10px 20px;
                 background: var(--brand-accent);
                 color: white;
@@ -1655,9 +1756,30 @@
                 font-weight: 600;
                 cursor: pointer;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
             `;
             printButton.addEventListener('click', optimizeForPrint);
-            document.body.appendChild(printButton);
+            
+            // PDF download button
+            const pdfButton = document.createElement('button');
+            pdfButton.innerHTML = '📄 PDF';
+            pdfButton.className = 'pdf-button';
+            pdfButton.style.cssText = `
+                padding: 10px 20px;
+                background: var(--brand-dark);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+            `;
+            pdfButton.addEventListener('click', downloadPDF);
+            
+            buttonContainer.appendChild(printButton);
+            buttonContainer.appendChild(pdfButton);
+            document.body.appendChild(buttonContainer);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1665,8 +1787,8 @@
             window.opener.postMessage('previewer-ready', '*');
           }
           
-          // Add print button after a short delay to ensure content is loaded
-          setTimeout(addPrintButton, 1000);
+          // Add action buttons after a short delay to ensure content is loaded
+          setTimeout(addActionButtons, 1000);
         });
     </script>
 </body>
