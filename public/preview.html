@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="print-color-adjust" content="exact">
     <title>Clinical Scenario Template - iSimulate</title>
     
     <!-- Fonts -->
@@ -36,8 +38,140 @@
         }
 
         @media print {
-            body { background: white !important; }
-            .no-print { display: none; }
+            /* Reset body for printing */
+            body { 
+                background: white !important; 
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 12pt !important;
+                line-height: 1.4 !important;
+            }
+            
+            /* Hide non-printable elements */
+            .no-print { display: none !important; }
+            
+            /* Ensure each sheet is treated as a separate A4 page */
+            .sheet {
+                page-break-before: always !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                background: white !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                overflow: hidden !important;
+                position: relative !important;
+            }
+            
+            /* First sheet shouldn't have page break before */
+            .sheet:first-child {
+                page-break-before: auto !important;
+            }
+            
+            /* Last sheet shouldn't have page break after */
+            .sheet:last-child {
+                page-break-after: auto !important;
+            }
+            
+            /* Ensure content fits within A4 bounds */
+            .sheet .content {
+                padding: 15mm !important;
+                height: calc(297mm - 30mm) !important;
+                overflow: hidden !important;
+            }
+            
+            /* Header adjustments for print */
+            .sheet .header {
+                padding: 5mm 15mm !important;
+                border-radius: 0 !important;
+            }
+            
+            /* Footer adjustments for print */
+            .sheet .footer {
+                padding: 3mm 15mm !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: #f8f9fa !important;
+            }
+            
+            /* Typography adjustments for print */
+            h1 { font-size: 18pt !important; margin-bottom: 12pt !important; }
+            h2 { font-size: 14pt !important; margin: 10pt 0 6pt 0 !important; }
+            h3 { font-size: 12pt !important; margin: 8pt 0 4pt 0 !important; }
+            
+            /* Ensure proper page breaks for dynamic content */
+            .events-container .event-card {
+                page-break-inside: avoid !important;
+            }
+            
+            .info-card {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Blood gas and lab tables */
+            .bloodgas, .lab-table {
+                page-break-inside: avoid !important;
+                font-size: 10pt !important;
+            }
+            
+            /* SBAR sections */
+            .sbar-item {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Lists */
+            .scenario-list li {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Debriefing layout adjustments */
+            .debriefing-layout {
+                height: calc(297mm - 60mm) !important;
+            }
+            
+            /* Notes section */
+            .notes-lines {
+                height: calc(297mm - 80mm) !important;
+            }
+            
+            /* Hide print button when printing */
+            button[onclick*="print"], button:contains("🖨️") {
+                display: none !important;
+            }
+        }
+        
+        /* Print button styles for screen */
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px 20px;
+            background: var(--brand-accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .print-button:hover {
+            background: #e6851a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Print-ready state */
+        body.print-ready .sheet {
+            box-shadow: none;
+            border: 1px solid #ddd;
         }
 
         /* Upload section */
@@ -97,8 +231,10 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            height: auto;
-            min-height: auto;
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            position: relative;
         }
 
         .sheet:last-child {
@@ -1457,10 +1593,53 @@
             }
         }
 
+        // Print optimization function
+        function optimizeForPrint() {
+            // Ensure all content is loaded
+            const sheets = document.querySelectorAll('.sheet');
+            sheets.forEach(sheet => {
+                // Force layout calculation
+                sheet.offsetHeight;
+            });
+            
+            // Add print-specific classes
+            document.body.classList.add('print-ready');
+            
+            // Small delay to ensure layout is complete
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        // Add print button when content is loaded
+        function addPrintButton() {
+            const printButton = document.createElement('button');
+            printButton.innerHTML = '🖨️ Print';
+            printButton.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                padding: 10px 20px;
+                background: var(--brand-accent);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            `;
+            printButton.addEventListener('click', optimizeForPrint);
+            document.body.appendChild(printButton);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
           if (window.opener) {
             window.opener.postMessage('previewer-ready', '*');
           }
+          
+          // Add print button after a short delay to ensure content is loaded
+          setTimeout(addPrintButton, 1000);
         });
     </script>
 </body>
