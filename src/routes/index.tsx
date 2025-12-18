@@ -224,19 +224,9 @@ function Home() {
           onChange={(e) => setSelectedModel(e.target.value)}
           className="px-3 py-2 text-sm text-white border rounded-lg bg-gray-800/80 backdrop-blur-sm border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
         >
-          <optgroup label="Claude 3.5">
-            <option value="claude-3-5-sonnet-latest">3.5 Sonnet (Latest)</option>
-            <option value="claude-3-5-sonnet-20241022">3.5 Sonnet (Oct 2024)</option>
-            <option value="claude-3-5-haiku-20241022">3.5 Haiku (Oct 2024)</option>
-          </optgroup>
-          <optgroup label="Claude 3">
-            <option value="claude-3-opus-20240229">3 Opus</option>
-            <option value="claude-3-sonnet-20240229">3 Sonnet</option>
-            <option value="claude-3-haiku-20240307">3 Haiku</option>
-          </optgroup>
-          <optgroup label="Experimental / Future">
-            <option value="claude-haiku-4-5-20251001">Haiku 4.5 (Oct 2025)</option>
-          </optgroup>
+          <option value="claude-haiku-4-5-20251001">Haiku 4.5: (Fast, good, cheap)</option>
+          <option value="claude-sonnet-4-5-20250929">Sonnet 4.5: (Slow, great, moderate)</option>
+          <option value="claude-opus-4-5-20251101">Opus 4.5: (Moderate, excellent, expensive)</option>
         </select>
         
         <button

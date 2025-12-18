@@ -38,7 +38,7 @@ const initialState: State = {
   conversations: [],
   currentConversationId: null,
   isLoading: false,
-  selectedModel: 'claude-3-5-sonnet-latest'
+  selectedModel: 'claude-haiku-4-5-20251001'
 }
 
 export const store = new Store<State>(initialState)
