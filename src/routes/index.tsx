@@ -24,7 +24,7 @@ function Home() {
     addMessage,
   } = useConversations()
   
-  const { isLoading, setLoading, getActivePrompt } = useAppState()
+  const { isLoading, setLoading, getActivePrompt, selectedModel, setSelectedModel } = useAppState()
 
   // Memoize messages to prevent unnecessary re-renders
   const messages = useMemo(() => currentConversation?.messages || [], [currentConversation]);
@@ -88,6 +88,7 @@ function Home() {
         messages: [...messages, userMessage],
         systemPrompt,
         conversationId, // ensure conversationId is passed if needed
+        model: selectedModel,
       });
 
       // If using background function, response will be undefined
@@ -108,7 +109,7 @@ function Home() {
       }
       await addMessage(conversationId, errorMessage)
     }
-  }, [messages, getActivePrompt, addMessage]);
+  }, [messages, getActivePrompt, addMessage, selectedModel]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
@@ -216,8 +217,28 @@ function Home() {
 
   return (
     <div className="relative flex h-screen bg-gray-900">
-      {/* Settings Button */}
-      <div className="absolute z-50 top-5 right-5">
+      {/* Model Selector and Settings Button */}
+      <div className="absolute z-50 flex items-center gap-3 top-5 right-5">
+        <select
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(e.target.value)}
+          className="px-3 py-2 text-sm text-white border rounded-lg bg-gray-800/80 backdrop-blur-sm border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        >
+          <optgroup label="Claude 3.5">
+            <option value="claude-3-5-sonnet-latest">3.5 Sonnet (Latest)</option>
+            <option value="claude-3-5-sonnet-20241022">3.5 Sonnet (Oct 2024)</option>
+            <option value="claude-3-5-haiku-20241022">3.5 Haiku (Oct 2024)</option>
+          </optgroup>
+          <optgroup label="Claude 3">
+            <option value="claude-3-opus-20240229">3 Opus</option>
+            <option value="claude-3-sonnet-20240229">3 Sonnet</option>
+            <option value="claude-3-haiku-20240307">3 Haiku</option>
+          </optgroup>
+          <optgroup label="Experimental / Future">
+            <option value="claude-haiku-4-5-20251001">Haiku 4.5 (Oct 2025)</option>
+          </optgroup>
+        </select>
+        
         <button
           onClick={() => setIsSettingsOpen(true)}
           className="flex items-center justify-center w-10 h-10 text-white transition-opacity rounded-full bg-gradient-to-r from-orange-500 to-red-600 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-orange-500"

@@ -2161,6 +2161,7 @@ export const genAIResponse = async (data: {
   messages: Array<Message>
   systemPrompt?: { value: string; enabled: boolean }
   conversationId: string
+  model?: string
 }) => {
   try {
     const response = await fetch('/.netlify/functions/genAIResponse-background', {

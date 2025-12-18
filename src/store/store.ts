@@ -30,13 +30,15 @@ export interface State {
   conversations: Conversation[]
   currentConversationId: string | null
   isLoading: boolean
+  selectedModel: string
 }
 
 const initialState: State = {
   prompts: [],
   conversations: [],
   currentConversationId: null,
-  isLoading: false
+  isLoading: false,
+  selectedModel: 'claude-3-5-sonnet-latest'
 }
 
 export const store = new Store<State>(initialState)
@@ -202,6 +204,10 @@ export const actions = {
 
   setLoading: (isLoading: boolean) => {
     store.setState(state => ({ ...state, isLoading }))
+  },
+
+  setSelectedModel: (model: string) => {
+    store.setState(state => ({ ...state, selectedModel: model }))
   }
 }
 
@@ -218,5 +224,6 @@ export const selectors = {
     return bTime - aTime;
   }),
   getCurrentConversationId: (state: State) => state.currentConversationId,
-  getIsLoading: (state: State) => state.isLoading
+  getIsLoading: (state: State) => state.isLoading,
+  getSelectedModel: (state: State) => state.selectedModel
 } 

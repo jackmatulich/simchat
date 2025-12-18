@@ -2187,7 +2187,7 @@ exports.handler = async (event) => {
 
   try {
     const body = event.body ? JSON.parse(event.body) : {};
-    const { messages, systemPrompt, conversationId } = body;
+    const { messages, systemPrompt, conversationId, model } = body;
     console.log('Received request body:', JSON.stringify(body, null, 2));
     console.log('Messages type:', typeof messages);
     console.log('Messages value:', messages);
@@ -2233,7 +2233,7 @@ exports.handler = async (event) => {
 
     // Generate AI response
     const response = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: model || 'claude-3-5-sonnet-latest',
       max_tokens: 17000,
       system: finalSystemPrompt,
       messages: formattedMessages,
