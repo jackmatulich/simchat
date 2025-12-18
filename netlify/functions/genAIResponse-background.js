@@ -2233,7 +2233,7 @@ exports.handler = async (event) => {
 
     // Generate AI response
     const response = await anthropic.messages.create({
-      model: 'claude-3-sonnet-20240229',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 17000,
       system: finalSystemPrompt,
       messages: formattedMessages,
