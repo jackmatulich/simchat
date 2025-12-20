@@ -1689,10 +1689,9 @@
                 for (let i = 0; i < sheets.length; i++) {
                     const sheet = sheets[i];
                     
-                    // Optimized settings for small file size while maintaining quality
-                    // Scale 1.2 provides good quality without excessive pixels
+                    // High quality settings for sharp, clear text
                     const canvas = await html2canvas(sheet, {
-                        scale: 1.2, // Optimized for file size while maintaining readability
+                        scale: 1, // 1:1 scale for optimal quality
                         useCORS: true,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
@@ -1710,9 +1709,8 @@
                         pdf.addPage();
                     }
                     
-                    // Use JPEG with optimized quality (0.88) for smaller files
-                    // This balances quality and file size, closer to native PDF sizes
-                    const imgData = canvas.toDataURL('image/jpeg', 0.88);
+                    // Use JPEG with maximum quality (1.0) for sharp, clear output
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
                     pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
                 }
                 
