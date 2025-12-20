@@ -1691,7 +1691,7 @@
                     
                     // High quality settings for sharp, clear text
                     const canvas = await html2canvas(sheet, {
-                        scale: 1, // 1:1 scale for optimal quality
+                        scale: 2, // Higher scale for crisp text rendering
                         useCORS: true,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
@@ -1701,7 +1701,10 @@
                         scrollY: 0,
                         logging: false,
                         removeContainer: false,
-                        imageTimeout: 0
+                        imageTimeout: 0,
+                        // Additional quality settings
+                        letterRendering: true,
+                        foreignObjectRendering: true
                     });
                     
                     // Add page to PDF (except for first page)
@@ -1709,9 +1712,10 @@
                         pdf.addPage();
                     }
                     
-                    // Use JPEG with maximum quality (1.0) for sharp, clear output
-                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+                    // Use PNG for truly lossless quality (larger files but maximum sharpness)
+                    // If file size becomes an issue, we can switch back to JPEG 0.95
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
                 }
                 
                 // Save the PDF automatically (no popups)
