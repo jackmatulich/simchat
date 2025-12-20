@@ -1691,7 +1691,7 @@
                     
                     // Convert sheet to canvas
                     const canvas = await html2canvas(sheet, {
-                        scale: 2, // Higher quality
+                        scale: 1, // Reduced from 2 for smaller file size (still good quality)
                         useCORS: true,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
@@ -1706,9 +1706,9 @@
                         pdf.addPage();
                     }
                     
-                    // Convert canvas to image and add to PDF
-                    const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                    // Convert canvas to JPEG with compression for much smaller file size
+                    const imgData = canvas.toDataURL('image/jpeg', 0.85); // 85% quality - good balance
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
                 }
                 
                 // Save the PDF
