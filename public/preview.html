@@ -1666,68 +1666,11 @@
             }, 100);
         }
 
-        // PDF download function
-        async function downloadPDF() {
-            try {
-                // Show loading state
-                const pdfButton = document.querySelector('.pdf-button');
-                const originalText = pdfButton.innerHTML;
-                pdfButton.innerHTML = '⏳ Generating...';
-                pdfButton.disabled = true;
-                
-                // Get scenario name for filename
-                const scenarioName = scenarioData?.scenarioName || 'Clinical Scenario';
-                const filename = `${scenarioName.replace(/[^a-zA-Z0-9\s-]/g, '')}.pdf`;
-                
-                // Initialize jsPDF
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                // Get all sheets
-                const sheets = document.querySelectorAll('.sheet');
-                
-                for (let i = 0; i < sheets.length; i++) {
-                    const sheet = sheets[i];
-                    
-                    // Convert sheet to canvas
-                    const canvas = await html2canvas(sheet, {
-                        scale: 1.5, // Balanced quality and file size
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff',
-                        width: 210 * 3.779527559, // Convert mm to pixels (210mm A4 width)
-                        height: 297 * 3.779527559, // Convert mm to pixels (297mm A4 height)
-                        scrollX: 0,
-                        scrollY: 0
-                    });
-                    
-                    // Add page to PDF (except for first page)
-                    if (i > 0) {
-                        pdf.addPage();
-                    }
-                    
-                    // Convert canvas to JPEG with high quality compression
-                    const imgData = canvas.toDataURL('image/jpeg', 0.92); // 92% quality - high quality, still compressed
-                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-                }
-                
-                // Save the PDF
-                pdf.save(filename);
-                
-                // Reset button state
-                pdfButton.innerHTML = originalText;
-                pdfButton.disabled = false;
-                
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-                
-                // Reset button state
-                const pdfButton = document.querySelector('.pdf-button');
-                pdfButton.innerHTML = '📄 PDF';
-                pdfButton.disabled = false;
-                
-                alert('Error generating PDF. Please try again.');
-            }
+        // PDF download function - uses native browser print-to-PDF for small, high-quality files
+        function downloadPDF() {
+            // Use the same optimization as print, then trigger native print dialog
+            // User can then "Save as PDF" in the print dialog for optimal results
+            optimizeForPrint();
         }
 
         // Add print and PDF buttons when content is loaded
