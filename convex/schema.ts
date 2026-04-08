@@ -17,6 +17,7 @@ export default defineSchema({
         exchangeRateAudPerUsd: v.optional(v.number()),
       })
     ),
-    createdAt: v.number(),
+    // Legacy rows may omit this; new conversations always set it in `create`.
+    createdAt: v.optional(v.number()),
   }),
 });
