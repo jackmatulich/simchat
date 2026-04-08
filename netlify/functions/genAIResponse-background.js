@@ -2165,6 +2165,50 @@ async function addMessageToConvex(conversationId, message) {
   });
 }
 
+const MODEL_PRICING_USD_PER_MILLION = {
+  'claude-opus-4-20250514': { input: 15, output: 75 },
+  'claude-sonnet-4-20250514': { input: 3, output: 15 },
+  'claude-3-7-sonnet-20250219': { input: 3, output: 15 },
+  'claude-3-5-sonnet-20241022': { input: 3, output: 15 },
+  'claude-3-5-haiku-20241022': { input: 0.8, output: 4 },
+  // Approximate; update when Anthropic publishes exact API rates for this snapshot
+  'claude-haiku-4-5-20251001': { input: 1, output: 5 },
+};
+
+function extractTokenUsage(usage) {
+  if (!usage || typeof usage !== 'object') {
+    return { inputTokens: 0, outputTokens: 0 };
+  }
+  const num = (value) => (typeof value === 'number' && Number.isFinite(value) ? value : 0);
+  const inputTokens =
+    num(usage.input_tokens) +
+    num(usage.cache_creation_input_tokens) +
+    num(usage.cache_read_input_tokens);
+  const outputTokens = num(usage.output_tokens);
+  return { inputTokens, outputTokens };
+}
+
+function computeCosts(model, usage) {
+  const { inputTokens, outputTokens } = extractTokenUsage(usage);
+  const pricing = MODEL_PRICING_USD_PER_MILLION[model];
+  if (!pricing) {
+    return { inputTokens, outputTokens, costUsd: undefined, costAud: undefined };
+  }
+  const costUsd =
+    (inputTokens / 1_000_000) * pricing.input +
+    (outputTokens / 1_000_000) * pricing.output;
+  const audPerUsd = Number(process.env.USD_TO_AUD_RATE || '1.55');
+  const safeAudRate = Number.isFinite(audPerUsd) && audPerUsd > 0 ? audPerUsd : 1.55;
+  const costAud = costUsd * safeAudRate;
+  return {
+    inputTokens,
+    outputTokens,
+    costUsd,
+    costAud,
+    exchangeRateAudPerUsd: safeAudRate,
+  };
+}
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -2231,18 +2275,29 @@ exports.handler = async (event) => {
       ? `${DEFAULT_SYSTEM_PROMPT}\n\n${systemPrompt.value}`
       : DEFAULT_SYSTEM_PROMPT;
 
-    // Generate AI response
+    // Generate AI response (body.model wins, then env, then Haiku default from upstream)
+    const resolvedModel =
+      (typeof model === 'string' && model.trim()) ||
+      process.env.ANTHROPIC_MODEL ||
+      'claude-haiku-4-5-20251001';
     const response = await anthropic.messages.create({
-      model: model || 'claude-haiku-4-5-20251001',
+      model: resolvedModel,
       max_tokens: 17000,
       system: finalSystemPrompt,
       messages: formattedMessages,
     });
     const aiContent = response.content[0]?.text || '';
+    const costInfo = computeCosts(resolvedModel, response.usage);
     const aiMessage = {
       id: Date.now().toString(),
       role: 'assistant',
       content: aiContent,
+      model: resolvedModel,
+      inputTokens: costInfo.inputTokens,
+      outputTokens: costInfo.outputTokens,
+      costUsd: costInfo.costUsd,
+      costAud: costInfo.costAud,
+      exchangeRateAudPerUsd: costInfo.exchangeRateAudPerUsd,
     };
     // Store the AI response in Convex
     await addMessageToConvex(conversationId, aiMessage);

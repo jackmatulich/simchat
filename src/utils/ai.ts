@@ -4,6 +4,12 @@ export interface Message {
   id: string
   role: 'user' | 'assistant'
   content: string
+  model?: string
+  inputTokens?: number
+  outputTokens?: number
+  costUsd?: number
+  costAud?: number
+  exchangeRateAudPerUsd?: number
 }
 
 const DEFAULT_SYSTEM_PROMPT = `

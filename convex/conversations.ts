@@ -29,6 +29,12 @@ export const create = mutation({
           id: v.string(),
           role: v.union(v.literal("user"), v.literal("assistant")),
           content: v.string(),
+          model: v.optional(v.string()),
+          inputTokens: v.optional(v.number()),
+          outputTokens: v.optional(v.number()),
+          costUsd: v.optional(v.number()),
+          costAud: v.optional(v.number()),
+          exchangeRateAudPerUsd: v.optional(v.number()),
         })
       )
     ),
@@ -61,6 +67,12 @@ export const addMessage = mutation({
       id: v.string(),
       role: v.union(v.literal("user"), v.literal("assistant")),
       content: v.string(),
+      model: v.optional(v.string()),
+      inputTokens: v.optional(v.number()),
+      outputTokens: v.optional(v.number()),
+      costUsd: v.optional(v.number()),
+      costAud: v.optional(v.number()),
+      exchangeRateAudPerUsd: v.optional(v.number()),
     }),
   },
   handler: async (ctx, args) => {
@@ -83,6 +95,12 @@ export const addMessage2 = mutation({
       id: v.string(),
       role: v.union(v.literal("user"), v.literal("assistant")),
       content: v.string(),
+      model: v.optional(v.string()),
+      inputTokens: v.optional(v.number()),
+      outputTokens: v.optional(v.number()),
+      costUsd: v.optional(v.number()),
+      costAud: v.optional(v.number()),
+      exchangeRateAudPerUsd: v.optional(v.number()),
     }),
   },
   handler: async (ctx, args) => {

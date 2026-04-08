@@ -72,6 +72,16 @@ export const ChatMessage = ({ message }: { message: Message }) => {
     }
   };
 
+  const formattedAudCost =
+    typeof message.costAud === 'number' && Number.isFinite(message.costAud)
+      ? new Intl.NumberFormat('en-AU', {
+          style: 'currency',
+          currency: 'AUD',
+          minimumFractionDigits: 4,
+          maximumFractionDigits: 4,
+        }).format(message.costAud)
+      : null;
+
   return (
     <div
       className={`py-6 ${
@@ -119,6 +129,18 @@ export const ChatMessage = ({ message }: { message: Message }) => {
               >
                 Preview
               </button>
+              {formattedAudCost && (
+                <span
+                  className="px-2 py-1 text-xs font-medium rounded bg-gray-800 text-emerald-300 border border-emerald-800/70"
+                  title={
+                    message.inputTokens && message.outputTokens
+                      ? `In: ${message.inputTokens.toLocaleString()} | Out: ${message.outputTokens.toLocaleString()}${message.model ? ` | ${message.model}` : ''}`
+                      : message.model || 'Estimated cost'
+                  }
+                >
+                  {formattedAudCost}
+                </span>
+              )}
               {downloadError && <span className="text-red-500 text-xs">{downloadError}</span>}
             </div>
           )}
