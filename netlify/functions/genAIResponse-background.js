@@ -2280,9 +2280,17 @@ exports.handler = async (event) => {
       (typeof model === 'string' && model.trim()) ||
       process.env.ANTHROPIC_MODEL ||
       'claude-haiku-4-5-20251001';
+    // Default 32k: matches Opus 4 snapshot max output (see Anthropic models overview).
+    // Sonnet 4 / Haiku 4.5 allow up to 64k — set ANTHROPIC_MAX_OUTPUT_TOKENS=64000 on Netlify if you only use those.
+    const maxOutputTokens = (() => {
+      const raw = process.env.ANTHROPIC_MAX_OUTPUT_TOKENS;
+      if (raw === undefined || raw === '') return 32000;
+      const n = Number.parseInt(String(raw), 10);
+      return Number.isFinite(n) && n > 0 ? n : 32000;
+    })();
     const response = await anthropic.messages.create({
       model: resolvedModel,
-      max_tokens: 17000,
+      max_tokens: maxOutputTokens,
       system: finalSystemPrompt,
       messages: formattedMessages,
     });
