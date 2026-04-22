@@ -1471,38 +1471,36 @@
                     html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
                 }
             });
-            // Add Co-Oximetry section if arterial
-            if (!isVenous) {
-                html += `<tr><td colspan="4"><strong>CO-OXIMETRY</strong></td></tr>`;
-                const coOxParams = [
-                    { name: 'Hct', display: 'Hct' },
-                    { name: 'tHb', display: 'tHb' },
-                    { name: 'sO2', display: 'sO2' },
-                    { name: 'FO2 Hb', display: 'FO2 Hb' },
-                    { name: 'FCO Hb', display: 'FCO Hb' },
-                    { name: 'FMet Hb', display: 'FMet Hb' },
-                    { name: 'FHHb', display: 'FHHb' }
-                ];
-                coOxParams.forEach(param => {
-                    const info = getParamInfo(param.name);
-                    if (info.value !== '-') {
-                        html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
-                    }
-                });
-                // Add corrected section
-                html += `<tr><td colspan="4"><strong>CORRECTED 37.0°</strong></td></tr>`;
-                const correctedParams = [
-                    { name: 'pH(T)', display: 'pH(T)' },
-                    { name: 'pCO2(T)', display: 'pCO2(T)' },
-                    { name: 'pO2(T)', display: 'pO2(T)' }
-                ];
-                correctedParams.forEach(param => {
-                    const info = getParamInfo(param.name);
-                    if (info.value !== '-') {
-                        html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
-                    }
-                });
-            }
+            // Add Co-Oximetry section (ABG and VBG)
+            html += `<tr><td colspan="4"><strong>CO-OXIMETRY</strong></td></tr>`;
+            const coOxParams = [
+                { name: 'Hct', display: 'Hct' },
+                { name: 'tHb', display: 'tHb' },
+                { name: 'sO2', display: 'sO2' },
+                { name: 'FO2 Hb', display: 'FO2 Hb' },
+                { name: 'FCO Hb', display: 'FCO Hb' },
+                { name: 'FMet Hb', display: 'FMet Hb' },
+                { name: 'FHHb', display: 'FHHb' }
+            ];
+            coOxParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add corrected section
+            html += `<tr><td colspan="4"><strong>CORRECTED 37.0°</strong></td></tr>`;
+            const correctedParams = [
+                { name: 'pH(T)', display: 'pH(T)' },
+                { name: 'pCO2(T)', display: 'pCO2(T)' },
+                { name: 'pO2(T)', display: 'pO2(T)' }
+            ];
+            correctedParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
             // Add electrolytes section
             html += `<tr><td colspan="4"><strong>ELECTROLYTES</strong></td></tr>`;
             const electrolyteParams = [
