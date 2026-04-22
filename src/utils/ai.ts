@@ -1269,7 +1269,7 @@ Here is the JSON:
                     "healthy_max": 29, // Do NOT edit this value
                     "value": 25, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "HCO3-" // Do NOT edit this value
                 },
                 {
@@ -1280,7 +1280,7 @@ Here is the JSON:
                     "healthy_max": 2, // Do NOT edit this value
                     "value": 1, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "BE" // Do NOT edit this value
                 },
                 {
@@ -1296,13 +1296,13 @@ Here is the JSON:
                 },
                 {
                     "name": "tHb", // Do NOT edit this value
-                    "absolute_min": 5, // Do NOT edit this value
-                    "absolute_max": 25, // Do NOT edit this value
-                    "healthy_min": 12, // Do NOT edit this value
-                    "healthy_max": 17, // Do NOT edit this value
-                    "value": 14.5, // ONLY change this value
-                    "interval": 0.1, // Do NOT edit this value
-                    "unit": "%", // Do NOT edit this value
+                    "absolute_min": 50, // Do NOT edit this value
+                    "absolute_max": 250, // Do NOT edit this value
+                    "healthy_min": 130, // Do NOT edit this value
+                    "healthy_max": 180, // Do NOT edit this value
+                    "value": 145, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "g/L", // Do NOT edit this value
                     "abbreviation": "tHb" // Do NOT edit this value
                 },
                 {
@@ -1412,7 +1412,7 @@ Here is the JSON:
                     "healthy_max": 145, // Do NOT edit this value
                     "value": 139, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Na+" // Do NOT edit this value
                 },
                 {
@@ -1423,7 +1423,7 @@ Here is the JSON:
                     "healthy_max": 5.0, // Do NOT edit this value
                     "value": 4.0, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "K+" // Do NOT edit this value
                 },
                 {
@@ -1434,7 +1434,7 @@ Here is the JSON:
                     "healthy_max": 1.30, // Do NOT edit this value
                     "value": 1.18, // ONLY change this value
                     "interval": 0.01, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Ca++" // Do NOT edit this value
                 },
                 {
@@ -1445,7 +1445,7 @@ Here is the JSON:
                     "healthy_max": 107, // Do NOT edit this value
                     "value": 100, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Cl-" // Do NOT edit this value
                 },
                 {
@@ -1456,7 +1456,7 @@ Here is the JSON:
                     "healthy_max": 7.8, // Do NOT edit this value
                     "value": 5.6, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Glu" // Do NOT edit this value
                 },
                 {
@@ -1467,7 +1467,7 @@ Here is the JSON:
                     "healthy_max": 2.2, // Do NOT edit this value
                     "value": 1.2, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Lac" // Do NOT edit this value
                 },
                 {
@@ -1528,7 +1528,7 @@ Here is the JSON:
                     "healthy_max": 26, // Do NOT edit this value
                     "value": 24, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "HCO3-" // Do NOT edit this value
                 },
                 {
@@ -1539,7 +1539,7 @@ Here is the JSON:
                     "healthy_max": 2, // Do NOT edit this value
                     "value": 0, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "BE" // Do NOT edit this value
                 },
                 {
@@ -1555,13 +1555,13 @@ Here is the JSON:
                 },
                 {
                     "name": "tHb", // Do NOT edit this value
-                    "absolute_min": 5, // Do NOT edit this value
-                    "absolute_max": 25, // Do NOT edit this value
-                    "healthy_min": 12, // Do NOT edit this value
-                    "healthy_max": 17, // Do NOT edit this value
-                    "value": 14, // ONLY change this value
-                    "interval": 0.1, // Do NOT edit this value
-                    "unit": "%", // Do NOT edit this value
+                    "absolute_min": 50, // Do NOT edit this value
+                    "absolute_max": 250, // Do NOT edit this value
+                    "healthy_min": 130, // Do NOT edit this value
+                    "healthy_max": 180, // Do NOT edit this value
+                    "value": 140, // ONLY change this value
+                    "interval": 1, // Do NOT edit this value
+                    "unit": "g/L", // Do NOT edit this value
                     "abbreviation": "tHb" // Do NOT edit this value
                 },
                 {
@@ -1671,7 +1671,7 @@ Here is the JSON:
                     "healthy_max": 145, // Do NOT edit this value
                     "value": 140, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Na+" // Do NOT edit this value
                 },
                 {
@@ -1682,7 +1682,7 @@ Here is the JSON:
                     "healthy_max": 5.0, // Do NOT edit this value
                     "value": 4.2, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "K+" // Do NOT edit this value
                 },
                 {
@@ -1693,7 +1693,7 @@ Here is the JSON:
                     "healthy_max": 1.30, // Do NOT edit this value
                     "value": 1.22, // ONLY change this value
                     "interval": 0.01, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Ca++" // Do NOT edit this value
                 },
                 {
@@ -1704,7 +1704,7 @@ Here is the JSON:
                     "healthy_max": 107, // Do NOT edit this value
                     "value": 102, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Cl-" // Do NOT edit this value
                 },
                 {
@@ -1715,7 +1715,7 @@ Here is the JSON:
                     "healthy_max": 7.8, // Do NOT edit this value
                     "value": 5.2, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Glu" // Do NOT edit this value
                 },
                 {
@@ -1726,7 +1726,7 @@ Here is the JSON:
                     "healthy_max": 2.2, // Do NOT edit this value
                     "value": 1.4, // ONLY change this value
                     "interval": 0.1, // Do NOT edit this value
-                    "unit": "mmol / L", // Do NOT edit this value
+                    "unit": "mmol/L", // Do NOT edit this value
                     "abbreviation": "Lac" // Do NOT edit this value
                 },
                 {
