@@ -93,9 +93,11 @@
 
             .sheet.ecg-sheet {
                 page: ecg-landscape;
+                box-sizing: border-box !important;
                 width: 297mm !important;
                 height: 210mm !important;
                 min-height: 210mm !important;
+                padding: 0 !important;
             }
 
             .sheet.ecg-sheet .content {
@@ -359,9 +361,12 @@
         }
 
         .sheet.ecg-sheet {
+            box-sizing: border-box;
+            flex: 0 0 auto;
             width: 297mm;
             height: 210mm;
             min-height: 210mm;
+            padding: 0;
         }
 
         .ecg-content {
@@ -1484,7 +1489,8 @@
 
                 groups.forEach((group, index) => {
                     const pageDiv = document.createElement('section');
-                    pageDiv.className = 'sheet padding-10mm ecg-sheet';
+                    pageDiv.className = 'sheet ecg-sheet';
+                    pageDiv.dataset.orientation = 'landscape';
                     pageDiv.innerHTML = `
                         <div class="header">
                             <div class="logo"></div>
@@ -1804,12 +1810,17 @@
                 // Initialize jsPDF
                 const { jsPDF } = window.jspdf;
                 const sheets = document.querySelectorAll('.sheet');
-                const firstSheetIsLandscape = sheets[0]?.classList.contains('ecg-sheet');
-                const pdf = new jsPDF(firstSheetIsLandscape ? 'l' : 'p', 'mm', 'a4');
+                const firstSheetIsLandscape = sheets[0]?.dataset.orientation === 'landscape';
+                const firstPageSize = firstSheetIsLandscape ? [297, 210] : [210, 297];
+                const pdf = new jsPDF({
+                    orientation: firstSheetIsLandscape ? 'landscape' : 'portrait',
+                    unit: 'mm',
+                    format: firstPageSize
+                });
 
                 for (let i = 0; i < sheets.length; i++) {
                     const sheet = sheets[i];
-                    const isLandscape = sheet.classList.contains('ecg-sheet');
+                    const isLandscape = sheet.dataset.orientation === 'landscape';
                     const pageWidth = isLandscape ? 297 : 210;
                     const pageHeight = isLandscape ? 210 : 297;
                     
@@ -1827,7 +1838,7 @@
                     
                     // Add page to PDF (except for first page)
                     if (i > 0) {
-                        pdf.addPage('a4', isLandscape ? 'l' : 'p');
+                        pdf.addPage([pageWidth, pageHeight], isLandscape ? 'landscape' : 'portrait');
                     }
                     
                     // Convert canvas to image and add to PDF - original PNG approach
