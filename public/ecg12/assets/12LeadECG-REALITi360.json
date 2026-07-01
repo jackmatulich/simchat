@@ -1,0 +1,4077 @@
+{
+    "01001": {
+        "leads": [
+            {
+                "heartbeat": 57,
+                "image": "Sinus-I.png",
+                "qrsPoints": [49, 62]
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus-II.png",
+                "qrsPoints": [49, 65]
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus-III.png",
+                "qrsPoints": [50, 68]
+            },
+            {
+                "heartbeat": 62,
+                "image": "Sinus-aVR.png",
+                "qrsPoints": [54, 69]
+            },
+            {
+                "heartbeat": 61,
+                "image": "Sinus-aVL.png",
+                "qrsPoints": [52, 67]
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus-aVF.png",
+                "qrsPoints": [52, 70]
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus-V1.png",
+                "qrsPoints": [52, 70]
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus-V2.png",
+                "qrsPoints": [51, 70]
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus-V3.png",
+                "qrsPoints": [53, 70]
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus-V4.png",
+                "qrsPoints": [36, 67]
+            },
+            {
+                "heartbeat": 58,
+                "image": "Sinus-V5.png",
+                "qrsPoints": [50, 65]
+            },
+            {
+                "heartbeat": 59,
+                "image": "Sinus-V6.png",
+                "qrsPoints": [50, 65]
+            }
+        ],
+        "name": "Sinus",
+        "path": "Sinus/Sinus"
+    },
+    "01002": {
+        "leads": [
+            {
+                "heartbeat": 33,
+                "image": "SinusInvertedP-I.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "SinusInvertedP-II.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "SinusInvertedP-III.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "SinusInvertedP-aVR.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "SinusInvertedP-aVL.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "SinusInvertedP-aVF.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "SinusInvertedP-V1.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "SinusInvertedP-V2.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "SinusInvertedP-V3.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "SinusInvertedP-V4.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "SinusInvertedP-V5.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "SinusInvertedP-V6.png"
+            }
+        ],
+        "name": "Sinus Inverted P Wave",
+        "path": "Sinus/SinusInvertedPWave"
+    },
+    "01003": {
+        "leads": [
+            {
+                "heartbeat": 57,
+                "image": "Sinus2-I.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus2-II.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus2-III.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "Sinus2-aVR.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "Sinus2-aVL.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus2-aVF.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus2-V1.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus2-V2.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "Sinus2-V3.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Sinus2-V4.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "Sinus2-V5.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "Sinus2-V6.png"
+            }
+        ],
+        "name": "Sinus 2",
+        "path": "Sinus/Sinus2"
+    },
+    "02001": {
+        "leads": [
+            {
+                "heartbeat": 19,
+                "image": "Agonal-I.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "Agonal-II.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "Agonal-III.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-aVR.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-aVL.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-aVF.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "Agonal-V1.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "Agonal-V2.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "Agonal-V3.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-V4.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-V5.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Agonal-V6.png"
+            }
+        ],
+        "name": "Agonal",
+        "path": "CardiacArrest/Agonal"
+    },
+    "02002": {
+        "leads": [
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave-aVR.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave-V1.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "PWave.png"
+            }
+        ],
+        "name": "P Wave Asystole",
+        "path": "CardiacArrest/PWaveAsystole"
+    },
+    "03001": {
+        "leads": [
+            {
+                "heartbeat": 33,
+                "image": "AT-I.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "AT-II.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "AT-III.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "AT-aVR.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "AT-aVL.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "AT-aVF.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "AT-V1.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "AT-V2.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "AT-V3.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "AT-V4.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AT-V5.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AT-V6.png"
+            }
+        ],
+        "name": "Atrial Tachycardia",
+        "path": "AtrialAbnormalities/AtrialTachycardia"
+    },
+    "03002": {
+        "leads": [
+            {
+                "heartbeat": 26,
+                "image": "AVNRT1-I.png"
+            },
+            {
+                "heartbeat": 28,
+                "image": "AVNRT1-II.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "AVNRT1-III.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "AVNRT1-aVR.png"
+            },
+            {
+                "heartbeat": 25,
+                "image": "AVNRT1-aVL.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "AVNRT1-aVF.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "AVNRT1-V1.png"
+            },
+            {
+                "heartbeat": 15,
+                "image": "AVNRT1-V2.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "AVNRT1-V3.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "AVNRT1-V4.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "AVNRT1-V5.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "AVNRT1-V6.png"
+            }
+        ],
+        "name": "AVNRT1",
+        "path": "AtrialAbnormalities/AVNRT1"
+    },
+    "03003": {
+        "leads": [
+            {
+                "heartbeat": 24,
+                "image": "AVNRT2-I.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "AVNRT2-II.png"
+            },
+            {
+                "heartbeat": 29,
+                "image": "AVNRT2-III.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "AVNRT2-aVR.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "AVNRT2-aVL.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "AVNRT2-aVF.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "AVNRT2-V1.png"
+            },
+            {
+                "heartbeat": 24,
+                "image": "AVNRT2-V2.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "AVNRT2-V3.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "AVNRT2-V4.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "AVNRT2-V5.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "AVNRT2-V6.png"
+            }
+        ],
+        "name": "AVNRT2",
+        "path": "AtrialAbnormalities/AVNRT2"
+    },
+    "03004": {
+        "leads": [
+            {
+                "heartbeat": 58,
+                "image": "BAE-I.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BAE-II.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BAE-III.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "BAE-aVR.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "BAE-aVL.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BAE-aVF.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "BAE-V1.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "BAE-V2.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "BAE-V3.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BAE-V4.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "BAE-V5.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "BAE-V6.png"
+            }
+        ],
+        "name": "Biatrial Enlargement",
+        "path": "AtrialAbnormalities/BiatrialEnlargement"
+    },
+    "03005": {
+        "leads": [
+            {
+                "heartbeat": 48,
+                "image": "Idioventricular-I.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "Idioventricular-II.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "Idioventricular-III.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Idioventricular-aVR.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Idioventricular-aVL.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Idioventricular-aVF.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "Idioventricular-V1.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "Idioventricular-V2.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "Idioventricular-V3.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Idioventricular-V4.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "Idioventricular-V5.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "Idioventricular-V6.png"
+            }
+        ],
+        "name": "Idioventricular",
+        "path": "AtrialAbnormalities/Idioventricular"
+    },
+    "03006": {
+        "leads": [
+            {
+                "heartbeat": 46,
+                "image": "SVT-I.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "SVT-II.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "SVT-III.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "SVT-aVR.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "SVT-aVL.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "SVT-aVF.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "SVT-V1.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "SVT-V2.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "SVT-V3.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "SVT-V4.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "SVT-V5.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "SVT-V6.png"
+            }
+        ],
+        "name": "Supraventricular Tachycardia",
+        "path": "AtrialAbnormalities/SupraventricularTachycardia"
+    },
+    "03007": {
+        "leads": [
+            {
+                "heartbeat": 56,
+                "image": "WPW-I.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "WPW-II.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "WPW-III.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "WPW-aVR.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "WPW-aVL.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "WPW-aVF.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "WPW-V1.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "WPW-V2.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "WPW-V3.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "WPW-V4.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "WPW-V5.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "WPW-V6.png"
+            }
+        ],
+        "name": "WPW",
+        "path": "AtrialAbnormalities/WPW"
+    },
+    "03008": {
+        "baselineScale": 0.5,
+        "leads": [
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 24,
+                "image": "AF-I.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 27,
+                "image": "AF-II.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 27,
+                "image": "AF-III.png"
+            },
+            {
+                "baseline": "AF-Baseline-1.png",
+                "heartbeat": 32,
+                "image": "AF-aVR.png"
+            },
+            {
+                "baseline": "AF-Baseline-1.png",
+                "heartbeat": 30,
+                "image": "AF-aVL.png"
+            },
+            {
+                "baseline": "AF-Baseline-1.png",
+                "heartbeat": 28,
+                "image": "AF-aVF.png"
+            },
+            {
+                "baseline": "AF-Baseline-2.png",
+                "heartbeat": 18,
+                "image": "AF-V1.png"
+            },
+            {
+                "baseline": "AF-Baseline-2.png",
+                "heartbeat": 18,
+                "image": "AF-V2.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 16,
+                "image": "AF-V3.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 20,
+                "image": "AF-V4.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 26,
+                "image": "AF-V5.png"
+            },
+            {
+                "baseline": "AF-Baseline-3.png",
+                "heartbeat": 28,
+                "image": "AF-V6.png"
+            }
+        ],
+        "name": "Atrial Fibrillation",
+        "path": "AtrialAbnormalities/AtrialFibrillation"
+    },
+    "03009": {
+        "leads": [
+            {
+                "heartbeat": 32,
+                "image": "AFBBB-I.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "AFBBB-II.png"
+            },
+            {
+                "heartbeat": 30,
+                "image": "AFBBB-III.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "AFBBB-aVR.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "AFBBB-aVL.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "AFBBB-aVF.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "AFBBB-V1.png"
+            },
+            {
+                "heartbeat": 29,
+                "image": "AFBBB-V2.png"
+            },
+            {
+                "heartbeat": 24,
+                "image": "AFBBB-V3.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "AFBBB-V4.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AFBBB-V5.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "AFBBB-V6.png"
+            }
+        ],
+        "name": "AF BBB",
+        "path": "AtrialAbnormalities/AFBBB"
+    },
+    "03010": {
+        "beatRatio": 0.33333333,
+        "leads": [
+            {
+                "heartbeat": -1,
+                "image": "AFP-I.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-II.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-III.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-aVR.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-aVL.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-aVF.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V1.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V2.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V3.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V4.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V5.png"
+            },
+            {
+                "heartbeat": -1,
+                "image": "AFP-V6.png"
+            }
+        ],
+        "name": "Atrial Flutter Pause",
+        "path": "AtrialAbnormalities/AtrialFlutterPause"
+    },
+    "03011": {
+        "leads": [
+            {
+                "heartbeat": 26,
+                "image": "AF2to1-I.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "AF2to1-II.png"
+            },
+            {
+                "heartbeat": 30,
+                "image": "AF2to1-III.png"
+            },
+            {
+                "heartbeat": 24,
+                "image": "AF2to1-aVR.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "AF2to1-aVL.png"
+            },
+            {
+                "heartbeat": 22,
+                "image": "AF2to1-aVF.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "AF2to1-V1.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "AF2to1-V2.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "AF2to1-V3.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "AF2to1-V4.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "AF2to1-V5.png"
+            },
+            {
+                "heartbeat": 30,
+                "image": "AF2to1-V6.png"
+            }
+        ],
+        "name": "Atrial Flutter 2 to 1",
+        "path": "AtrialAbnormalities/AtrialFlutter2to1"
+    },
+    "03012": {
+        "leads": [
+            {
+                "heartbeat": 10,
+                "image": "AF3to1-I.png"
+            },
+            {
+                "heartbeat": 7,
+                "image": "AF3to1-II.png"
+            },
+            {
+                "heartbeat": 8,
+                "image": "AF3to1-III.png"
+            },
+            {
+                "heartbeat": 9,
+                "image": "AF3to1-aVR.png"
+            },
+            {
+                "heartbeat": 13,
+                "image": "AF3to1-aVL.png"
+            },
+            {
+                "heartbeat": 7,
+                "image": "AF3to1-aVF.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF3to1-V1.png"
+            },
+            {
+                "heartbeat": 7,
+                "image": "AF3to1-V2.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF3to1-V3.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF3to1-V4.png"
+            },
+            {
+                "heartbeat": 11,
+                "image": "AF3to1-V5.png"
+            },
+            {
+                "heartbeat": 12,
+                "image": "AF3to1-V6.png"
+            }
+        ],
+        "name": "Atrial Flutter 3 to 1",
+        "path": "AtrialAbnormalities/AtrialFlutter3to1"
+    },
+    "03013": {
+        "leads": [
+            {
+                "heartbeat": 8,
+                "image": "AF4to1-I.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-II.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-III.png"
+            },
+            {
+                "heartbeat": 9,
+                "image": "AF4to1-aVR.png"
+            },
+            {
+                "heartbeat": 11,
+                "image": "AF4to1-aVL.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-aVF.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-V1.png"
+            },
+            {
+                "heartbeat": 7,
+                "image": "AF4to1-V2.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-V3.png"
+            },
+            {
+                "heartbeat": 6,
+                "image": "AF4to1-V4.png"
+            },
+            {
+                "heartbeat": 8,
+                "image": "AF4to1-V5.png"
+            },
+            {
+                "heartbeat": 10,
+                "image": "AF4to1-V6.png"
+            }
+        ],
+        "name": "Atrial Flutter 4 to 1",
+        "path": "AtrialAbnormalities/AtrialFlutter4to1"
+    },
+    "04001": {
+        "leads": [
+            {
+                "heartbeat": 25,
+                "image": "VT1-I.png"
+            },
+            {
+                "heartbeat": 32,
+                "image": "VT1-II.png"
+            },
+            {
+                "heartbeat": 32,
+                "image": "VT1-III.png"
+            },
+            {
+                "heartbeat": 92,
+                "image": "VT1-aVR.png"
+            },
+            {
+                "heartbeat": 86,
+                "image": "VT1-aVL.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "VT1-aVF.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "VT1-V1.png"
+            },
+            {
+                "heartbeat": 22,
+                "image": "VT1-V2.png"
+            },
+            {
+                "heartbeat": 32,
+                "image": "VT1-V3.png"
+            },
+            {
+                "heartbeat": 30,
+                "image": "VT1-V4.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "VT1-V5.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "VT1-V6.png"
+            }
+        ],
+        "name": "VT1",
+        "path": "VentricularAbnormalities/VT1"
+    },
+    "04002": {
+        "leads": [
+            {
+                "heartbeat": 44,
+                "image": "VT2-I.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "VT2-II.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "VT2-III.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "VT2-aVR.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "VT2-aVL.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VT2-aVF.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "VT2-V1.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "VT2-V2.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT2-V3.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "VT2-V4.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "VT2-V5.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "VT2-V6.png"
+            }
+        ],
+        "name": "VT2",
+        "path": "VentricularAbnormalities/VT2"
+    },
+    "04003": {
+        "leads": [
+            {
+                "heartbeat": 24,
+                "image": "VT3-I.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT3-II.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "VT3-III.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "VT3-aVR.png"
+            },
+            {
+                "heartbeat": 16,
+                "image": "VT3-aVL.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "VT3-aVF.png"
+            },
+            {
+                "heartbeat": 10,
+                "image": "VT3-V1.png"
+            },
+            {
+                "heartbeat": 9,
+                "image": "VT3-V2.png"
+            },
+            {
+                "heartbeat": 9,
+                "image": "VT3-V3.png"
+            },
+            {
+                "heartbeat": 24,
+                "image": "VT3-V4.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "VT3-V5.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT3-V6.png"
+            }
+        ],
+        "name": "VT3",
+        "path": "VentricularAbnormalities/VT3"
+    },
+    "04004": {
+        "leads": [
+            {
+                "heartbeat": 35,
+                "image": "VT4-I.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT4-II.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "VT4-III.png"
+            },
+            {
+                "heartbeat": 23,
+                "image": "VT4-aVR.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT4-aVL.png"
+            },
+            {
+                "heartbeat": 22,
+                "image": "VT4-aVF.png"
+            },
+            {
+                "heartbeat": 15,
+                "image": "VT4-V1.png"
+            },
+            {
+                "heartbeat": 15,
+                "image": "VT4-V2.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "VT4-V3.png"
+            },
+            {
+                "heartbeat": 25,
+                "image": "VT4-V4.png"
+            },
+            {
+                "heartbeat": 25,
+                "image": "VT4-V5.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "VT4-V6.png"
+            }
+        ],
+        "name": "VT4",
+        "path": "VentricularAbnormalities/VT4"
+    },
+    "04005": {
+        "leads": [
+            {
+                "heartbeat": 34,
+                "image": "VT5-I.png"
+            },
+            {
+                "heartbeat": 32,
+                "image": "VT5-II.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "VT5-III.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "VT5-aVR.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "VT5-aVL.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "VT5-aVF.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "VT5-V1.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "VT5-V2.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "VT5-V3.png"
+            },
+            {
+                "heartbeat": 30,
+                "image": "VT5-V4.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "VT5-V5.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "VT5-V6.png"
+            }
+        ],
+        "name": "VT5",
+        "path": "VentricularAbnormalities/VT5"
+    },
+    "04006": {
+        "leads": [
+            {
+                "heartbeat": 42,
+                "image": "VER-I.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-II.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-III.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-aVR.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-aVL.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-aVF.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V1.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V2.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V3.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V4.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V5.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "VER-V6.png"
+            }
+        ],
+        "name": "Ventricular Escape Rhythm",
+        "path": "VentricularAbnormalities/VentricularEscapeRhythm"
+    },
+    "05001": {
+        "leads": [
+            {
+                "heartbeat": 52,
+                "image": "BFB-I.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "BFB-II.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "BFB-III.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BFB-aVR.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BFB-aVL.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "BFB-aVF.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "BFB-V1.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "BFB-V2.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "BFB-V3.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BFB-V4.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BFB-V5.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "BFB-V6.png"
+            }
+        ],
+        "name": "Bifascicular Block",
+        "path": "ConductionAbnormalities/BifascicularBlock"
+    },
+    "05002": {
+        "leads": [
+            {
+                "heartbeat": 64,
+                "image": "FDHB-I.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "FDHB-II.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "FDHB-III.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "FDHB-aVR.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "FDHB-aVL.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "FDHB-aVF.png"
+            },
+            {
+                "heartbeat": 67,
+                "image": "FDHB-V1.png"
+            },
+            {
+                "heartbeat": 66,
+                "image": "FDHB-V2.png"
+            },
+            {
+                "heartbeat": 65,
+                "image": "FDHB-V3.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "FDHB-V4.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "FDHB-V5.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "FDHB-V6.png"
+            }
+        ],
+        "name": "First Deg Heart Block",
+        "path": "ConductionAbnormalities/FirstDegHeartBlock"
+    },
+    "05003": {
+        "leads": [
+            {
+                "heartbeat": 47,
+                "image": "AJR-I.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "AJR-II.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "AJR-III.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "AJR-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "AJR-aVL.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "AJR-aVF.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "AJR-V1.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "AJR-V2.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "AJR-V3.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "AJR-V4.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "AJR-V5.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "AJR-V6.png"
+            }
+        ],
+        "name": "Accelerated Junctional Rhythm",
+        "path": "ConductionAbnormalities/AcceleratedJunctionalRhythm"
+    },
+    "05004": {
+        "leads": [
+            {
+                "heartbeat": 51,
+                "image": "RBBB-I.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "RBBB-II.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "RBBB-III.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "RBBB-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "RBBB-aVL.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "RBBB-aVF.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "RBBB-V1.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "RBBB-V2.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "RBBB-V3.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "RBBB-V4.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "RBBB-V5.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "RBBB-V6.png"
+            }
+        ],
+        "name": "RBBB",
+        "path": "ConductionAbnormalities/RBBB"
+    },
+    "05005": {
+        "leads": [
+            {
+                "heartbeat": 43,
+                "image": "LBBB-I.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "LBBB-II.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "LBBB-III.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "LBBB-aVR.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "LBBB-aVL.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "LBBB-aVF.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "LBBB-V1.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "LBBB-V2.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "LBBB-V3.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "LBBB-V4.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "LBBB-V5.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "LBBB-V6.png"
+            }
+        ],
+        "name": "LBBB",
+        "path": "ConductionAbnormalities/LBBB"
+    },
+    "05006": {
+        "leads": [
+            {
+                "heartbeat": 18,
+                "image": "3rdHB-I.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "3rdHB-II.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 18,
+                "image": "3rdHB-III.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "3rdHB-aVR.png",
+                "pWave": "3rdHB-PWave-aVR.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "3rdHB-aVL.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 17,
+                "image": "3rdHB-aVF.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 14,
+                "image": "3rdHB-V1.png",
+                "pWave": "3rdHB-PWave-V1.png"
+            },
+            {
+                "heartbeat": 13,
+                "image": "3rdHB-V2.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 15,
+                "image": "3rdHB-V3.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "3rdHB-V4.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "3rdHB-V5.png",
+                "pWave": "3rdHB-PWave.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "3rdHB-V6.png",
+                "pWave": "3rdHB-PWave.png"
+            }
+        ],
+        "name": "3rd Degree Heart Block",
+        "path": "ConductionAbnormalities/3rdDegreeHeartBlock",
+        "pWaveBeatRatio": 2.5
+    },
+    "06001": {
+        "leads": [
+            {
+                "heartbeat": 46,
+                "image": "AnteriorSTEMI-I.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "AnteriorSTEMI-II.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AnteriorSTEMI-III.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "AnteriorSTEMI-aVR.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "AnteriorSTEMI-aVL.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AnteriorSTEMI-aVF.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "AnteriorSTEMI-V1.png"
+            },
+            {
+                "heartbeat": 41,
+                "image": "AnteriorSTEMI-V2.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "AnteriorSTEMI-V3.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "AnteriorSTEMI-V4.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "AnteriorSTEMI-V5.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "AnteriorSTEMI-V6.png"
+            }
+        ],
+        "name": "Anterior STEMI",
+        "path": "Ischaemic/AnteriorSTEMI"
+    },
+    "06002": {
+        "leads": [
+            {
+                "heartbeat": 50,
+                "image": "STD-I.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "STD-II.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "STD-III.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "STD-aVR.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "STD-aVL.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "STD-aVF.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "STD-V1.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "STD-V2.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "STD-V3.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "STD-V4.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "STD-V5.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "STD-V6.png"
+            }
+        ],
+        "name": "ST Depression",
+        "path": "Ischaemic/STDepression"
+    },
+    "06003": {
+        "leads": [
+            {
+                "heartbeat": 47,
+                "image": "InferiorSTEMI-I.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "InferiorSTEMI-II.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "InferiorSTEMI-III.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "InferiorSTEMI-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "InferiorSTEMI-aVL.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "InferiorSTEMI-aVF.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "InferiorSTEMI-V1.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "InferiorSTEMI-V2.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "InferiorSTEMI-V3.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "InferiorSTEMI-V4.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "InferiorSTEMI-V5.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "InferiorSTEMI-V6.png"
+            }
+        ],
+        "name": "Inferior STEMI",
+        "path": "Ischaemic/InferiorSTEMI"
+    },
+    "06004": {
+        "leads": [
+            {
+                "heartbeat": 50,
+                "image": "AIMI-I.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "AIMI-II.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "AIMI-III.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "AIMI-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "AIMI-aVL.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "AIMI-aVF.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "AIMI-V1.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "AIMI-V2.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "AIMI-V3.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "AIMI-V4.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "AIMI-V5.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "AIMI-V6.png"
+            }
+        ],
+        "name": "Acute Inferior MI",
+        "path": "Ischaemic/AcuteInferiorMI"
+    },
+    "06005": {
+        "leads": [
+            {
+                "heartbeat": 45,
+                "image": "DeWinterT-I.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "DeWinterT-II.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "DeWinterT-III.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "DeWinterT-aVR.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "DeWinterT-aVL.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "DeWinterT-aVF.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "DeWinterT-V1.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "DeWinterT-V2.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "DeWinterT-V3.png"
+            },
+            {
+                "heartbeat": 43,
+                "image": "DeWinterT-V4.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "DeWinterT-V5.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "DeWinterT-V6.png"
+            }
+        ],
+        "name": "De Winter’s T Waves",
+        "path": "Ischaemic/DeWinterTWaves"
+    },
+    "07001": {
+        "leads": [
+            {
+                "heartbeat": 59,
+                "image": "ARVC-I.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-II.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-III.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-aVR.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-aVL.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-aVF.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V1.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V2.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V3.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V4.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V5.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "ARVC-V6.png"
+            }
+        ],
+        "name": "Arrhythmogenic Right Ventricular Cardiomyopathy",
+        "path": "Myopathies/ARVC"
+    },
+    "07002": {
+        "leads": [
+            {
+                "heartbeat": 56,
+                "image": "BVH-I.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BVH-II.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BVH-III.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BVH-aVR.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "BVH-aVL.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "BVH-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "BVH-V1.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "BVH-V2.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "BVH-V3.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "BVH-V4.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "BVH-V5.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "BVH-V6.png"
+            }
+        ],
+        "name": "Biventricular Hypertrophy",
+        "path": "Myopathies/BiventricularHypertrophy"
+    },
+    "07003": {
+        "leads": [
+            {
+                "heartbeat": 59,
+                "image": "DCM-I.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-II.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-III.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-aVR.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-aVL.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-aVF.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V1.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V2.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V3.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V4.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V5.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DCM-V6.png"
+            }
+        ],
+        "name": "Dilated Cardiomyopathy",
+        "path": "Myopathies/DilatedCardiomyopathy"
+    },
+    "07004": {
+        "leads": [
+            {
+                "heartbeat": 53,
+                "image": "HCM-I.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "HCM-II.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "HCM-III.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-aVL.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "HCM-V1.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "HCM-V2.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "HCM-V3.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-V4.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-V5.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HCM-V6.png"
+            }
+        ],
+        "name": "Hypertrophic Cardiomyopathy",
+        "path": "Myopathies/HypertrophicCardiomyopathy"
+    },
+    "07005": {
+        "leads": [
+            {
+                "heartbeat": 56,
+                "image": "RCM-I.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "RCM-II.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "RCM-III.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "RCM-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "RCM-aVL.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "RCM-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "RCM-V1.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "RCM-V2.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "RCM-V3.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "RCM-V4.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "RCM-V5.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "RCM-V6.png"
+            }
+        ],
+        "name": "Restrictive Cardiomyopathy",
+        "path": "Myopathies/RestrictiveCardiomyopathy"
+    },
+    "08001": {
+        "leads": [
+            {
+                "heartbeat": 56,
+                "image": "BBCCB-I.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BBCCB-II.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "BBCCB-III.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "BBCCB-aVR.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "BBCCB-aVL.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "BBCCB-aVF.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "BBCCB-V1.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "BBCCB-V2.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "BBCCB-V3.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "BBCCB-V4.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "BBCCB-V5.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "BBCCB-V6.png"
+            }
+        ],
+        "name": "Beta-blocker and Calcium channel blocker toxicity",
+        "path": "ElectrolytesAndDrugs/BetaBlockerCalciumChannelBlockerToxicity"
+    },
+    "08002": {
+        "leads": [
+            {
+                "heartbeat": 53,
+                "image": "CBZ-I.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-II.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "CBZ-III.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-aVR.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-aVL.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-aVF.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-V1.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "CBZ-V2.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-V3.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "CBZ-V4.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "CBZ-V5.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "CBZ-V6.png"
+            }
+        ],
+        "name": "Carbamazepine Cardiotoxicity",
+        "path": "ElectrolytesAndDrugs/CarbamazepineCardiotoxicity"
+    },
+    "08003": {
+        "leads": [
+            {
+                "heartbeat": 61,
+                "image": "DigoxinEffect-I.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "DigoxinEffect-II.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "DigoxinEffect-III.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "DigoxinEffect-aVR.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "DigoxinEffect-aVL.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "DigoxinEffect-aVF.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "DigoxinEffect-V1.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "DigoxinEffect-V2.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "DigoxinEffect-V3.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "DigoxinEffect-V4.png"
+            },
+            {
+                "heartbeat": 59,
+                "image": "DigoxinEffect-V5.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "DigoxinEffect-V6.png"
+            }
+        ],
+        "name": "Digoxin Effect",
+        "path": "ElectrolytesAndDrugs/DigoxinEffect"
+    },
+    "08004": {
+        "leads": [
+            {
+                "heartbeat": 63,
+                "image": "HyperCa-I.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "HyperCa-II.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "HyperCa-III.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "HyperCa-aVR.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "HyperCa-aVL.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "HyperCa-aVF.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "HyperCa-V1.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "HyperCa-V2.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "HyperCa-V3.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "HyperCa-V4.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "HyperCa-V5.png"
+            },
+            {
+                "heartbeat": 65,
+                "image": "HyperCa-V6.png"
+            }
+        ],
+        "name": "Hypercalcaemia",
+        "path": "ElectrolytesAndDrugs/Hypercalcaemia"
+    },
+    "08005": {
+        "leads": [
+            {
+                "heartbeat": 50,
+                "image": "HypoCa-I.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-II.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-III.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "HypoCa-aVR.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "HypoCa-aVL.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-aVF.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-V1.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-V2.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-V3.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "HypoCa-V4.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-V5.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "HypoCa-V6.png"
+            }
+        ],
+        "name": "Hypocalcaemia",
+        "path": "ElectrolytesAndDrugs/Hypocalcaemia"
+    },
+    "08006": {
+        "leads": [
+            {
+                "heartbeat": 51,
+                "image": "HyperK7.1-I.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "HyperK7.1-II.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "HyperK7.1-III.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "HyperK7.1-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "HyperK7.1-aVL.png"
+            },
+            {
+                "heartbeat": 58,
+                "image": "HyperK7.1-aVF.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "HyperK7.1-V1.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "HyperK7.1-V2.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "HyperK7.1-V3.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "HyperK7.1-V4.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "HyperK7.1-V5.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "HyperK7.1-V6.png"
+            }
+        ],
+        "name": "Hyperkalaemia 7.1",
+        "path": "ElectrolytesAndDrugs/Hyperkalaemia7.1"
+    },
+    "08007": {
+        "leads": [
+            {
+                "heartbeat": 21,
+                "image": "HyperK9.2-I.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-II.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-III.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "HyperK9.2-aVR.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-aVL.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "HyperK9.2-aVF.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-V1.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "HyperK9.2-V2.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-V3.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-V4.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-V5.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HyperK9.2-V6.png"
+            }
+        ],
+        "name": "Hyperkalaemia 9.2",
+        "path": "ElectrolytesAndDrugs/Hyperkalaemia9.2"
+    },
+    "08008": {
+        "leads": [
+            {
+                "heartbeat": 38,
+                "image": "HypoK1.7-I.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "HypoK1.7-II.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "HypoK1.7-III.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "HypoK1.7-aVR.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "HypoK1.7-aVL.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "HypoK1.7-aVF.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "HypoK1.7-V1.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "HypoK1.7-V2.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "HypoK1.7-V3.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "HypoK1.7-V4.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "HypoK1.7-V5.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "HypoK1.7-V6.png"
+            }
+        ],
+        "name": "Hypokalaemia 1.7",
+        "path": "ElectrolytesAndDrugs/Hypokalaemia1.7"
+    },
+    "08009": {
+        "leads": [
+            {
+                "heartbeat": 53,
+                "image": "HypoMg-I.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "HypoMg-II.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HypoMg-III.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HypoMg-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "HypoMg-aVL.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "HypoMg-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "HypoMg-V1.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "HypoMg-V2.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "HypoMg-V3.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "HypoMg-V4.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "HypoMg-V5.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "HypoMg-V6.png"
+            }
+        ],
+        "name": "Hypomagnesaemia",
+        "path": "ElectrolytesAndDrugs/Hypomagnesaemia"
+    },
+    "09001": {
+        "leads": [
+            {
+                "heartbeat": 49,
+                "image": "BER-I.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "BER-II.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "BER-III.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "BER-aVR.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "BER-aVL.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "BER-aVF.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "BER-V1.png"
+            },
+            {
+                "heartbeat": 46,
+                "image": "BER-V2.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "BER-V3.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "BER-V4.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "BER-V5.png"
+            },
+            {
+                "heartbeat": 48,
+                "image": "BER-V6.png"
+            }
+        ],
+        "name": "Benign Early Repolarisation",
+        "path": "Miscellaneous/BenignEarlyRepolarisation"
+    },
+    "09002": {
+        "leads": [
+            {
+                "heartbeat": 262,
+                "image": "BrS-I.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-II.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-III.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-aVR.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-aVL.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-aVF.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V1.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V2.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V3.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V4.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V5.png"
+            },
+            {
+                "heartbeat": 262,
+                "image": "BrS-V6.png"
+            }
+        ],
+        "name": "Brugada Syndrome",
+        "path": "Miscellaneous/BrugadaSyndrome"
+    },
+    "09003": {
+        "leads": [
+            {
+                "heartbeat": 64,
+                "image": "Dextrocardia-I.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-II.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-III.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-aVR.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "Dextrocardia-aVL.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "Dextrocardia-aVF.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-V1.png"
+            },
+            {
+                "heartbeat": 61,
+                "image": "Dextrocardia-V2.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-V3.png"
+            },
+            {
+                "heartbeat": 64,
+                "image": "Dextrocardia-V4.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-V5.png"
+            },
+            {
+                "heartbeat": 63,
+                "image": "Dextrocardia-V6.png"
+            }
+        ],
+        "name": "Dextrocardia",
+        "path": "Miscellaneous/Dextrocardia"
+    },
+    "09004": {
+        "leads": [
+            {
+                "heartbeat": 15,
+                "image": "HypoT-I.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "HypoT-II.png"
+            },
+            {
+                "heartbeat": 22,
+                "image": "HypoT-III.png"
+            },
+            {
+                "heartbeat": 19,
+                "image": "HypoT-aVR.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "HypoT-aVL.png"
+            },
+            {
+                "heartbeat": 27,
+                "image": "HypoT-aVF.png"
+            },
+            {
+                "heartbeat": 20,
+                "image": "HypoT-V1.png"
+            },
+            {
+                "heartbeat": 21,
+                "image": "HypoT-V2.png"
+            },
+            {
+                "heartbeat": 25,
+                "image": "HypoT-V3.png"
+            },
+            {
+                "heartbeat": 17,
+                "image": "HypoT-V4.png"
+            },
+            {
+                "heartbeat": 24,
+                "image": "HypoT-V5.png"
+            },
+            {
+                "heartbeat": 31,
+                "image": "HypoT-V6.png"
+            }
+        ],
+        "name": "Hypothermia",
+        "path": "Miscellaneous/Hypothermia"
+    },
+    "09005": {
+        "leads": [
+            {
+                "heartbeat": 38,
+                "image": "Hypothyroidism-I.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "Hypothyroidism-II.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "Hypothyroidism-III.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "Hypothyroidism-aVR.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "Hypothyroidism-aVL.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "Hypothyroidism-aVF.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "Hypothyroidism-V1.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "Hypothyroidism-V2.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "Hypothyroidism-V3.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "Hypothyroidism-V4.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "Hypothyroidism-V5.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "Hypothyroidism-V6.png"
+            }
+        ],
+        "name": "Hypothyroidism",
+        "path": "Miscellaneous/Hypothyroidism"
+    },
+    "09006": {
+        "leads": [
+            {
+                "heartbeat": 38,
+                "image": "LongQT-I.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "LongQT-II.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "LongQT-III.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "LongQT-aVR.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "LongQT-aVL.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "LongQT-aVF.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "LongQT-V1.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "LongQT-V2.png"
+            },
+            {
+                "heartbeat": 42,
+                "image": "LongQT-V3.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "LongQT-V4.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "LongQT-V5.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "LongQT-V6.png"
+            }
+        ],
+        "name": "LongQT",
+        "path": "Miscellaneous/LongQT"
+    },
+    "09007": {
+        "leads": [
+            {
+                "heartbeat": 50,
+                "image": "LowV-I.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "LowV-II.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "LowV-III.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "LowV-aVR.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "LowV-aVL.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "LowV-aVF.png"
+            },
+            {
+                "heartbeat": 51,
+                "image": "LowV-V1.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "LowV-V2.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "LowV-V3.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "LowV-V4.png"
+            },
+            {
+                "heartbeat": 60,
+                "image": "LowV-V5.png"
+            },
+            {
+                "heartbeat": 62,
+                "image": "LowV-V6.png"
+            }
+        ],
+        "name": "Low Voltage",
+        "path": "Miscellaneous/LowVoltage"
+    },
+    "09008": {
+        "leads": [
+            {
+                "heartbeat": 52,
+                "image": "Pericarditis-I.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "Pericarditis-II.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Pericarditis-III.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Pericarditis-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Pericarditis-aVL.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Pericarditis-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "Pericarditis-V1.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "Pericarditis-V2.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "Pericarditis-V3.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "Pericarditis-V4.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Pericarditis-V5.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Pericarditis-V6.png"
+            }
+        ],
+        "name": "Pericarditis",
+        "path": "Miscellaneous/Pericarditis"
+    },
+    "09009": {
+        "leads": [
+            {
+                "heartbeat": 52,
+                "image": "COPD-I.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-II.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-III.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-aVR.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-aVL.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-aVF.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V1.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V2.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V3.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V4.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V5.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "COPD-V6.png"
+            }
+        ],
+        "name": "The ECG in Chronic Obstructive Pulmonary Disease",
+        "path": "Miscellaneous/ECGinChronicObstructivePulmonaryDisease"
+    },
+    "09010": {
+        "leads": [
+            {
+                "heartbeat": 45,
+                "image": "SCP-I.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "SCP-II.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "SCP-III.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "SCP-aVR.png"
+            },
+            {
+                "heartbeat": 38,
+                "image": "SCP-aVL.png"
+            },
+            {
+                "heartbeat": 39,
+                "image": "SCP-aVF.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "SCP-V1.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "SCP-V2.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "SCP-V3.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "SCP-V4.png"
+            },
+            {
+                "heartbeat": 44,
+                "image": "SCP-V5.png"
+            },
+            {
+                "heartbeat": 45,
+                "image": "SCP-V6.png"
+            }
+        ],
+        "name": "Single Chamber Pacemaker",
+        "path": "Miscellaneous/SingleChamberPacemaker"
+    },
+    "09011": {
+        "leads": [
+            {
+                "heartbeat": 57,
+                "image": "DCP-I.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "DCP-II.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "DCP-III.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "DCP-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "DCP-aVL.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "DCP-aVF.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "DCP-V1.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "DCP-V2.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "DCP-V3.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "DCP-V4.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "DCP-V5.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "DCP-V6.png"
+            }
+        ],
+        "name": "Dual Chamber Pacemaker",
+        "path": "Miscellaneous/DualChamberPacemaker"
+    },
+    "09012": {
+        "leads": [
+            {
+                "heartbeat": 30,
+                "image": "PE-I.png"
+            },
+            {
+                "heartbeat": 37,
+                "image": "PE-II.png"
+            },
+            {
+                "heartbeat": 36,
+                "image": "PE-III.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "PE-aVR.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "PE-aVL.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "PE-aVF.png"
+            },
+            {
+                "heartbeat": 35,
+                "image": "PE-V1.png"
+            },
+            {
+                "heartbeat": 32,
+                "image": "PE-V2.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "PE-V3.png"
+            },
+            {
+                "heartbeat": 34,
+                "image": "PE-V4.png"
+            },
+            {
+                "heartbeat": 40,
+                "image": "PE-V5.png"
+            },
+            {
+                "heartbeat": 33,
+                "image": "PE-V6.png"
+            }
+        ],
+        "name": "Pulmonary Embolism",
+        "path": "Miscellaneous/PulmonaryEmbolism"
+    },
+    "10001": {
+        "leads": [
+            {
+                "heartbeat": 55,
+                "image": "Neonate-I.png"
+            },
+            {
+                "heartbeat": 54,
+                "image": "Neonate-II.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Neonate-III.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "Neonate-aVR.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Neonate-aVL.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "Neonate-aVF.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "Neonate-V1.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "Neonate-V2.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "Neonate-V3.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Neonate-V4.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Neonate-V5.png"
+            },
+            {
+                "heartbeat": 57,
+                "image": "Neonate-V6.png"
+            }
+        ],
+        "name": "Neonate",
+        "path": "Paediatric/Neonate"
+    },
+    "10002": {
+        "leads": [
+            {
+                "heartbeat": 50,
+                "image": "ChildSR-I.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "ChildSR-II.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "ChildSR-III.png"
+            },
+            {
+                "heartbeat": 52,
+                "image": "ChildSR-aVR.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "ChildSR-aVL.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "ChildSR-aVF.png"
+            },
+            {
+                "heartbeat": 50,
+                "image": "ChildSR-V1.png"
+            },
+            {
+                "heartbeat": 49,
+                "image": "ChildSR-V2.png"
+            },
+            {
+                "heartbeat": 47,
+                "image": "ChildSR-V3.png"
+            },
+            {
+                "heartbeat": 56,
+                "image": "ChildSR-V4.png"
+            },
+            {
+                "heartbeat": 55,
+                "image": "ChildSR-V5.png"
+            },
+            {
+                "heartbeat": 53,
+                "image": "ChildSR-V6.png"
+            }
+        ],
+        "name": "Young Child SR",
+        "path": "Paediatric/YoungChildSR"
+    },
+    "11001" : {
+        "leads" : [
+            {
+                "heartbeat" : 18,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 9,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 6,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 10,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 9,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 7,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 8,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 4,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 2,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 8,
+                "image" : "Atrial tachy_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "Atrial tachy_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11002" : {
+        "leads" : [
+            {
+                "heartbeat" : 204,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 168,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 179,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 195,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 163,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 175,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 423,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 150,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 149,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 168,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 168,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 168,
+                "image" : "LA25581_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA25581_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11003" : {
+        "leads" : [
+            {
+                "heartbeat" : 323,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 319,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 328,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 320,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 326,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 317,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 321,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 319,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 326,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 320,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 320,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 321,
+                "image" : "LA30344_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA30344_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11004" : {
+        "leads" : [
+            {
+                "heartbeat" : 43,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 39,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 39,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 40,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 60,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 39,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 41,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 43,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 38,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 39,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 40,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 40,
+                "image" : "LA37024_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA37024_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11005" : {
+        "leads" : [
+            {
+                "heartbeat" : 141,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 152,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 154,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 152,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 145,
+                "image" : "LA37918_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA37918_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11006" : {
+        "leads" : [
+            {
+                "heartbeat" : 141,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 152,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 154,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 152,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 145,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V6.png"
+            },
+            {
+                "heartbeat" : 144,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V7.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V8.png"
+            },
+            {
+                "heartbeat" : 141,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V9.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V10.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V11.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V12.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V3R.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V4R.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V5R.png"
+            },
+            {
+                "heartbeat" : 0,
+                "image" : "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_V6R.png"
+            }
+        ],
+        "name" : "LA37918_FDA-WithAddLeads",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11007" : {
+        "leads" : [
+            {
+                "heartbeat" : 141,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 141,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 155,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 146,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 153,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 139,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA46938_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11008" : {
+        "leads" : [
+            {
+                "heartbeat" : 141,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 141,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 155,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 143,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 146,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 153,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 139,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 140,
+                "image" : "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA46938_FDA-WithAddLeads",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11009" : {
+        "leads" : [
+            {
+                "heartbeat" : 9,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 7,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 9,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 18,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 4,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 3,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA54571_FDA",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11010" : {
+        "leads" : [
+            {
+                "heartbeat" : 9,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 7,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 9,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 18,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 4,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 3,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 1,
+                "image" : "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA54571_FDA-WithAddLeads",
+        "path" : "GeneratedECG12Lead"
+    },
+    "11011" : {
+        "leads" : [
+            {
+                "heartbeat" : 124,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_I.png"
+            },
+            {
+                "heartbeat" : 124,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_II.png"
+            },
+            {
+                "heartbeat" : 124,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_III.png"
+            },
+            {
+                "heartbeat" : 124,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_AVR.png"
+            },
+            {
+                "heartbeat" : 124,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_AVL.png"
+            },
+            {
+                "heartbeat" : 120,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_AVF.png"
+            },
+            {
+                "heartbeat" : 87,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V1.png"
+            },
+            {
+                "heartbeat" : 87,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V2.png"
+            },
+            {
+                "heartbeat" : 91,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V3.png"
+            },
+            {
+                "heartbeat" : 125,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V4.png"
+            },
+            {
+                "heartbeat" : 109,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V5.png"
+            },
+            {
+                "heartbeat" : 138,
+                "image" : "LA57370_FDA-MDC_ECG_LEAD_V6.png"
+            }
+        ],
+        "name" : "LA57370_FDA",
+        "path" : "GeneratedECG12Lead"
+    }
+}

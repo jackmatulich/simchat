@@ -85,6 +85,23 @@
                 top: 0 !important;
                 left: 0 !important;
             }
+
+            @page ecg-landscape {
+                margin: 0 !important;
+                size: A4 landscape !important;
+            }
+
+            .sheet.ecg-sheet {
+                page: ecg-landscape;
+                width: 297mm !important;
+                height: 210mm !important;
+                min-height: 210mm !important;
+            }
+
+            .sheet.ecg-sheet .content {
+                height: calc(210mm - 30mm) !important;
+                padding: 4mm 0 !important;
+            }
             
             /* First sheet shouldn't have page break before */
             .sheet:first-child {
@@ -339,6 +356,43 @@
             flex: 1;
             overflow: visible;
             height: auto;
+        }
+
+        .sheet.ecg-sheet {
+            width: 297mm;
+            height: 210mm;
+            min-height: 210mm;
+        }
+
+        .ecg-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4mm 0;
+            overflow: hidden;
+        }
+
+        .ecg-page-title {
+            color: #5c6670;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin: 0 0 5mm;
+            text-align: center;
+        }
+
+        .ecg-canvas {
+            display: block;
+            height: auto;
+            max-width: 297mm;
+            width: 297mm;
+        }
+
+        .ecg-error {
+            color: #9b1c1c;
+            font-size: 13px;
+            text-align: center;
         }
 
         /* Typography */
@@ -1000,9 +1054,12 @@
         </section>
         <!-- Laboratory Results Pages (dynamically generated) -->
         <div id="labPagesContainer"></div>
+        <!-- 12-lead ECG Pages (dynamically generated) -->
+        <div id="ecgPagesContainer"></div>
     </div>
     <script>
         let scenarioData = null;
+        let ecgPagesReady = Promise.resolve();
         // ECG Rhythm lookup from scenario JSON
         const ecgRhythmLookup = {
             9: "Sinus",
@@ -1199,6 +1256,8 @@
             // Labs
             console.log('[populateTemplate] Populating labs');
             populateLabs(data.labs || []);
+            console.log('[populateTemplate] Populating ECG pages');
+            ecgPagesReady = populateECGPages(data);
             console.log('[populateTemplate] End');
         }
         function populateList(containerId, items, addCheckbox = false) {
@@ -1409,6 +1468,69 @@
                 }
             });
             insertLogos();
+        }
+        async function populateECGPages(data) {
+            const ecgPagesContainer = document.getElementById('ecgPagesContainer');
+            ecgPagesContainer.innerHTML = '';
+
+            try {
+                const ecgPreview = await import('/ecg12/ecg-preview.js');
+                const assets = await ecgPreview.preloadEcgAssets();
+                const groups = ecgPreview.buildEcgGroups(data, assets.waveforms);
+
+                if (groups.length === 0) {
+                    return;
+                }
+
+                groups.forEach((group, index) => {
+                    const pageDiv = document.createElement('section');
+                    pageDiv.className = 'sheet padding-10mm ecg-sheet';
+                    pageDiv.innerHTML = `
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>12-Lead ECG</h1>
+                                <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content ecg-content">
+                            <div class="ecg-page-title">${ecgPreview.formatStateTitle(group.stateIndices)}</div>
+                            <canvas class="ecg-canvas" id="ecgCanvas${index}"></canvas>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    `;
+                    ecgPagesContainer.appendChild(pageDiv);
+                });
+
+                insertLogos();
+
+                for (let index = 0; index < groups.length; index += 1) {
+                    const canvas = document.getElementById(`ecgCanvas${index}`);
+                    await ecgPreview.renderEcgToCanvas(canvas, groups[index].renderState);
+                }
+            } catch (error) {
+                console.error('Error rendering ECG pages:', error);
+                ecgPagesContainer.innerHTML = `
+                    <section class="sheet padding-10mm">
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>12-Lead ECG</h1>
+                                <div class="scenario-id">${scenarioData?.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="ecg-error">Unable to render 12-lead ECG pages: ${error.message}</div>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    </section>
+                `;
+                insertLogos();
+            }
         }
         function createBloodGasTable(lab, isVenous) {
             const table = document.createElement('table');
@@ -1667,6 +1789,8 @@
         // PDF download function - original approach with high quality
         async function downloadPDF() {
             try {
+                await ecgPagesReady;
+
                 // Show loading state
                 const pdfButton = document.querySelector('.pdf-button');
                 const originalText = pdfButton.innerHTML;
@@ -1679,13 +1803,15 @@
                 
                 // Initialize jsPDF
                 const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                // Get all sheets
                 const sheets = document.querySelectorAll('.sheet');
-                
+                const firstSheetIsLandscape = sheets[0]?.classList.contains('ecg-sheet');
+                const pdf = new jsPDF(firstSheetIsLandscape ? 'l' : 'p', 'mm', 'a4');
+
                 for (let i = 0; i < sheets.length; i++) {
                     const sheet = sheets[i];
+                    const isLandscape = sheet.classList.contains('ecg-sheet');
+                    const pageWidth = isLandscape ? 297 : 210;
+                    const pageHeight = isLandscape ? 210 : 297;
                     
                     // Convert sheet to canvas - original settings
                     const canvas = await html2canvas(sheet, {
@@ -1693,20 +1819,20 @@
                         useCORS: true,
                         allowTaint: true,
                         backgroundColor: '#ffffff',
-                        width: 210 * 3.779527559, // Convert mm to pixels (210mm A4 width)
-                        height: 297 * 3.779527559, // Convert mm to pixels (297mm A4 height)
+                        width: pageWidth * 3.779527559, // Convert mm to pixels
+                        height: pageHeight * 3.779527559, // Convert mm to pixels
                         scrollX: 0,
                         scrollY: 0
                     });
                     
                     // Add page to PDF (except for first page)
                     if (i > 0) {
-                        pdf.addPage();
+                        pdf.addPage('a4', isLandscape ? 'l' : 'p');
                     }
                     
                     // Convert canvas to image and add to PDF - original PNG approach
                     const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                    pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
                 }
                 
                 // Save the PDF

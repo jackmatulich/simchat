@@ -1,0 +1,3046 @@
+{
+	"9": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Sinus",
+		"acronym": "Sinus",
+		"groups": [
+			1
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"canAlternate": true,
+		"blockable": true,
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"27": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Sinus 2",
+		"acronym": "Sinus2",
+		"groups": [
+			1
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "01003",
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					57
+				],
+				"datafilename": "w_ecg_sinus2.png"
+			}
+		]
+	},
+	"101": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Sinus P wave Inversion",
+		"acronym": "SinusPI",
+		"groups": [
+			1
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "01002",
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					40
+				],
+				"datafilename": "w_ecg_sinus_inv.png"
+			}
+		]
+	},
+	"18": {
+		"sortOrder": 40,
+		"type": "fixed-random",
+		"name": "Ventricular Fibrillation Coarse",
+		"acronym": "VF Coarse",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 200,
+		"minbpm": 200,
+		"ecg12LeadId": "00000",
+		"autopea": true,
+		"isVF": true,
+		"isshockable": 1,
+		"ispulseless": 1,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					96,
+					67,
+					8
+				],
+				"datafilename": "w_ecg_vf_coarse1.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					71,
+					49,
+					7
+				],
+				"datafilename": "w_ecg_vf_coarse2.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					134,
+					110,
+					63,
+					47,
+					25
+				],
+				"datafilename": "w_ecg_vf_coarse3.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					122,
+					101,
+					79,
+					35
+				],
+				"datafilename": "w_ecg_vf_coarse4.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					88,
+					71,
+					50,
+					30,
+					8
+				],
+				"datafilename": "w_ecg_vf_coarse5.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					67,
+					37,
+					8
+				],
+				"datafilename": "w_ecg_vf_coarse6.png"
+			}
+		]
+	},
+	"17": {
+		"sortOrder": 45,
+		"type": "fixed-random",
+		"name": "Ventricular Fibrillation Medium",
+		"acronym": "VF Medium",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 200,
+		"minbpm": 200,
+		"ecg12LeadId": "00000",
+		"isVF": true,
+		"ispulseless": 1,
+		"isshockable": 1,
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					96,
+					54,
+					7
+				],
+				"datafilename": "w_ecg_vf_med1.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					82,
+					50,
+					24
+				],
+				"datafilename": "w_ecg_vf_med2.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					78,
+					49,
+					32,
+					8
+				],
+				"datafilename": "w_ecg_vf_med3.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					125,
+					72,
+					8
+				],
+				"datafilename": "w_ecg_vf_med4.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					61,
+					10
+				],
+				"datafilename": "w_ecg_vf_med5.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					109,
+					57,
+					7
+				],
+				"datafilename": "w_ecg_vf_med6.png"
+			}
+		]
+	},
+	"15": {
+		"sortOrder": 50,
+		"type": "fixed-random",
+		"name": "Ventricular Fibrillation Fine",
+		"acronym": "VF Fine",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 200,
+		"minbpm": 200,
+		"ecg12LeadId": "00000",
+		"isVF": true,
+		"isshockable": 1,
+		"ispulseless": 1,
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					96,
+					54
+				],
+				"datafilename": "w_ecg_vf_fine1.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					112
+				],
+				"datafilename": "w_ecg_vf_fine2.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					134,
+					110,
+					51
+				],
+				"datafilename": "w_ecg_vf_fine3.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					53,
+					6
+				],
+				"datafilename": "w_ecg_vf_fine4.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					140,
+					110,
+					55
+				],
+				"datafilename": "w_ecg_vf_fine5.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					67,
+					30
+				],
+				"datafilename": "w_ecg_vf_fine6.png"
+			}
+		]
+	},
+	"16": {
+		"sortOrder": 55,
+		"type": "fixed-random",
+		"name": "Ventricular Fibrillation Ultra Fine",
+		"acronym": "VF Ul Fine",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 200,
+		"minbpm": 200,
+		"ecg12LeadId": "00000",
+		"isVF": true,
+		"isshockable": 1,
+		"ispulseless": 1,
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					82,
+					54
+				],
+				"datafilename": "w_ecg_vf_ultrafine1.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					96,
+					24
+				],
+				"datafilename": "w_ecg_vf_ultrafine2.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					70,
+					61
+				],
+				"datafilename": "w_ecg_vf_ultrafine3.png"
+			}
+		]
+	},
+	"115": {
+		"sortOrder": 80,
+		"type": "normal",
+		"name": "VT / VF",
+		"acronym": "VTVF",
+		"groups": [
+			2,
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"isshockable": 1,
+		"isVF": true,
+		"isVT": true,
+		"beatratio": 0.04166666,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 9999,
+				"heartbeats": [
+					952,
+					924,
+					852,
+					844,
+					811,
+					760,
+					720,
+					674,
+					634,
+					594,
+					545,
+					509,
+					473,
+					435,
+					395,
+					354,
+					309,
+					266,
+					232,
+					180,
+					137,
+					96,
+					46,
+					15
+				],
+				"datafilename": "w_ecg_vt_vf.png"
+			}
+		]
+	},
+	"83": {
+		"sortOrder": 90,
+		"type": "normal",
+		"name": "Torsades",
+		"acronym": "Torsades",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 250,
+		"minbpm": 150,
+		"beatratio": 0.04166666,
+		"ispulseless": 1,
+		"isshockable": 1,
+		"isVT": true,
+		"ecg12LeadId": "00000",
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 9999,
+				"heartbeats": [
+					972,
+					939,
+					901,
+					851,
+					817,
+					779,
+					744,
+					700,
+					664,
+					624,
+					583,
+					546,
+					506,
+					469,
+					430,
+					389,
+					343,
+					293,
+					244,
+					197,
+					148,
+					104,
+					63,
+					11
+				],
+				"datafilename": "w_ecg_torsades.png"
+			}
+		]
+	},
+	"88": {
+		"sortOrder": 95,
+		"type": "normal",
+		"name": "Torsades 2",
+		"acronym": "Torsades 2",
+		"groups": [
+			4,
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 250,
+		"minbpm": 150,
+		"beatratio": 0.111111111,
+		"ispulseless": 1,
+		"isshockable": 1,
+		"isVT": true,
+		"ecg12LeadId": "00000",
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 9999,
+				"heartbeats": [
+					439,
+					399,
+					369,
+					317,
+					268,
+					216,
+					162,
+					86,
+					30
+				],
+				"datafilename": "w_ecg_torsades2.png"
+			}
+		]
+	},
+	"3": {
+		"sortOrder": 100,
+		"type": "normal",
+		"name": "Asystole",
+		"acronym": "Asys",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 0,
+		"maxbpm": 0,
+		"minbpm": 0,
+		"ecg12LeadId": "00000",
+		"modifieramplitude": 3,
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 1,
+				"heartbeats": [],
+				"datafilename": "w_ecg_blank.png"
+			}
+		]
+	},
+	"102": {
+		"sortOrder": 110,
+		"type": "normal",
+		"name": "P wave Asystole",
+		"acronym": "PWaveAsys",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 30,
+		"maxbpm": 80,
+		"minbpm": 0,
+		"ecg12LeadId": "02002",
+		"modifieramplitude": 3,
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [],
+				"datafilename": "w_ecg_pwave_asystole.png"
+			}
+		]
+	},
+	"90": {
+		"sortOrder": 120,
+		"type": "normal",
+		"name": "Agonal",
+		"acronym": "Agonal",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 20,
+		"maxbpm": 20,
+		"minbpm": 0,
+		"ecg12LeadId": "02001",
+		"autopea": true,
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					19
+				],
+				"datafilename": "w_ecg_agonal.png"
+			}
+		]
+	},
+	"111": {
+		"sortOrder": 200,
+		"type": "random",
+		"name": "CPR",
+		"acronym": "CPR",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 110,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "00000",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr0.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr1.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr2.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr3.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr4.png"
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr5.png"
+			}
+		]
+	},
+	"108": {
+		"sortOrder": 205,
+		"type": "normal",
+		"name": "CPR ↑",
+		"acronym": "CPR ↑",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 110,
+		"maxbpm": 150,
+		"minbpm": 50,
+		"ecg12LeadId": "00000",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr_hi.png"
+			}
+		]
+	},
+	"107": {
+		"sortOrder": 210,
+		"type": "normal",
+		"name": "CPR ↓",
+		"acronym": "CPR ↓",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 110,
+		"maxbpm": 150,
+		"minbpm": 50,
+		"ecg12LeadId": "00000",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr_lo.png"
+			}
+		]
+	},
+	"106": {
+		"sortOrder": 220,
+		"type": "normal",
+		"name": "CPR 2",
+		"acronym": "CPR 2",
+		"groups": [
+			2
+		],
+		"passiverate": false,
+		"recommendedRate": 110,
+		"maxbpm": 150,
+		"minbpm": 50,
+		"ecg12LeadId": "00000",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_cpr.png"
+			}
+		]
+	},
+	"38": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Atrial Fibrillation",
+		"acronym": "Afib",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 75,
+		"maxbpm": 258,
+		"minbpm": 20,
+		"hrVariation": 40,
+		"ecg12LeadId": "03008",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					27
+				],
+				"datafilename": "w_ecg_af.png"
+			}
+		]
+	},
+	"2": {
+		"sortOrder": 15,
+		"type": "normal",
+		"name": "Fast Atrial Fibrillation",
+		"acronym": "Fast AF",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 130,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"hrVariation": 40,
+		"ecg12LeadId": "03008",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					27
+				],
+				"datafilename": "w_ecg_af.png"
+			}
+		]
+	},
+	"37": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "AFBBB",
+		"acronym": "AFBBB",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 150,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"hrVariation": 40,
+		"ecg12LeadId": "03009",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					46
+				],
+				"datafilename": "w_ecg_afbbb.png"
+			}
+		]
+	},
+	"4": {
+		"sortOrder": 25,
+		"type": "normal",
+		"name": "Atrial Tachycardia",
+		"acronym": "Atach",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 130,
+		"maxbpm": 258,
+		"minbpm": 130,
+		"ecg12LeadId": "03001",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					43
+				],
+				"datafilename": "w_ecg_atrial_tachy.png"
+			}
+		]
+	},
+	"1": {
+		"sortOrder": 40,
+		"type": "normal",
+		"name": "Atrial Flutter",
+		"acronym": "AFlut",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 100,
+		"maxbpm": 100,
+		"minbpm": 100,
+		"datasource": [
+			{
+				"maxrange": 400,
+				"heartbeats": [
+					20
+				],
+				"datafilename": "w_ecg_flutter.png"
+			}
+		]
+	},
+	"85": {
+		"sortOrder": 45,
+		"type": "normal",
+		"name": "Atrial Flutter 2:1",
+		"acronym": "AFlut2:1",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 150,
+		"maxbpm": 150,
+		"minbpm": 150,
+		"ecg12LeadId": "03011",
+		"datasource": [
+			{
+				"maxrange": 400,
+				"heartbeats": [
+					27
+				],
+				"datafilename": "w_ecg_flutter_2to1.png"
+			}
+		]
+	},
+	"86": {
+		"sortOrder": 50,
+		"type": "normal",
+		"name": "Atrial Flutter 3:1",
+		"acronym": "AFlut3:1",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 100,
+		"maxbpm": 100,
+		"minbpm": 100,
+		"ecg12LeadId": "03012",
+		"datasource": [
+			{
+				"maxrange": 400,
+				"heartbeats": [
+					7
+				],
+				"datafilename": "w_ecg_flutter_3to1.png"
+			}
+		]
+	},
+	"87": {
+		"sortOrder": 55,
+		"type": "normal",
+		"name": "Atrial Flutter 4:1",
+		"acronym": "AFlut4:1",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 75,
+		"maxbpm": 75,
+		"minbpm": 75,
+		"ecg12LeadId": "03013",
+		"datasource": [
+			{
+				"maxrange": 400,
+				"heartbeats": [
+					6
+				],
+				"datafilename": "w_ecg_flutter_4to1.png"
+			}
+		]
+	},
+	"20": {
+		"sortOrder": 60,
+		"type": "normal",
+		"name": "Atrial Flutter Pause",
+		"acronym": "AFlutP",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 300,
+		"maxbpm": 300,
+		"minbpm": 300,
+		"ecg12LeadId": "03010",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [],
+				"beatratio": 0.33333333,
+				"datafilename": "w_ecg_flutter_pause.png"
+			}
+		]
+	},
+	"35": {
+		"sortOrder": 70,
+		"type": "normal",
+		"name": "Atrial Flutter with Digoxin Effect",
+		"acronym": "AFlutDig",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 90,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"hrVariation": 40,
+		"ecg12LeadId": "08003",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					61
+				],
+				"datafilename": "w_ecg_digoxin.png"
+			}
+		]
+	},
+	"28": {
+		"sortOrder": 80,
+		"type": "normal",
+		"name": "AVNRT1",
+		"acronym": "AVNRT1",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 220,
+		"maxbpm": 300,
+		"minbpm": 150,
+		"ecg12LeadId": "03002",
+		"datasource": [
+			{
+				"maxrange": 300,
+				"heartbeats": [
+					28
+				],
+				"datafilename": "w_ecg_avnrt1.png"
+			}
+		]
+	},
+	"29": {
+		"sortOrder": 90,
+		"type": "normal",
+		"name": "AVNRT2",
+		"acronym": "AVNRT2",
+		"groups": [
+			3
+		],
+		"passiverate": false,
+		"recommendedRate": 150,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"ecg12LeadId": "03003",
+		"datasource": [
+			{
+				"maxrange": 300,
+				"heartbeats": [
+					27
+				],
+				"datafilename": "w_ecg_avnrt2.png"
+			}
+		]
+	},
+	"8": {
+		"sortOrder": 105,
+		"type": "normal",
+		"name": "Supraventricular Tachycardia",
+		"acronym": "SVT",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 150,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "03006",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					48
+				],
+				"datafilename": "w_ecg_svt.png"
+			}
+		]
+	},
+	"84": {
+		"sortOrder": 110,
+		"type": "normal",
+		"name": "WPW",
+		"acronym": "WPW",
+		"groups": [
+			3
+		],
+		"passiverate": true,
+		"recommendedRate": 60,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "03007",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"datafilename": "w_ecg_wpw.png"
+			}
+		]
+	},
+	"91": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Idioventricular",
+		"acronym": "Idioventricular",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 50,
+		"maxbpm": 50,
+		"minbpm": 0,
+		"ecg12LeadId": "03005",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					48
+				],
+				"datafilename": "w_ecg_idioventricular.png"
+			}
+		]
+	},
+	"12": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Ventricular Tachycardia 1",
+		"acronym": "VT1",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"ecg12LeadId": "04001",
+		"isshockable": 1,
+		"isVT": true,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_vt1.png"
+			}
+		]
+	},
+	"13": {
+		"sortOrder": 15,
+		"type": "normal",
+		"name": "Ventricular Tachycardia 2",
+		"acronym": "VT2",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"ecg12LeadId": "04002",
+		"isshockable": 1,
+		"isVT": true,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					43
+				],
+				"datafilename": "w_ecg_vt2.png"
+			}
+		]
+	},
+	"14": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Ventricular Tachycardia 3",
+		"acronym": "VT3",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"ecg12LeadId": "04003",
+		"isshockable": 1,
+		"isVT": true,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					21
+				],
+				"datafilename": "w_ecg_vt3.png"
+			}
+		]
+	},
+	"113": {
+		"sortOrder": 25,
+		"type": "normal",
+		"name": "Ventricular Tachycardia 4",
+		"acronym": "VT4",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 0,
+		"ecg12LeadId": "04004",
+		"isshockable": 1,
+		"isVT": true,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					21
+				],
+				"datafilename": "w_ecg_vt4.png"
+			}
+		]
+	},
+	"114": {
+		"sortOrder": 30,
+		"type": "random",
+		"name": "Ventricular Tachycardia 5",
+		"acronym": "VT5",
+		"groups": [
+			4
+		],
+		"passiverate": false,
+		"recommendedRate": 180,
+		"maxbpm": 300,
+		"minbpm": 100,
+		"ecg12LeadId": "04005",
+		"isshockable": 1,
+		"isVT": true,
+		"minshockthreshold": 180,
+		"datasource": [
+			{
+				"maxrange": 140,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_vt5_1.png"
+			},
+			{
+				"maxrange": 140,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_vt5_2.png"
+			},
+			{
+				"maxrange": 140,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_vt5_3.png"
+			},
+			{
+				"maxrange": 140,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_vt5_4.png"
+			},
+			{
+				"maxrange": 140,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_vt5_5.png"
+			}
+		]
+	},
+	"49": {
+		"sortOrder": 150,
+		"type": "control-random",
+		"name": "PVC 1",
+		"acronym": "PVC 1",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 4,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 1,
+				"minplays": 1,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"62": {
+		"sortOrder": 155,
+		"type": "control-random",
+		"name": "PVC 1 Couplet",
+		"acronym": "PVC1Couplet",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 2,
+				"minplays": 2,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"66": {
+		"sortOrder": 160,
+		"type": "control-random",
+		"name": "PVC 1 Triplet",
+		"acronym": "PVC1Triplet",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 3,
+				"minplays": 3,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"51": {
+		"sortOrder": 180,
+		"type": "control-random",
+		"name": "PVC 2",
+		"acronym": "PVC 2",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 4,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_pvc2.png",
+				"maxplays": 1,
+				"minplays": 1,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"64": {
+		"sortOrder": 185,
+		"type": "control-random",
+		"name": "PVC 2 Couplet",
+		"acronym": "PVC2Couplet",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_pvc2.png",
+				"maxplays": 2,
+				"minplays": 2,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"68": {
+		"sortOrder": 190,
+		"type": "control-random",
+		"name": "PVC 2 Triplet",
+		"acronym": "PVC2Triplet",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_pvc2.png",
+				"maxplays": 3,
+				"minplays": 3,
+				"failchance": 90,
+				"weighting": 0.6,
+				"premature": 1
+			}
+		]
+	},
+	"71": {
+		"sortOrder": 220,
+		"type": "control-random",
+		"name": "Mixed Unifocal",
+		"acronym": "MixUnifocal",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 2,
+				"minplays": 2,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 3,
+				"minplays": 3,
+				"failchance": 90,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"56": {
+		"sortOrder": 230,
+		"type": "control-random",
+		"name": "Multifocal",
+		"acronym": "Multifocal",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 4,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 1,
+				"minplays": 1,
+				"failchance": 0,
+				"weighting": 0.7,
+				"premature": 1
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 4,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_pvc2.png",
+				"maxplays": 1,
+				"minplays": 1,
+				"failchance": 0,
+				"weighting": 0.7,
+				"premature": 1
+			}
+		]
+	},
+	"70": {
+		"sortOrder": 240,
+		"type": "control-random",
+		"name": "Mixed Multifocal",
+		"acronym": "MixMultifocal",
+		"groups": [
+			4
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					32
+				],
+				"datafilename": "w_ecg_pvc1.png",
+				"maxplays": 2,
+				"minplays": 2,
+				"failchance": 0,
+				"weighting": 0.7,
+				"premature": 1
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_sinus.png",
+				"maxplays": 3,
+				"minplays": 2,
+				"failchance": 40
+			},
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					30
+				],
+				"datafilename": "w_ecg_pvc2.png",
+				"maxplays": 3,
+				"minplays": 3,
+				"weighting": 0.7,
+				"failchance": 0,
+				"premature": 1
+			}
+		]
+	},
+	"22": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Bifascicular Block",
+		"acronym": "BFB",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 125,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "05001",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					51
+				],
+				"datafilename": "w_ecg_bfb.png"
+			}
+		]
+	},
+	"5": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "First Degree Heart Block",
+		"acronym": "1°HB",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 100,
+		"maxbpm": 258,
+		"minbpm": 10,
+		"ecg12LeadId": "05002",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					63
+				],
+				"datafilename": "w_ecg_1stdegree.png"
+			}
+		]
+	},
+	"6": {
+		"sortOrder": 15,
+		"type": "normal",
+		"name": "Second Degree Heart Block Type 1",
+		"acronym": "2°HBT1",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 60,
+		"maxbpm": 120,
+		"minbpm": 10,
+		"ecg12LeadId": "01001",
+		"prIncrement": 50,
+		"pQrsRatios": [
+			{
+				"4": "3"
+			},
+			{
+				"5": "4"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"42": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "2° HB T2 4:3",
+		"acronym": "2° HBT2 4:3",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 50,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"4": "3"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"41": {
+		"sortOrder": 25,
+		"type": "normal",
+		"name": "2° HB T2 3:2",
+		"acronym": "2° HBT2 3:2",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 50,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"3": "2"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"40": {
+		"sortOrder": 30,
+		"type": "normal",
+		"name": "2° HB T2 2:1",
+		"acronym": "2° HBT2 2:1",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 30,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"2": "1"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"43": {
+		"sortOrder": 35,
+		"type": "normal",
+		"name": "2° HB T2 3:1",
+		"acronym": "2° HBT2 3:1",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 20,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"3": "1"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"45": {
+		"sortOrder": 40,
+		"type": "normal",
+		"name": "2° HB T2 4:1",
+		"acronym": "2° HBT2 4:1",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 20,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"4": "1"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"103": {
+		"sortOrder": 45,
+		"type": "normal",
+		"name": "2° HB T2 V1",
+		"acronym": "2° HBT2 V1",
+		"groups": [
+			5
+		],
+		"passiverate": false,
+		"recommendedRate": 40,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"4": "3"
+			},
+			{
+				"3": "2"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"104": {
+		"sortOrder": 50,
+		"type": "normal",
+		"name": "2° HB T2 V2",
+		"acronym": "2° HBT2 V2",
+		"groups": [
+			5
+		],
+		"passiverate": false,
+		"recommendedRate": 20,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"2": "1"
+			},
+			{
+				"3": "2"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"105": {
+		"sortOrder": 55,
+		"type": "normal",
+		"name": "2° HB T2 V3",
+		"acronym": "2° HBT2 V3",
+		"groups": [
+			5
+		],
+		"passiverate": false,
+		"recommendedRate": 20,
+		"maxbpm": 150,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"pQrsRatios": [
+			{
+				"3": "1"
+			},
+			{
+				"4": "1"
+			}
+		],
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"100": {
+		"sortOrder": 60,
+		"type": "normal",
+		"name": "3° Heart Block",
+		"acronym": "3°HB",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 40,
+		"maxbpm": 80,
+		"minbpm": 0,
+		"ecg12LeadId": "05006",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					18
+				],
+				"datafilename": "w_ecg_3rddegree_qrs.png"
+			},
+			{
+				"maxrange": 120,
+				"heartbeats": [],
+				"datafilename": "w_ecg_pwave_asystole.png",
+				"beatratio": 2.5
+			}
+		]
+	},
+	"79": {
+		"sortOrder": 70,
+		"type": "normal",
+		"name": "Accelerated Junctional Rhythm",
+		"acronym": "AJR",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 125,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "05003",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					48
+				],
+				"datafilename": "w_ecg_ajr.png"
+			}
+		]
+	},
+	"82": {
+		"sortOrder": 80,
+		"type": "normal",
+		"name": "RBBB",
+		"acronym": "RBBB",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 60,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "05004",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					52
+				],
+				"datafilename": "w_ecg_rbbb.png"
+			}
+		]
+	},
+	"80": {
+		"sortOrder": 85,
+		"type": "normal",
+		"name": "LBBB",
+		"acronym": "LBBB",
+		"groups": [
+			5
+		],
+		"passiverate": true,
+		"recommendedRate": 100,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "05005",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					43
+				],
+				"datafilename": "w_ecg_lbbb.png"
+			}
+		]
+	},
+	"23": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Anterior STEMI",
+		"acronym": "Anterior STEMI",
+		"groups": [
+			6
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "06001",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					43
+				],
+				"datafilename": "w_ecg_anterior_stemi.png"
+			}
+		]
+	},
+	"10": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "ST Depression",
+		"acronym": "SR-ST Dep",
+		"groups": [
+			6
+		],
+		"passiverate": true,
+		"recommendedRate": 100,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "06002",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					52
+				],
+				"datafilename": "w_ecg_st_depression.png"
+			}
+		]
+	},
+	"11": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Inferior STEMI",
+		"acronym": "SR-ST Elev",
+		"groups": [
+			6
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 1,
+		"ecg12LeadId": "06003",
+		"datasource": [
+			{
+				"maxrange": 95,
+				"heartbeats": [
+					46
+				],
+				"datafilename": "w_ecg_st_elevation.png"
+			}
+		]
+	},
+	"25": {
+		"sortOrder": 30,
+		"type": "normal",
+		"name": "Acute Inferior MI",
+		"acronym": "InfMi",
+		"groups": [
+			6
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "06004",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					51
+				],
+				"datafilename": "w_ecg_infmi.png"
+			}
+		]
+	},
+	"39": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Biventricular Hypertrophy",
+		"acronym": "BVH",
+		"groups": [
+			7
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "07002",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_bvh.png"
+			}
+		]
+	},
+	"46": {
+		"sortOrder": 40,
+		"type": "normal",
+		"name": "Hypertrophic Cardiomyopathy",
+		"acronym": "HCM",
+		"groups": [
+			7
+		],
+		"passiverate": true,
+		"recommendedRate": 60,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "07004",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					52
+				],
+				"datafilename": "w_ecg_hcm.png"
+			}
+		]
+	},
+	"47": {
+		"sortOrder": 50,
+		"type": "normal",
+		"name": "Restrictive Cardiomyopathy",
+		"acronym": "RCM",
+		"groups": [
+			7
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "07005",
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					55
+				],
+				"datafilename": "w_ecg_rcm.png"
+			}
+		]
+	},
+	"48": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Beta-blocker and Calcium channel blocker toxicity",
+		"acronym": "BBCCB",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 50,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08001",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_ecg_bbccb.png"
+			}
+		]
+	},
+	"50": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Carbamazepine Cardiotoxicity",
+		"acronym": "CBZ",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08002",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					53
+				],
+				"datafilename": "w_ecg_cbz.png"
+			}
+		]
+	},
+	"52": {
+		"sortOrder": 15,
+		"type": "normal",
+		"name": "Digoxin Effect",
+		"acronym": "Digoxin Effect",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08003",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					61
+				],
+				"datafilename": "w_ecg_digoxin.png"
+			}
+		]
+	},
+	"53": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Hypercalcaemia",
+		"acronym": "HyperCa",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 70,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08004",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					62
+				],
+				"datafilename": "w_ecg_hyperca.png"
+			}
+		]
+	},
+	"54": {
+		"sortOrder": 25,
+		"type": "normal",
+		"name": "Hypocalcaemia",
+		"acronym": "HypoCa",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 100,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08005",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_hypoca.png"
+			}
+		]
+	},
+	"75": {
+		"sortOrder": 30,
+		"type": "normal",
+		"name": "Hyperkalaemia 7.1",
+		"acronym": "HyperK Mild",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "08006",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					60
+				],
+				"datafilename": "w_ecg_hyperk_mild.png"
+			}
+		]
+	},
+	"76": {
+		"sortOrder": 35,
+		"type": "normal",
+		"name": "Hyperkalaemia 9.2",
+		"acronym": "HyperK Severe",
+		"groups": [
+			8
+		],
+		"passiverate": false,
+		"recommendedRate": 56,
+		"maxbpm": 100,
+		"minbpm": 0,
+		"ecg12LeadId": "08007",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					20
+				],
+				"datafilename": "w_ecg_hyperk_severe.png"
+			}
+		]
+	},
+	"26": {
+		"sortOrder": 40,
+		"type": "normal",
+		"name": "Hypokalaemia 1.7",
+		"acronym": "HypoK",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "08008",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					40
+				],
+				"datafilename": "w_ecg_hypok.png"
+			}
+		]
+	},
+	"55": {
+		"sortOrder": 50,
+		"type": "normal",
+		"name": "Hypomagnesaemia",
+		"acronym": "HypoMg",
+		"groups": [
+			8
+		],
+		"passiverate": true,
+		"recommendedRate": 125,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "08009",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					54
+				],
+				"datafilename": "w_ecg_hypomg.png"
+			}
+		]
+	},
+	"57": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Benign Early Repolarisation",
+		"acronym": "BER",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09001",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_ber.png"
+			}
+		]
+	},
+	"59": {
+		"sortOrder": 30,
+		"type": "normal",
+		"name": "Dextrocardia",
+		"acronym": "Dextrocardia",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09003",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					63
+				],
+				"datafilename": "w_ecg_dextrocardia.png"
+			}
+		]
+	},
+	"19": {
+		"sortOrder": 40,
+		"type": "normal",
+		"name": "Electrical Alternans",
+		"acronym": "Elec Alter",
+		"groups": [
+			9
+		],
+		"passiverate": false,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "01001",
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					57
+				],
+				"qrsPoints": [
+					49,
+					65
+				],
+				"qrsScale": 0.7,
+				"datafilename": "w_ecg_sinus_new.png"
+			}
+		]
+	},
+	"78": {
+		"sortOrder": 45,
+		"type": "normal",
+		"name": "Hypothermia",
+		"acronym": "Hypothermia",
+		"groups": [
+			9
+		],
+		"passiverate": false,
+		"recommendedRate": 39,
+		"maxbpm": 100,
+		"minbpm": 0,
+		"ecg12LeadId": "09004",
+		"datasource": [
+			{
+				"maxrange": 150,
+				"heartbeats": [
+					19
+				],
+				"datafilename": "w_ecg_hypothermia.png"
+			}
+		]
+	},
+	"60": {
+		"sortOrder": 48,
+		"type": "normal",
+		"name": "Hypothyroidism",
+		"acronym": "Hypothyroidism",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 40,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09005",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					38
+				],
+				"datafilename": "w_ecg_hypothyroidism.png"
+			}
+		]
+	},
+	"81": {
+		"sortOrder": 50,
+		"type": "normal",
+		"name": "LongQT",
+		"acronym": "LongQT",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "09006",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					38
+				],
+				"datafilename": "w_ecg_long_qt.png"
+			}
+		]
+	},
+	"32": {
+		"sortOrder": 55,
+		"type": "normal",
+		"name": "Low Voltage",
+		"acronym": "LVolt",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "09007",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					45
+				],
+				"datafilename": "w_ecg_low_voltage.png"
+			}
+		]
+	},
+	"31": {
+		"sortOrder": 60,
+		"type": "normal",
+		"name": "Pericarditis",
+		"acronym": "PERTIS",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 110,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09008",
+		"datasource": [
+			{
+				"maxrange": 100,
+				"heartbeats": [
+					53
+				],
+				"datafilename": "w_ecg_pericarditis.png"
+			}
+		]
+	},
+	"110": {
+		"sortOrder": 70,
+		"type": "normal",
+		"name": "Single Chamber Pacemaker",
+		"acronym": "Single P",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09010",
+		"datasource": [
+			{
+				"maxrange": 200,
+				"heartbeats": [
+					45
+				],
+				"datafilename": "w_ecg_single_pacemaker.png"
+			}
+		]
+	},
+	"109": {
+		"sortOrder": 80,
+		"type": "normal",
+		"name": "Dual Chamber Pacemaker",
+		"acronym": "Dual P",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 78,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09011",
+		"datasource": [
+			{
+				"maxrange": 200,
+				"heartbeats": [
+					57
+				],
+				"datafilename": "w_ecg_dual_pacemaker.png"
+			}
+		]
+	},
+	"120": {
+		"sortOrder": 90,
+		"type": "normal",
+		"name": "Pulmonary Embolism",
+		"acronym": "PE",
+		"groups": [
+			9
+		],
+		"passiverate": true,
+		"recommendedRate": 70,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"ecg12LeadId": "09012",
+		"datasource": [
+			{
+				"maxrange": 80,
+				"heartbeats": [
+					37
+				],
+				"datafilename": "w_ecg_pe.png"
+			}
+		]
+	},
+	"33": {
+		"sortOrder": 10,
+		"type": "normal",
+		"name": "Neonate",
+		"acronym": "Neonate",
+		"groups": [
+			10
+		],
+		"passiverate": true,
+		"recommendedRate": 150,
+		"maxbpm": 300,
+		"minbpm": 50,
+		"ecg12LeadId": "10001",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					54
+				],
+				"datafilename": "w_ecg_neonate.png"
+			}
+		]
+	},
+	"30": {
+		"sortOrder": 20,
+		"type": "normal",
+		"name": "Young Child SR",
+		"acronym": "ChildSR",
+		"groups": [
+			10
+		],
+		"passiverate": true,
+		"recommendedRate": 125,
+		"maxbpm": 200,
+		"minbpm": 0,
+		"ecg12LeadId": "10002",
+		"datasource": [
+			{
+				"maxrange": 120,
+				"heartbeats": [
+					49
+				],
+				"datafilename": "w_ecg_young_sr.png"
+			}
+		]
+	},
+	"116": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Lift Off",
+		"acronym": "LiftOffLaunch",
+		"groups": [
+			11
+		],
+		"passiverate": false,
+		"recommendedRate": 125,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_lunar_launch-rate-125.png"
+			}
+		]
+	},
+	"117": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Landing on the Moon",
+		"acronym": "MoonLanding",
+		"groups": [
+			11
+		],
+		"passiverate": false,
+		"recommendedRate": 200,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_lunar_touchdown-rate-200.png"
+			}
+		]
+	},
+	"118": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Walking on the Moon",
+		"acronym": "MoonWalking",
+		"groups": [
+			11
+		],
+		"passiverate": false,
+		"recommendedRate": 150,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_lunar_eva-rate-150.png"
+			}
+		]
+	},
+	"119": {
+		"sortOrder": 5,
+		"type": "normal",
+		"name": "Lift Off from the Moon",
+		"acronym": "LiftOffMoon",
+		"groups": [
+			11
+		],
+		"passiverate": false,
+		"recommendedRate": 150,
+		"maxbpm": 258,
+		"minbpm": 0,
+		"datasource": [
+			{
+				"maxrange": 70,
+				"heartbeats": [
+					58
+				],
+				"datafilename": "w_lunar_lift-off-rate-150.png"
+			}
+		]
+	},
+	"121": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "Atrial tachy_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					9
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11001",
+		"groups": [
+			9
+		],
+		"maxbpm": 176,
+		"minbpm": 0,
+		"name": "Atrial tachy_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 121,
+		"type": "normal"
+	},
+	"122": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA25581_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					168
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11002",
+		"groups": [
+			9
+		],
+		"maxbpm": 115,
+		"minbpm": 0,
+		"name": "LA25581_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 122,
+		"type": "normal"
+	},
+	"123": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA30344_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					319
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11003",
+		"groups": [
+			9
+		],
+		"maxbpm": 67,
+		"minbpm": 0,
+		"name": "LA30344_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 123,
+		"type": "normal"
+	},
+	"124": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA37024_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					39
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11004",
+		"groups": [
+			9
+		],
+		"maxbpm": 124,
+		"minbpm": 0,
+		"name": "LA37024_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 124,
+		"type": "normal"
+	},
+	"125": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA37918_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					144
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11005",
+		"groups": [
+			9
+		],
+		"maxbpm": 80,
+		"minbpm": 0,
+		"name": "LA37918_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 125,
+		"type": "normal"
+	},
+	"126": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA37918_FDA-WithAddLeads-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					144
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11006",
+		"groups": [
+			9
+		],
+		"maxbpm": 80,
+		"minbpm": 0,
+		"name": "LA37918_FDA-WithAddLeads",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 126,
+		"type": "normal"
+	},
+	"127": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA46938_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					140
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11007",
+		"groups": [
+			9
+		],
+		"maxbpm": 89,
+		"minbpm": 0,
+		"name": "LA46938_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 127,
+		"type": "normal"
+	},
+	"128": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA46938_FDA-WithAddLeads-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					140
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11008",
+		"groups": [
+			9
+		],
+		"maxbpm": 89,
+		"minbpm": 0,
+		"name": "LA46938_FDA-WithAddLeads",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 128,
+		"type": "normal"
+	},
+	"129": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA54571_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					1
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11009",
+		"groups": [
+			9
+		],
+		"maxbpm": 148,
+		"minbpm": 0,
+		"name": "LA54571_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 129,
+		"type": "normal"
+	},
+	"130": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA54571_FDA-WithAddLeads-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					1
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11010",
+		"groups": [
+			9
+		],
+		"maxbpm": 148,
+		"minbpm": 0,
+		"name": "LA54571_FDA-WithAddLeads",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 130,
+		"type": "normal"
+	},
+	"131": {
+		"acronym": "",
+		"datasource": [
+			{
+				"datafilename": "LA57370_FDA-MDC_ECG_LEAD_II.png",
+				"heartbeats": [
+					124
+				],
+				"maxrange": 1000
+			}
+		],
+		"ecg12LeadId": "11011",
+		"groups": [
+			9
+		],
+		"maxbpm": 124,
+		"minbpm": 0,
+		"name": "LA57370_FDA",
+		"passiverate": true,
+		"recommendedRate": 78,
+		"sortOrder": 131,
+		"type": "normal"
+	}
+}
