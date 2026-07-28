@@ -1825,7 +1825,8 @@
                 const pdf = new jsPDF({
                     orientation: firstSheetIsLandscape ? 'landscape' : 'portrait',
                     unit: 'mm',
-                    format: firstPageSize
+                    format: firstPageSize,
+                    compress: true
                 });
 
                 for (let i = 0; i < sheets.length; i++) {
@@ -1853,7 +1854,7 @@
                     
                     // Convert canvas to image and add to PDF - original PNG approach
                     const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
+                    pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
                 }
                 
                 // Save the PDF
