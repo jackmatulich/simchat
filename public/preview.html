@@ -17,6 +17,7 @@
     <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     
     <style>
         :root {
@@ -1803,6 +1804,38 @@
         }
 
         // PDF download function - original approach with high quality
+        async function embedScenarioJsonInPdf(pdf, data) {
+            if (!window.PDFLib) {
+                throw new Error('pdf-lib failed to load');
+            }
+
+            const { PDFDocument, PDFName } = window.PDFLib;
+            const pdfBytes = pdf.output('arraybuffer');
+            const pdfDoc = await PDFDocument.load(pdfBytes);
+            const projectStateBytes = new TextEncoder().encode(JSON.stringify(data));
+            const projectStateStream = pdfDoc.context.flateStream(projectStateBytes);
+            const projectStateRef = pdfDoc.context.register(projectStateStream);
+            const realiti360Ref = pdfDoc.context.register(pdfDoc.context.obj({
+                SchemaVersion: 1,
+                ProjectState: projectStateRef
+            }));
+
+            pdfDoc.catalog.set(PDFName.of('Realiti360'), realiti360Ref);
+            return pdfDoc.save();
+        }
+
+        function downloadPdfBytes(bytes, filename) {
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
         async function downloadPDF() {
             try {
                 await ecgPagesReady;
@@ -1857,8 +1890,9 @@
                     pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
                 }
                 
-                // Save the PDF
-                pdf.save(filename);
+                // Save the PDF with the scenario JSON embedded as application data.
+                const enrichedPdfBytes = await embedScenarioJsonInPdf(pdf, scenarioData);
+                downloadPdfBytes(enrichedPdfBytes, filename);
                 
                 // Reset button state
                 pdfButton.innerHTML = originalText;
