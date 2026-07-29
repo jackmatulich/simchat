@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimChat PDF JSON Extractor</title>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      box-sizing: border-box;
+    }
+
+    main {
+      width: min(980px, 100%);
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: #d1d5db;
+    }
+
+    .picker {
+      border: 1px dashed #f97316;
+      border-radius: 12px;
+      padding: 20px;
+      background: rgba(249, 115, 22, 0.08);
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      color: #f9fafb;
+    }
+
+    .status {
+      min-height: 24px;
+      margin: 12px 0;
+      color: #93c5fd;
+      font-weight: 600;
+    }
+
+    .status.error {
+      color: #fca5a5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 14px;
+      background: #f97316;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      min-height: 340px;
+      max-height: 62vh;
+      overflow: auto;
+      border-radius: 12px;
+      background: #030712;
+      border: 1px solid #374151;
+      color: #e5e7eb;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SimChat PDF JSON Extractor</h1>
+    <p>Choose a SimChat PDF generated after the /Realiti360 embed change. The extracted scenario JSON will appear below.</p>
+
+    <div class="picker">
+      <input id="pdfInput" type="file" accept="application/pdf,.pdf">
+    </div>
+
+    <div id="status" class="status">Waiting for a PDF...</div>
+
+    <div class="actions">
+      <button id="copyButton" disabled>Copy JSON</button>
+      <button id="downloadButton" disabled>Download JSON</button>
+    </div>
+
+    <pre id="output"></pre>
+  </main>
+
+  <script>
+    const input = document.getElementById('pdfInput');
+    const statusEl = document.getElementById('status');
+    const output = document.getElementById('output');
+    const copyButton = document.getElementById('copyButton');
+    const downloadButton = document.getElementById('downloadButton');
+    let extractedJson = '';
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('error', isError);
+    }
+
+    function setResult(jsonText) {
+      extractedJson = jsonText;
+      output.textContent = jsonText;
+      copyButton.disabled = !jsonText;
+      downloadButton.disabled = !jsonText;
+    }
+
+    async function extractScenarioJson(file) {
+      if (!window.PDFLib) {
+        throw new Error('pdf-lib failed to load');
+      }
+
+      const { PDFDocument, PDFName, decodePDFRawStream } = window.PDFLib;
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const pdfDoc = await PDFDocument.load(bytes);
+      const realitiRef = pdfDoc.catalog.get(PDFName.of('Realiti360'));
+
+      if (!realitiRef) {
+        throw new Error('This PDF does not contain a /Realiti360 object.');
+      }
+
+      const realiti = pdfDoc.context.lookup(realitiRef);
+      const projectStateRef = realiti.get(PDFName.of('ProjectState'));
+
+      if (!projectStateRef) {
+        throw new Error('The /Realiti360 object does not contain /ProjectState.');
+      }
+
+      const projectStateStream = pdfDoc.context.lookup(projectStateRef);
+      const decodedBytes = decodePDFRawStream(projectStateStream).decode();
+      const jsonText = new TextDecoder().decode(decodedBytes);
+      return JSON.stringify(JSON.parse(jsonText), null, 2);
+    }
+
+    input.addEventListener('change', async () => {
+      const [file] = input.files;
+      setResult('');
+
+      if (!file) {
+        setStatus('Waiting for a PDF...');
+        return;
+      }
+
+      try {
+        setStatus(`Reading ${file.name}...`);
+        const jsonText = await extractScenarioJson(file);
+        setResult(jsonText);
+        setStatus(`Extracted JSON from ${file.name}`);
+      } catch (error) {
+        console.error(error);
+        setStatus(error.message || 'Unable to extract JSON from this PDF.', true);
+      }
+    });
+
+    copyButton.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(extractedJson);
+      setStatus('Copied JSON to clipboard.');
+    });
+
+    downloadButton.addEventListener('click', () => {
+      const blob = new Blob([extractedJson], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'scenario.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>

@@ -9,6 +9,11 @@ VITE_ANTHROPIC_API_KEY="Add your Anthropic API key here"
   timeout = 900
 
 [[redirects]]
+  from = "/extract"
+  to = "/extract.html"
+  status = 200
+
+[[redirects]]
   from = "/api/genAIResponse"
   to = "/.netlify/functions/genAIResponse"
   status = 200
