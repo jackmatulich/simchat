@@ -11,6 +11,14 @@ import {
 } from '../components'
 import { useConversations, useAppState, store, actions } from '../store'
 import { genAIResponse, type Message } from '../utils'
+import {
+  AttachmentError,
+  MAX_ATTACHMENTS,
+  composeUserMessageContent,
+  processFile,
+  toMessageAttachments,
+  type PendingAttachment,
+} from '../utils/attachments'
 
 function Home() {
   const {
@@ -22,6 +30,7 @@ function Home() {
     updateConversationTitle,
     deleteConversation,
     addMessage,
+    uploadFile,
   } = useConversations()
   
   const { isLoading, setLoading, getActivePrompt, selectedModel, setSelectedModel } = useAppState()
@@ -40,6 +49,8 @@ function Home() {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const [pendingMessage, setPendingMessage] = useState<Message | null>(null)
   const [error, setError] = useState<string | null>(null);
+  const [pendingAttachments, setPendingAttachments] = useState<PendingAttachment[]>([])
+  const [attachmentError, setAttachmentError] = useState<string | null>(null)
 
   const scrollToBottom = useCallback(() => {
     if (messagesContainerRef.current) {
@@ -64,11 +75,46 @@ function Home() {
     }
   }, [messages, isLoading, setLoading]);
 
-  const createTitleFromInput = useCallback((text: string) => {
-    const words = text.trim().split(/\s+/)
+  const createTitleFromInput = useCallback((text: string, attachments: PendingAttachment[]) => {
+    const words = text.trim().split(/\s+/).filter(Boolean)
+    if (words.length === 0 && attachments.length > 0) {
+      return attachments[0].name.length > 40
+        ? attachments[0].name.slice(0, 37) + '...'
+        : attachments[0].name
+    }
     const firstThreeWords = words.slice(0, 3).join(' ')
     return firstThreeWords + (words.length > 3 ? '...' : '')
   }, []);
+
+  const handleFilesSelected = useCallback(async (files: FileList | null) => {
+    if (!files || files.length === 0) return
+    setAttachmentError(null)
+    try {
+      const remaining = MAX_ATTACHMENTS - pendingAttachments.length
+      if (remaining <= 0) {
+        throw new AttachmentError(`You can attach up to ${MAX_ATTACHMENTS} files per message.`)
+      }
+      const selected = Array.from(files).slice(0, remaining)
+      const processed: PendingAttachment[] = []
+      for (const file of selected) {
+        processed.push(await processFile(file))
+      }
+      setPendingAttachments((prev) => [...prev, ...processed].slice(0, MAX_ATTACHMENTS))
+    } catch (err) {
+      const message =
+        err instanceof AttachmentError
+          ? err.message
+          : err instanceof Error
+            ? err.message
+            : 'Failed to process attachment.'
+      setAttachmentError(message)
+    }
+  }, [pendingAttachments.length])
+
+  const handleRemoveAttachment = useCallback((id: string) => {
+    setPendingAttachments((prev) => prev.filter((a) => a.id !== id))
+    setAttachmentError(null)
+  }, [])
 
   // Helper function to process AI response
   const processAIResponse = useCallback(async (conversationId: string, userMessage: Message) => {
@@ -113,21 +159,48 @@ function Home() {
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim() || isLoading) return
+    if (isLoading) return
+    if (!input.trim() && pendingAttachments.length === 0) return
 
     const currentInput = input
+    const attachmentsForSend = pendingAttachments
     setInput('') // Clear input early for better UX
+    setPendingAttachments([])
+    setAttachmentError(null)
     setLoading(true)
     setError(null)
     
-    const conversationTitle = createTitleFromInput(currentInput)
+    const conversationTitle = createTitleFromInput(currentInput, attachmentsForSend)
 
     try {
+      const pdfAttachments = attachmentsForSend.filter((a) => a.kind === 'pdf_document')
+      const storageIds: Record<string, string> = {}
+
+      if (pdfAttachments.length > 0) {
+        for (const attachment of pdfAttachments) {
+          const storageId = await uploadFile(attachment.file)
+          if (!storageId) {
+            throw new Error(
+              'PDF attachments require Convex storage. Check your Convex configuration.',
+            )
+          }
+          storageIds[attachment.id] = storageId
+        }
+      }
+
+      const { content, displayText } = composeUserMessageContent(
+        currentInput,
+        attachmentsForSend,
+      )
+      const messageAttachments = toMessageAttachments(attachmentsForSend, storageIds)
+
       // Create the user message object
       const userMessage: Message = {
         id: Date.now().toString(),
         role: 'user' as const,
-        content: currentInput.trim(),
+        content,
+        displayText,
+        ...(messageAttachments.length > 0 ? { attachments: messageAttachments } : {}),
       }
       
       let conversationId = currentConversationId
@@ -179,6 +252,9 @@ function Home() {
       
     } catch (error) {
       console.error('Error:', error)
+      // Restore composer state so the user can retry
+      setInput(currentInput)
+      setPendingAttachments(attachmentsForSend)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant' as const,
@@ -197,12 +273,25 @@ function Home() {
       // Set loading to false on error
       setLoading(false)
     }
-  }, [input, isLoading, createTitleFromInput, currentConversationId, createNewConversation, addMessage, processAIResponse, setLoading]);
+  }, [
+    input,
+    isLoading,
+    pendingAttachments,
+    createTitleFromInput,
+    currentConversationId,
+    createNewConversation,
+    addMessage,
+    processAIResponse,
+    setLoading,
+    uploadFile,
+  ]);
 
   const handleNewChat = useCallback(() => {
     // Clear current conversation without creating a new one
     // A new conversation will be created when the user sends their first message
     setCurrentConversationId(null)
+    setPendingAttachments([])
+    setAttachmentError(null)
   }, [setCurrentConversationId]);
 
   const handleDeleteChat = useCallback(async (id: string) => {
@@ -285,6 +374,10 @@ function Home() {
               setInput={setInput}
               handleSubmit={handleSubmit}
               isLoading={isLoading}
+              pendingAttachments={pendingAttachments}
+              onFilesSelected={handleFilesSelected}
+              onRemoveAttachment={handleRemoveAttachment}
+              attachmentError={attachmentError}
             />
           </>
         ) : (
@@ -293,6 +386,10 @@ function Home() {
             setInput={setInput}
             handleSubmit={handleSubmit}
             isLoading={isLoading}
+            pendingAttachments={pendingAttachments}
+            onFilesSelected={handleFilesSelected}
+            onRemoveAttachment={handleRemoveAttachment}
+            attachmentError={attachmentError}
           />
         )}
       </div>

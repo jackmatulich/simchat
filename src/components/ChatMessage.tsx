@@ -4,11 +4,15 @@ import rehypeSanitize from 'rehype-sanitize'
 import rehypeHighlight from 'rehype-highlight'
 import type { Message } from '../utils/ai'
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, File, FileJson, FileText } from 'lucide-react';
 
 export const ChatMessage = ({ message }: { message: Message }) => {
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [isJsonExpanded, setIsJsonExpanded] = useState(false);
+  const visibleContent =
+    message.role === 'user' && message.displayText
+      ? message.displayText
+      : message.content;
 
   // Helper to robustly extract JSON from message content
   function extractJson(content: string): any {
@@ -51,8 +55,10 @@ export const ChatMessage = ({ message }: { message: Message }) => {
   scenarioName = jsonData?.scenarioName || null;
 
   // Check if this message contains JSON that should be collapsible
-  const hasJsonContent = message.content.includes('```json') || message.content.includes('```') && jsonData;
-  const { truncated, full, hasMore } = hasJsonContent ? truncateJsonContent(message.content) : { truncated: message.content, full: message.content, hasMore: false };
+  const hasJsonContent = visibleContent.includes('```json') || visibleContent.includes('```') && jsonData;
+  const { truncated, full, hasMore } = hasJsonContent ? truncateJsonContent(visibleContent) : { truncated: visibleContent, full: visibleContent, hasMore: false };
+
+  const attachmentChips = message.role === 'user' ? message.attachments ?? [] : [];
 
   const handleDownload = () => {
     if (!jsonData || !scenarioName) return;
@@ -145,6 +151,35 @@ export const ChatMessage = ({ message }: { message: Message }) => {
             </div>
           )}
           
+          {attachmentChips.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-2">
+              {attachmentChips.map((attachment) => {
+                const Icon =
+                  attachment.kind === 'scenario_json'
+                    ? FileJson
+                    : attachment.kind === 'text'
+                      ? FileText
+                      : File
+                const kindLabel =
+                  attachment.kind === 'scenario_json'
+                    ? 'Scenario'
+                    : attachment.kind === 'text'
+                      ? 'Text'
+                      : 'PDF'
+                return (
+                  <div
+                    key={attachment.id}
+                    className="flex items-center gap-1.5 px-2 py-1 text-xs text-gray-200 border rounded-md border-orange-500/30 bg-gray-800/70"
+                  >
+                    <Icon className="w-3.5 h-3.5 text-orange-400" />
+                    <span className="max-w-[180px] truncate">{attachment.name}</span>
+                    <span className="text-gray-500">{kindLabel}</span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
           {/* Collapsible content */}
           <div className="relative">
             <ReactMarkdown

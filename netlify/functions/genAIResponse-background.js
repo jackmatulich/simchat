@@ -4,22 +4,78 @@ const { ConvexHttpClient } = require("convex/browser");
 
 const { DEFAULT_SYSTEM_PROMPT } = require('../../src/shared/defaultSystemPrompt.cjs');
 
-// Helper to add a message to Convex using the backend client
-async function addMessageToConvex(conversationId, message) {
+const ATTACHMENT_SYSTEM_NOTE = `
+When the user attaches files:
+- Scenario JSON (including JSON extracted from a SimChat PDF) is an existing simulation to rebuild, refine, or align with. Prefer preserving structure and intent unless asked otherwise.
+- Attached text documents and PDFs are policy, article, or reference material. Align the generated scenario with their requirements and constraints.
+`;
+
+function getConvexClient() {
   const convexUrl = process.env.CONVEX_URL;
   const convexAdminKey = process.env.CONVEX_ADMIN_KEY;
   if (!convexUrl || !convexAdminKey) {
     throw new Error('Missing Convex URL or admin key in environment variables.');
   }
-  // Use only .convex.cloud for backend client
   if (!convexUrl.endsWith('.convex.cloud')) {
     throw new Error('CONVEX_URL must end with .convex.cloud for backend client calls.');
   }
-  const convex = new ConvexHttpClient(convexUrl, { adminKey: convexAdminKey });
+  return new ConvexHttpClient(convexUrl, { adminKey: convexAdminKey });
+}
+
+// Helper to add a message to Convex using the backend client
+async function addMessageToConvex(conversationId, message) {
+  const convex = getConvexClient();
   return await convex.mutation("conversations:addMessage", {
     conversationId,
     message,
   });
+}
+
+async function fetchPdfBase64(storageId) {
+  const convex = getConvexClient();
+  const url = await convex.query("files:getUrl", { storageId });
+  if (!url) {
+    throw new Error(`Unable to resolve storage URL for attachment ${storageId}`);
+  }
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to download attachment ${storageId} (${response.status})`);
+  }
+  const buffer = Buffer.from(await response.arrayBuffer());
+  return buffer.toString('base64');
+}
+
+async function formatMessageForAnthropic(msg) {
+  const text = (msg.content || '').trim();
+  const pdfAttachments = (msg.attachments || []).filter(
+    (attachment) => attachment.kind === 'pdf_document' && attachment.storageId,
+  );
+
+  if (pdfAttachments.length === 0) {
+    return { role: msg.role, content: text };
+  }
+
+  const contentBlocks = [];
+  for (const attachment of pdfAttachments) {
+    const data = await fetchPdfBase64(attachment.storageId);
+    contentBlocks.push({
+      type: 'document',
+      source: {
+        type: 'base64',
+        media_type: 'application/pdf',
+        data,
+      },
+      title: attachment.name,
+    });
+  }
+  contentBlocks.push({ type: 'text', text });
+  return { role: msg.role, content: contentBlocks };
+}
+
+function messagesHaveAttachments(messages) {
+  return messages.some(
+    (msg) => Array.isArray(msg.attachments) && msg.attachments.length > 0,
+  );
 }
 
 const MODEL_PRICING_USD_PER_MILLION = {
@@ -89,10 +145,8 @@ exports.handler = async (event) => {
   try {
     const body = event.body ? JSON.parse(event.body) : {};
     const { messages, systemPrompt, conversationId, model } = body;
-    console.log('Received request body:', JSON.stringify(body, null, 2));
-    console.log('Messages type:', typeof messages);
-    console.log('Messages value:', messages);
-    console.log('Is array?', Array.isArray(messages));
+    console.log('Received request for conversation:', conversationId);
+    console.log('Message count:', Array.isArray(messages) ? messages.length : 0);
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
@@ -118,9 +172,16 @@ exports.handler = async (event) => {
     }
 
     const anthropic = new Anthropic({ apiKey, timeout: 900000 });
-    const formattedMessages = messages
-      .filter((msg) => msg.content && msg.content.trim() !== '' && !msg.content.startsWith('Sorry, I encountered an error'))
-      .map((msg) => ({ role: msg.role, content: msg.content.trim() }));
+    const validMessages = messages.filter(
+      (msg) =>
+        msg.content &&
+        msg.content.trim() !== '' &&
+        !msg.content.startsWith('Sorry, I encountered an error'),
+    );
+    const formattedMessages = [];
+    for (const msg of validMessages) {
+      formattedMessages.push(await formatMessageForAnthropic(msg));
+    }
     if (formattedMessages.length === 0) {
       return {
         statusCode: 400,
@@ -128,9 +189,13 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: 'No valid messages to send' }),
       };
     }
-    const finalSystemPrompt = systemPrompt?.enabled
+
+    let finalSystemPrompt = systemPrompt?.enabled
       ? `${DEFAULT_SYSTEM_PROMPT}\n\n${systemPrompt.value}`
       : DEFAULT_SYSTEM_PROMPT;
+    if (messagesHaveAttachments(validMessages)) {
+      finalSystemPrompt = `${finalSystemPrompt}\n\n${ATTACHMENT_SYSTEM_NOTE}`;
+    }
 
     // Generate AI response (body.model wins, then env, then Haiku default from upstream)
     const resolvedModel =
@@ -180,4 +245,4 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: error.message }),
     };
   }
-}; 
+};

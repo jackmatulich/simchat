@@ -1,9 +1,24 @@
 // Types for the AI response functionality
 
+export type AttachmentKind = 'scenario_json' | 'text' | 'pdf_document'
+
+export interface MessageAttachment {
+  id: string
+  name: string
+  mimeType: string
+  kind: AttachmentKind
+  sizeBytes: number
+  /** Convex storage id for general PDFs */
+  storageId?: string
+}
+
 export interface Message {
   id: string
   role: 'user' | 'assistant'
   content: string
+  /** User-typed prompt for UI; falls back to content when absent */
+  displayText?: string
+  attachments?: MessageAttachment[]
   model?: string
   inputTokens?: number
   outputTokens?: number
@@ -51,5 +66,3 @@ export const genAIResponse = async (data: {
     throw error
   }
 }
-
-

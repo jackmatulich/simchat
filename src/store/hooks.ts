@@ -60,6 +60,7 @@ export function useConversations() {
   const updateTitle = isConvexAvailable ? useMutation(api.conversations.updateTitle) : null;
   const deleteConversation = isConvexAvailable ? useMutation(api.conversations.remove) : null;
   const addMessageToConversation = isConvexAvailable ? useMutation(api.conversations.addMessage) : null;
+  const generateUploadUrl = isConvexAvailable ? useMutation(api.files.generateUploadUrl) : null;
   
   // Convert Convex conversations to local format if available
   useEffect(() => {
@@ -183,11 +184,41 @@ export function useConversations() {
         try {
           await addMessageToConversation({
             conversationId: conversationId as Id<'conversations'>,
-            message,
+            message: {
+              ...message,
+              attachments: message.attachments?.map((attachment) => ({
+                ...attachment,
+                storageId: attachment.storageId
+                  ? (attachment.storageId as Id<'_storage'>)
+                  : undefined,
+              })),
+            },
           });
         } catch (error) {
           console.error('Failed to add message to Convex:', error);
         }
+      }
+    },
+
+    uploadFile: async (file: File): Promise<Id<'_storage'> | null> => {
+      if (!isConvexAvailable || !generateUploadUrl) {
+        return null;
+      }
+      try {
+        const uploadUrl = await generateUploadUrl();
+        const result = await fetch(uploadUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': file.type || 'application/octet-stream' },
+          body: file,
+        });
+        if (!result.ok) {
+          throw new Error(`Upload failed (${result.status})`);
+        }
+        const { storageId } = await result.json();
+        return storageId as Id<'_storage'>;
+      } catch (error) {
+        console.error('Failed to upload file to Convex storage:', error);
+        throw error;
       }
     },
   };

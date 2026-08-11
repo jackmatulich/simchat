@@ -2,6 +2,33 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+const attachmentValidator = v.object({
+  id: v.string(),
+  name: v.string(),
+  mimeType: v.string(),
+  kind: v.union(
+    v.literal("scenario_json"),
+    v.literal("text"),
+    v.literal("pdf_document"),
+  ),
+  sizeBytes: v.number(),
+  storageId: v.optional(v.id("_storage")),
+});
+
+const messageValidator = v.object({
+  id: v.string(),
+  role: v.union(v.literal("user"), v.literal("assistant")),
+  content: v.string(),
+  displayText: v.optional(v.string()),
+  attachments: v.optional(v.array(attachmentValidator)),
+  model: v.optional(v.string()),
+  inputTokens: v.optional(v.number()),
+  outputTokens: v.optional(v.number()),
+  costUsd: v.optional(v.number()),
+  costAud: v.optional(v.number()),
+  exchangeRateAudPerUsd: v.optional(v.number()),
+});
+
 // Get all conversations
 export const list = query({
   handler: async (ctx) => {
@@ -23,21 +50,7 @@ export const get = query({
 export const create = mutation({
   args: {
     title: v.string(),
-    messages: v.optional(
-      v.array(
-        v.object({
-          id: v.string(),
-          role: v.union(v.literal("user"), v.literal("assistant")),
-          content: v.string(),
-          model: v.optional(v.string()),
-          inputTokens: v.optional(v.number()),
-          outputTokens: v.optional(v.number()),
-          costUsd: v.optional(v.number()),
-          costAud: v.optional(v.number()),
-          exchangeRateAudPerUsd: v.optional(v.number()),
-        })
-      )
-    ),
+    messages: v.optional(v.array(messageValidator)),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("conversations", {
@@ -63,17 +76,7 @@ export const updateTitle = mutation({
 export const addMessage = mutation({
   args: {
     conversationId: v.id("conversations"),
-    message: v.object({
-      id: v.string(),
-      role: v.union(v.literal("user"), v.literal("assistant")),
-      content: v.string(),
-      model: v.optional(v.string()),
-      inputTokens: v.optional(v.number()),
-      outputTokens: v.optional(v.number()),
-      costUsd: v.optional(v.number()),
-      costAud: v.optional(v.number()),
-      exchangeRateAudPerUsd: v.optional(v.number()),
-    }),
+    message: messageValidator,
   },
   handler: async (ctx, args) => {
     const conversation = await ctx.db.get(args.conversationId);
@@ -91,17 +94,7 @@ export const addMessage = mutation({
 export const addMessage2 = mutation({
   args: {
     conversationId: v.id("conversations"),
-    message: v.object({
-      id: v.string(),
-      role: v.union(v.literal("user"), v.literal("assistant")),
-      content: v.string(),
-      model: v.optional(v.string()),
-      inputTokens: v.optional(v.number()),
-      outputTokens: v.optional(v.number()),
-      costUsd: v.optional(v.number()),
-      costAud: v.optional(v.number()),
-      exchangeRateAudPerUsd: v.optional(v.number()),
-    }),
+    message: messageValidator,
   },
   handler: async (ctx, args) => {
     const conversation = await ctx.db.get(args.conversationId);
