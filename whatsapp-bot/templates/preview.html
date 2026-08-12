@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="print-color-adjust" content="exact">
+    <title>Clinical Scenario Template - iSimulate</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Normalize + Paper.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    
+    <style>
+        :root {
+            --brand-dark: #224B8C;
+            --brand-light: #599ED8;
+            --brand-accent: #F7941E;
+            --bg-app: #F0F4FA;
+            --text-dark: #2C3E50;
+            --border-light: #E8EEF7;
+        }
+
+        body {
+            font-family: 'Inter', 'Proxima Nova', sans-serif;
+            background: var(--bg-app);
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.A4 {
+            background: var(--bg-app);
+        }
+
+        @media print {
+            /* Safari-specific page margin reset */
+            @page {
+                margin: 0 !important;
+                size: A4 !important;
+            }
+            /* Reset body for printing */
+            body { 
+                background: white !important; 
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 12pt !important;
+                line-height: 1.4 !important;
+                /* Safari-specific body fixes */
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+            
+            /* Hide non-printable elements */
+            .no-print { display: none !important; }
+            
+            /* Ensure each sheet is treated as a separate A4 page */
+            .sheet {
+                page-break-before: always !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                background: white !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                overflow: hidden !important;
+                position: relative !important;
+                /* Safari-specific fixes for clipping */
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+
+            @page ecg-landscape {
+                margin: 0 !important;
+                size: A4 landscape !important;
+            }
+
+            body.A4 .sheet.ecg-sheet,
+            .sheet.ecg-sheet {
+                page: ecg-landscape;
+                box-sizing: border-box !important;
+                width: 297mm !important;
+                height: 210mm !important;
+                min-height: 210mm !important;
+                max-height: 210mm !important;
+                padding: 0 !important;
+            }
+
+            body.A4 .sheet.ecg-sheet .content,
+            .sheet.ecg-sheet .content {
+                height: calc(210mm - 30mm) !important;
+                padding: 4mm 0 !important;
+            }
+            
+            /* First sheet shouldn't have page break before */
+            .sheet:first-child {
+                page-break-before: auto !important;
+            }
+            
+            /* Last sheet shouldn't have page break after */
+            .sheet:last-child {
+                page-break-after: auto !important;
+            }
+            
+            /* Ensure content fits within A4 bounds */
+            .sheet .content {
+                padding: 15mm !important;
+                height: calc(297mm - 30mm) !important;
+                overflow: hidden !important;
+                /* Safari-specific content positioning */
+                position: relative !important;
+                top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Header adjustments for print */
+            .sheet .header {
+                padding: 5mm 15mm !important;
+                border-radius: 0 !important;
+                /* Safari-specific header positioning */
+                position: relative !important;
+                top: 0 !important;
+                margin-top: 0 !important;
+                -webkit-transform: translateZ(0) !important;
+                transform: translateZ(0) !important;
+            }
+            
+            /* Footer adjustments for print */
+            .sheet .footer {
+                padding: 3mm 15mm !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: #f8f9fa !important;
+            }
+            
+            /* Typography adjustments for print */
+            h1 { font-size: 18pt !important; margin-bottom: 12pt !important; }
+            h2 { font-size: 14pt !important; margin: 10pt 0 6pt 0 !important; }
+            h3 { font-size: 12pt !important; margin: 8pt 0 4pt 0 !important; }
+            
+            /* Ensure proper page breaks for dynamic content */
+            .events-container .event-card {
+                page-break-inside: avoid !important;
+            }
+            
+            .info-card {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Blood gas and lab tables */
+            .bloodgas, .lab-table {
+                page-break-inside: avoid !important;
+                font-size: 10pt !important;
+            }
+            
+            /* SBAR sections */
+            .sbar-item {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Lists */
+            .scenario-list li {
+                page-break-inside: avoid !important;
+            }
+            
+            /* Debriefing layout adjustments */
+            .debriefing-layout {
+                height: calc(297mm - 60mm) !important;
+            }
+            
+            /* Notes section */
+            .notes-lines {
+                height: calc(297mm - 80mm) !important;
+            }
+            
+            /* Hide action buttons when printing */
+            .action-buttons {
+                display: none !important;
+            }
+        }
+        
+        /* Action button styles for screen */
+        .action-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .print-button, .pdf-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .print-button {
+            background: var(--brand-accent);
+            color: white;
+        }
+        
+        .pdf-button {
+            background: var(--brand-dark);
+            color: white;
+        }
+        
+        .print-button:hover {
+            background: #e6851a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .pdf-button:hover {
+            background: #1a3a6b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .print-button:disabled, .pdf-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Print-ready state */
+        body.print-ready .sheet {
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+
+        /* Upload section */
+        .upload-section {
+            background: var(--bg-app);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--brand-dark);
+            margin-bottom: 20px;
+        }
+
+        .upload-section h2 {
+            color: var(--brand-dark);
+            margin-bottom: 10px;
+        }
+
+        .file-input-wrapper {
+            display: inline-block;
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-button {
+            background: var(--brand-accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .file-input-button:hover {
+            background: #e6851a;
+        }
+
+        #upload-status {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* Paper.css override for our pages */
+        .sheet {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 210mm;
+            height: 297mm;
+            min-height: 297mm;
+            position: relative;
+        }
+
+        .sheet:last-child {
+            margin-bottom: 40px;
+        }
+
+        /* Header */
+        .sheet .header {
+            background: var(--brand-dark);
+            color: white;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .sheet .header .logo {
+            width: 63px;
+            height: 63px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 16px 0 0;
+            padding: 0;
+        }
+
+        .sheet .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+            color: white;
+        }
+
+        .scenario-id {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        /* Content area - no overflow */
+        .sheet .content {
+            padding: 8mm;
+            flex: 1;
+            overflow: visible;
+            height: auto;
+        }
+
+        body.A4 .sheet.ecg-sheet,
+        .sheet.ecg-sheet {
+            box-sizing: border-box;
+            flex: 0 0 auto;
+            width: 297mm !important;
+            height: 210mm !important;
+            min-height: 210mm !important;
+            max-height: 210mm !important;
+            padding: 0 !important;
+        }
+
+        body.A4 .sheet.ecg-sheet .content,
+        .sheet.ecg-sheet .content {
+            height: calc(210mm - 30mm) !important;
+        }
+
+        .ecg-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4mm 0;
+            overflow: hidden;
+        }
+
+        .ecg-page-title {
+            color: #5c6670;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin: 0 0 5mm;
+            text-align: center;
+        }
+
+        .ecg-canvas {
+            display: block;
+            height: auto;
+            max-width: 297mm;
+            width: 297mm;
+        }
+
+        .ecg-error {
+            color: #9b1c1c;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--brand-dark);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--brand-light);
+            font-size: 16px;
+            margin: 15px 0 10px 0;
+            border-bottom: 2px solid var(--brand-light);
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--brand-dark);
+            font-size: 13px;
+            margin: 12px 0 6px 0;
+        }
+
+        /* Cards and info sections */
+        .info-card {
+            background: #f8f9fa;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--brand-dark);
+            font-size: 11px;
+        }
+
+        .info-value {
+            color: var(--text-dark);
+            font-size: 11px;
+            text-align: right;
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        /* Lists */
+        .scenario-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .scenario-list li {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 6px 0;
+            font-size: 11px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Checkbox for simulation tools */
+        .checkbox-item::before {
+            content: '☐';
+            margin-right: 8px;
+            font-size: 14px;
+            color: var(--brand-dark);
+        }
+
+        /* Events timeline */
+        .events-container {
+            display: grid;
+            gap: 8px;
+        }
+
+        .event-card {
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .event-header {
+            background: var(--brand-light);
+            color: white;
+            padding: 6px 10px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .event-content {
+            padding: 8px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .event-main {
+            flex: 3;
+        }
+
+        .event-checklist {
+            flex: 2;
+            padding-left: 10px;
+            border-left: 1px solid var(--border-light);
+        }
+
+        .event-description {
+            font-size: 11px;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            font-size: 10px;
+        }
+
+        .vital-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .vital-item.ecg-item {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 2px;
+            padding-bottom: 4px;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .vital-label {
+            font-weight: 600;
+            color: var(--brand-dark);
+        }
+
+        .vital-value {
+            color: var(--text-dark);
+        }
+
+        /* Event checklist styling */
+        .event-checklist h4 {
+            font-size: 12px;
+            color: var(--brand-dark);
+            margin: 0 0 6px 0;
+        }
+
+        .event-checklist ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .event-checklist li {
+            font-size: 11px;
+            padding: 3px 0;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.3;
+        }
+
+        .event-checklist li:before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--brand-accent);
+            font-size: 10px;
+        }
+
+        /* Blood gas tables - updated styling */
+        .bloodgas {
+            width: 100%;
+            max-width: 250px;
+            margin: 10px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            table-layout: fixed;
+            font-size: 11px;
+        }
+
+        .bloodgas td {
+            padding: 4px 6px;
+            vertical-align: top;
+            word-wrap: break-word;
+            font-size: 12px;
+        }
+
+        /* Section headers */
+        .bloodgas td[colspan="4"] {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            padding-left: 5% !important;
+            text-align: left !important;
+            padding-top: 4% !important;
+        }
+
+        /* Label cells */
+        .bloodgas tr td:first-child {
+            font-weight: bold;
+            background-color: #ffffff;
+            font-size: 12px;
+        }
+
+        .bloodgas td:nth-child(1) {
+            text-align: right;
+        }
+
+        .bloodgas td:nth-child(2) {
+            text-align: center;
+        }
+
+        .bloodgas td:nth-child(3) {
+            text-align: left;
+        }
+
+        .bloodgas td:nth-child(4) {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /* Lab tables */
+        .lab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+
+        .lab-table th {
+            background: var(--brand-dark);
+            color: white;
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .lab-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .lab-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .abnormal {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* SBAR sections */
+        .sbar-section {
+            margin: 12px 0;
+        }
+
+        .sbar-item {
+            background: white;
+            border-left: 4px solid var(--brand-accent);
+            padding: 10px;
+            margin: 6px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sbar-label {
+            font-weight: 700;
+            color: var(--brand-dark);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .sbar-content {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .sheet .footer {
+            background: #f8f9fa;
+            padding: 6px 16px;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-size: 9px;
+            color: #666;
+            margin-top: auto;
+        }
+
+        /* Hidden content initially */
+        #scenarioContent {
+            display: none;
+        }
+
+        #scenarioContent.active {
+            display: block;
+        }
+
+        /* Debriefing page layout */
+        .debriefing-layout {
+            display: flex;
+            height: calc(100% - 40px);
+            gap: 20px;
+        }
+
+        .debriefing-points-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notes-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--brand-dark);
+            border-radius: 8px;
+            padding: 15px;
+            background: #fafafa;
+        }
+
+        .notes-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--brand-dark);
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--brand-light);
+            padding-bottom: 8px;
+        }
+
+        .notes-lines {
+            flex: 1;
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 24px,
+                #ddd 24px,
+                #ddd 25px
+            );
+            background-size: 100% 25px;
+            min-height: 400px;
+        }
+
+        /* Scaling for debriefing content */
+        .debriefing-layout .scenario-list li {
+            padding: 15px 20px;
+            margin: 12px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .debriefing-layout h2 {
+            font-size: 20px;
+            margin: 0 0 20px 0;
+        }
+        .scenario-list.two-columns {
+            column-count: 2;
+            column-gap: 16px;
+        }
+        .scenario-list.two-columns li {
+            break-inside: avoid;
+        }
+        /* Fix the height of the tools list box (adjust as needed for your design) */
+        #toolsList {
+            max-height: 140px;
+            min-height: 80px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body class="A4">
+    <!-- Logo SVG Template (hidden) -->
+    <template id="logo-template">
+        <?xml version="1.0" encoding="utf-8"?>
+        <!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="320 200 200 200" style="width: 63px; height: 63px; display: block; enable-background:new 320 200 200 200;" xml:space="preserve">
+        <style type="text/css">
+            .st0{display:none;}
+            .st1{clip-path:url(#SVGID_2_);}
+            .st2{fill:#F99F1C;}
+            .st3{fill:url(#SVGID_3_);}
+            .st4{display:inline;}
+            .st5{fill:#004A8F;stroke:#004A8F;stroke-width:2.4838;stroke-miterlimit:10;}
+            .st6{fill:url(#SVGID_4_);}
+            .st7{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:2.4838;stroke-miterlimit:10;}
+            .st8{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_5_);}
+            .st9{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_6_);}
+            .st10{display:inline;clip-path:url(#SVGID_8_);}
+            .st11{fill:#F8BB1A;}
+            .st12{display:none;fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_9_);}
+            .st13{display:none;fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+            .st14{clip-path:url(#SVGID_11_);}
+            .st15{display:inline;fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_12_);}
+            .st16{display:inline;fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+        </style>
+        <g id="Layer_3" class="st0">
+        </g>
+        <g id="Layer_2" class="st0">
+        </g>
+        <g id="Layer_1">
+            <!-- White circular background -->
+            <circle cx="420.945" cy="297.638" r="86" fill="white"/>
+            <g>
+                <defs>
+                    <ellipse id="SVGID_1_" transform="matrix(0.9725 -0.2331 0.2331 0.9725 -57.7779 106.3073)" cx="420.945" cy="297.638" rx="47.375" ry="47.375"/>
+                </defs>
+                <clipPath id="SVGID_2_">
+                    <use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+                </clipPath>
+                <g class="st1">
+                    <path class="st2" d="M416.92,338.278c-0.086,0-0.175-0.003-0.268-0.01c-1.024-0.075-1.824-0.996-1.824-2.026
+                        c-0.014-2.181-1.463-31.764-2.699-52.784c-3.016,26.382-4.018,27.638-6.539,27.638h-9.314c-1.566,0-3.036-0.926-4.732-2.002
+                        c-1.844-1.165-3.932-2.49-6.065-2.49c-2.281,0-5.024,1.477-7.229,2.665c-1.899,1.024-3.397,1.826-4.736,1.826h-13.317
+                        l-0.986-3.914h14.303c0.433-0.048,1.848-0.807,2.878-1.363c2.589-1.395,5.818-3.132,9.087-3.132c3.27,0,5.983,1.717,8.16,3.098
+                        c0.872,0.556,2.191,1.391,2.637,1.397h8.339c1.415-3.943,3.351-21.618,4.423-31.381c0.701-6.371,1.25-11.409,1.635-13.445
+                        c0.172-0.939,1.051-1.587,1.958-1.593c0.954,0.014,1.758,0.718,1.906,1.665c0.738,4.837,2.359,35.792,3.366,56.051
+                        c1.998-9.104,3.736-11.151,5.926-11.151c2.013,0,5.505-0.085,8.714-0.162c2.761-0.071,5.316-0.133,6.566-0.133
+                        c0.728-0.145,3.372-2.067,5.302-3.476c4.121-3.002,8.387-6.109,11.611-6.109c3.28,0,6.989,3.194,10.568,6.285
+                        c1.596,1.366,3.997,3.44,4.787,3.602l15.639-0.007c1.085,0,1.965,0.879,1.965,1.965c0,1.078-0.88,1.958-1.965,1.958h-15.721
+                        c-1.889,0-3.891-1.648-7.26-4.547c-2.466-2.125-6.189-5.337-8.013-5.337c-1.954,0-6.381,3.228-9.31,5.361
+                        c-3.808,2.775-5.879,4.224-7.603,4.224c-1.236,0-3.75,0.062-6.47,0.13c-3.016,0.075-6.278,0.155-8.356,0.165
+                        c-0.883,1.13-2.599,5.749-5.168,23.03C418.702,337.049,418.516,338.278,416.92,338.278z"/>
+                </g>
+            </g>
+            <g>
+                <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="428.7" y1="338.8856" x2="455.0268" y2="378.9244">
+                    <stop  offset="0" style="stop-color:#F6861F"/>
+                    <stop  offset="1" style="stop-color:#FFC20E"/>
+                </linearGradient>
+                <path style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_3_);" d="M452.438,332.358
+                    c-8.138,7.388-18.86,11.999-30.713,12.196l-0.018-0.001c0.18,10.652,0.401,23.622,0.674,39.467
+                    c22.026-0.366,41.99-8.945,57.022-22.77C469.378,350.64,460.317,340.903,452.438,332.358z"/>
+                <linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="439.7779" y1="330.6447" x2="391.1865" y2="245.4844">
+                    <stop  offset="0" style="stop-color:#F15A2A"/>
+                    <stop  offset="1" style="stop-color:#F6861F"/>
+                </linearGradient>
+                <path style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_4_);" d="M415.178,344.155
+                    c-22.857-2.81-40.75-22.048-41.144-45.731c-0.43-25.908,20.223-47.26,46.131-47.691c25.908-0.431,47.259,20.222,47.691,46.13
+                    c0.194,11.699-3.938,22.443-10.884,30.777c8.091,8.764,17.162,18.507,27.046,29.003c14.777-15.793,23.692-37.104,23.304-60.436
+                    c-0.793-47.705-40.108-85.734-87.813-84.941c-47.705,0.793-85.734,40.109-84.941,87.813c0.757,45.509,36.577,82.185,81.288,84.779
+                    C415.59,368.385,415.367,355.288,415.178,344.155z"/>
+            </g>
+        </g>
+        </svg>
+    </template>
+    <!-- Scenario Content (no upload UI) -->
+    <div id="scenarioContent">
+        <!-- Page 1: Overview -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1 id="scenarioName">Clinical Scenario</h1>
+                    <div class="scenario-id" id="scenarioId">Scenario ID</div>
+                </div>
+            </div>
+            <div class="content">
+                <h1>Scenario Overview</h1>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Basic Information</h3>
+                        <div class="info-item">
+                            <div class="info-label">Scenario Type</div>
+                            <div class="info-value" id="scenarioType">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Duration</div>
+                            <div class="info-value" id="scenarioDuration">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Patient</div>
+                            <div class="info-value" id="patientName">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Condition</div>
+                            <div class="info-value" id="patientCondition">-</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Purpose</h3>
+                        <div id="scenarioPurpose" style="font-size: 11px; line-height: 1.4;">-</div>
+                    </div>
+                </div>
+                <h2>Intended Participants</h2>
+                <ul class="scenario-list" id="participantsList"></ul>
+                <h2>Learning Objectives</h2>
+                <ul class="scenario-list" id="objectivesList"></ul>
+                <h2>Required Simulation Tools</h2>
+                <ul class="scenario-list" id="toolsList"></ul>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Page 2: Patient Information -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Patient Information</h1>
+                    <div class="scenario-id" id="scenarioNameHeader">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Demographics</h3>
+                        <div class="info-item">
+                            <div class="info-label">Name</div>
+                            <div class="info-value" id="patientNameDetail">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Age</div>
+                            <div class="info-value" id="patientAge">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Sex</div>
+                            <div class="info-value" id="patientSex">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Weight</div>
+                            <div class="info-value" id="patientWeight">-</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Clinical Context</h3>
+                        <div class="info-item">
+                            <div class="info-label">Condition</div>
+                            <div class="info-value" id="patientConditionDetail">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Days Admitted</div>
+                            <div class="info-value" id="patientAdmitted">-</div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Handover Information</h2>
+                <div class="info-card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Time of Day</div>
+                            <div class="info-value" id="handoverTime">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Handover Reason</div>
+                            <div class="info-value" id="handoverReason">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Confederate Role</div>
+                            <div class="info-value" id="confederateRole">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">What's About to Happen</div>
+                            <div class="info-value" id="aboutToHappen">-</div>
+                        </div>
+                    </div>
+                </div>
+                <h2>SBAR Handover</h2>
+                <div class="sbar-section">
+                    <div class="sbar-item">
+                        <div class="sbar-label">Situation</div>
+                        <div class="sbar-content" id="sbarSituation">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Background</div>
+                        <div class="sbar-content" id="sbarBackground">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Assessment</div>
+                        <div class="sbar-content" id="sbarAssessment">-</div>
+                    </div>
+                    <div class="sbar-item">
+                        <div class="sbar-label">Recommendation</div>
+                        <div class="sbar-content" id="sbarRecommendation">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Page 3: Events Timeline -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Event Timeline</h1>
+                    <div class="scenario-id" id="scenarioNameHeader2">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2>Scenario Events</h2>
+                <div class="events-container" id="eventsContainer"></div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Page 4: Debriefing Points -->
+        <section class="sheet padding-10mm">
+            <div class="header">
+                <div class="logo"></div>
+                <div>
+                    <h1>Debriefing Points</h1>
+                    <div class="scenario-id" id="scenarioNameHeader4">Clinical Scenario</div>
+                </div>
+            </div>
+            <div class="content" id="debriefingContent">
+                <div class="debriefing-layout">
+                    <div class="debriefing-points-section">
+                        <h2>Debriefing Points</h2>
+                        <ul class="scenario-list" id="debriefList"></ul>
+                    </div>
+                    <div class="notes-section">
+                        <div class="notes-title">Notes</div>
+                        <div class="notes-lines"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+            </div>
+        </section>
+        <!-- Laboratory Results Pages (dynamically generated) -->
+        <div id="labPagesContainer"></div>
+        <!-- 12-lead ECG Pages (dynamically generated) -->
+        <div id="ecgPagesContainer"></div>
+    </div>
+    <script>
+        let scenarioData = null;
+        let ecgPagesReady = Promise.resolve();
+        // ECG Rhythm lookup from scenario JSON
+        const ecgRhythmLookup = {
+            9: "Sinus",
+            27: "Sinus 2",
+            101: "Sinus P wave Inversion",
+            18: "Ventricular Fibrillation Coarse",
+            17: "Ventricular Fibrillation Medium",
+            15: "Ventricular Fibrillation Fine",
+            16: "Ventricular Fibrillation Ultra Fine",
+            115: "VT / VF",
+            83: "Torsades",
+            88: "Torsades 2",
+            3: "Asystole",
+            102: "P wave Asystole",
+            90: "Agonal",
+            111: "CPR",
+            108: "CPR ↑",
+            107: "CPR ↓",
+            106: "CPR 2",
+            38: "Atrial Fibrillation",
+            2: "Fast Atrial Fibrillation",
+            37: "AFBBB",
+            4: "Atrial Tachycardia",
+            1: "Atrial Flutter",
+            85: "Atrial Flutter 2:1",
+            86: "Atrial Flutter 3:1",
+            87: "Atrial Flutter 4:1",
+            20: "Atrial Flutter Pause",
+            35: "Atrial Flutter with Digoxin Effect",
+            28: "AVNRT1",
+            29: "AVNRT2",
+            91: "Idioventricular",
+            8: "Supraventricular Tachycardia",
+            84: "WPW",
+            12: "Ventricular Tachycardia 1",
+            13: "Ventricular Tachycardia 2",
+            14: "Ventricular Tachycardia 3",
+            113: "Ventricular Tachycardia 4",
+            114: "Ventricular Tachycardia 5",
+            49: "PVC 1",
+            62: "PVC 1 Couplet",
+            66: "PVC 1 Triplet",
+            51: "PVC 2",
+            64: "PVC 2 Couplet",
+            68: "PVC 2 Triplet",
+            71: "Mixed Unifocal",
+            56: "Multifocal",
+            70: "Mixed Multifocal",
+            22: "Bifascicular Block",
+            5: "First Degree Heart Block",
+            6: "Second Degree Heart Block Type 1",
+            42: "2° HB T2 4:3",
+            41: "2° HB T2 3:2",
+            40: "2° HB T2 2:1",
+            43: "2° HB T2 3:1",
+            45: "2° HB T2 4:1",
+            103: "2° HB T2 V1",
+            104: "2° HB T2 V2",
+            105: "2° HB T2 V3",
+            100: "3° Heart Block",
+            79: "Accelerated Junctional Rhythm",
+            82: "RBBB",
+            80: "LBBB",
+            23: "Anterior STEMI",
+            10: "ST Depression",
+            11: "Inferior STEMI",
+            25: "Acute Inferior MI",
+            39: "Biventricular Hypertrophy",
+            46: "Hypertrophic Cardiomyopathy",
+            47: "Restrictive Cardiomyopathy",
+            48: "Beta-blocker and Calcium channel blocker toxicity",
+            50: "Carbamazepine Cardiotoxicity",
+            52: "Digoxin Effect",
+            53: "Hypercalcaemia",
+            54: "Hypocalcaemia",
+            75: "Hyperkalaemia 7.1",
+            76: "Hyperkalaemia 9.2",
+            26: "Hypokalaemia 1.7",
+            55: "Hypomagnesaemia",
+            57: "Benign Early Repolarisation",
+            59: "Dextrocardia",
+            19: "Electrical Alternans",
+            78: "Hypothermia",
+            60: "Hypothyroidism",
+            81: "LongQT",
+            32: "Low Voltage",
+            31: "Pericarditis",
+            110: "Single Chamber Pacemaker",
+            109: "Dual Chamber Pacemaker",
+            120: "Pulmonary Embolism",
+            33: "Neonate",
+            30: "Young Child SR",
+            116: "Lift Off",
+            117: "Landing on the Moon",
+            118: "Walking on the Moon",
+            119: "Lift Off from the Moon"
+        };
+
+        // --- Helper functions ---
+        function populateTemplate(data) {
+            console.log('[populateTemplate] Start', data);
+            // Basic scenario info
+            const scenarioNameEl = document.getElementById('scenarioName');
+            if (!scenarioNameEl) { console.warn('Missing #scenarioName'); return; }
+            scenarioNameEl.textContent = data.scenarioName || 'Clinical Scenario';
+            const scenarioIdEl = document.getElementById('scenarioId');
+            if (!scenarioIdEl) { console.warn('Missing #scenarioId'); return; }
+            scenarioIdEl.textContent = data.scenarioId || '';
+            const scenarioTypeEl = document.getElementById('scenarioType');
+            if (!scenarioTypeEl) { console.warn('Missing #scenarioType'); return; }
+            scenarioTypeEl.textContent = data.scenarioType || '';
+            const durationSeconds = data.scenarioTime || 0;
+            const durationMinutes = Math.round(durationSeconds / 60 * 10) / 10; 
+            const scenarioDurationEl = document.getElementById('scenarioDuration');
+            if (!scenarioDurationEl) { console.warn('Missing #scenarioDuration'); return; }
+            scenarioDurationEl.textContent = `${durationMinutes} minutes`;
+            // Update all header references
+            const scenarioNameHeaderEls = [
+                document.getElementById('scenarioNameHeader'),
+                document.getElementById('scenarioNameHeader2'),
+                document.getElementById('scenarioNameHeader4')
+            ];
+            scenarioNameHeaderEls.forEach((el, i) => {
+                if (!el) { console.warn(`Missing scenarioNameHeader${i ? i+1 : ''}`); return; }
+                el.textContent = data.scenarioName || 'Clinical Scenario';
+            });
+            // Patient info
+            const patient = data.patientInformation || {};
+            const patientNameEl = document.getElementById('patientName');
+            if (!patientNameEl) { console.warn('Missing #patientName'); return; }
+            patientNameEl.textContent = patient.patientName || '-';
+            const patientConditionEl = document.getElementById('patientCondition');
+            if (!patientConditionEl) { console.warn('Missing #patientCondition'); return; }
+            patientConditionEl.textContent = patient.patientCondition || '-';
+            const patientNameDetailEl = document.getElementById('patientNameDetail');
+            if (!patientNameDetailEl) { console.warn('Missing #patientNameDetail'); return; }
+            patientNameDetailEl.textContent = patient.patientName || '-';
+            const patientAgeEl = document.getElementById('patientAge');
+            if (!patientAgeEl) { console.warn('Missing #patientAge'); return; }
+            patientAgeEl.textContent = `${patient.patientAge || '-'} ${patient.patientAgeUnit || ''}`;
+            const patientSexEl = document.getElementById('patientSex');
+            if (!patientSexEl) { console.warn('Missing #patientSex'); return; }
+            patientSexEl.textContent = patient.patientSex === 1 ? 'Male' : patient.patientSex === 2 ? 'Female' : 'Unspecified';
+            const patientWeightEl = document.getElementById('patientWeight');
+            if (!patientWeightEl) { console.warn('Missing #patientWeight'); return; }
+            patientWeightEl.textContent = patient.patientWeight ? `${patient.patientWeight}kg` : '-';
+            const patientConditionDetailEl = document.getElementById('patientConditionDetail');
+            if (!patientConditionDetailEl) { console.warn('Missing #patientConditionDetail'); return; }
+            patientConditionDetailEl.textContent = patient.patientCondition || '-';
+            const patientAdmittedEl = document.getElementById('patientAdmitted');
+            if (!patientAdmittedEl) { console.warn('Missing #patientAdmitted'); return; }
+            patientAdmittedEl.textContent = patient.patientAdmitted ? `${patient.patientAdmitted} days` : '-';
+            // Purpose
+            const scenarioPurposeEl = document.getElementById('scenarioPurpose');
+            if (!scenarioPurposeEl) { console.warn('Missing #scenarioPurpose'); return; }
+            scenarioPurposeEl.textContent = data.purpose || '-';
+            // Handover info
+            const handover = data.handover || {};
+            const handoverTimeEl = document.getElementById('handoverTime');
+            if (!handoverTimeEl) { console.warn('Missing #handoverTime'); return; }
+            handoverTimeEl.textContent = handover.time_of_day || '-';
+            const handoverReasonEl = document.getElementById('handoverReason');
+            if (!handoverReasonEl) { console.warn('Missing #handoverReason'); return; }
+            handoverReasonEl.textContent = handover.handover_reason || '-';
+            const confederateRoleEl = document.getElementById('confederateRole');
+            if (!confederateRoleEl) { console.warn('Missing #confederateRole'); return; }
+            confederateRoleEl.textContent = handover.confederate_role || '-';
+            const aboutToHappenEl = document.getElementById('aboutToHappen');
+            if (!aboutToHappenEl) { console.warn('Missing #aboutToHappen'); return; }
+            aboutToHappenEl.textContent = handover.what_is_about_to_happen || '-';
+            // SBAR
+            const sbar = handover.SBAR || {};
+            const sbarSituationEl = document.getElementById('sbarSituation');
+            if (!sbarSituationEl) { console.warn('Missing #sbarSituation'); return; }
+            sbarSituationEl.textContent = sbar.situation || '-';
+            const sbarBackgroundEl = document.getElementById('sbarBackground');
+            if (!sbarBackgroundEl) { console.warn('Missing #sbarBackground'); return; }
+            sbarBackgroundEl.textContent = sbar.background || '-';
+            const sbarAssessmentEl = document.getElementById('sbarAssessment');
+            if (!sbarAssessmentEl) { console.warn('Missing #sbarAssessment'); return; }
+            sbarAssessmentEl.textContent = sbar.assessment || '-';
+            const sbarRecommendationEl = document.getElementById('sbarRecommendation');
+            if (!sbarRecommendationEl) { console.warn('Missing #sbarRecommendation'); return; }
+            sbarRecommendationEl.textContent = sbar.recommendation || '-';
+            // Lists
+            console.log('[populateTemplate] Populating lists');
+            populateList('participantsList', data.intended_participants || []);
+            populateList('objectivesList', data.learning_objectives || []);
+            populateList('toolsList', data.required_simulation_tools || [], true);
+            populateList('debriefList', data.debriefing_points || []);
+            // Events
+            console.log('[populateTemplate] Populating events');
+            populateEvents(data.events || data.scenarioEvents || []);
+            // Labs
+            console.log('[populateTemplate] Populating labs');
+            populateLabs(data.labs || []);
+            console.log('[populateTemplate] Populating ECG pages');
+            ecgPagesReady = populateECGPages(data);
+            console.log('[populateTemplate] End');
+        }
+        function populateList(containerId, items, addCheckbox = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            if (items.length === 0) {
+                container.innerHTML = '<li style="color: #666; font-style: italic;">No items specified</li>';
+                container.classList.remove('two-columns');
+                return;
+            }
+            // For toolsList, add two-columns class if >4 items
+            if (containerId === 'toolsList') {
+                if (items.length > 4) {
+                    container.classList.add('two-columns');
+                } else {
+                    container.classList.remove('two-columns');
+                }
+            }
+            items.forEach(item => {
+                const li = document.createElement('li');
+                if (addCheckbox) {
+                    li.className = 'checkbox-item';
+                }
+                li.textContent = item;
+                container.appendChild(li);
+            });
+        }
+        function populateEvents(events) {
+            const container = document.getElementById('eventsContainer');
+            container.innerHTML = '';
+            if (events.length === 0) {
+                container.innerHTML = '<p style="color: #666; font-style: italic;">No events specified</p>';
+                return;
+            }
+            // Custom split logic
+            let eventPages = [];
+            if (events.length <= 5) {
+                eventPages = [events];
+            } else {
+                // First page: min(5, total-2)
+                const firstPageCount = Math.min(5, events.length - 2);
+                eventPages.push(events.slice(0, firstPageCount));
+                let remaining = events.slice(firstPageCount);
+                // All subsequent pages: max 5, but always at least 2 on the last page
+                while (remaining.length > 0) {
+                    if (remaining.length <= 5) {
+                        eventPages.push(remaining);
+                        break;
+                    } else if (remaining.length === 6) {
+                        // Special case: split as 4/2
+                        eventPages.push(remaining.slice(0, 4));
+                        eventPages.push(remaining.slice(4));
+                        break;
+                    } else {
+                        eventPages.push(remaining.slice(0, 5));
+                        remaining = remaining.slice(5);
+                    }
+                }
+            }
+            // Create first events page (replace existing content)
+            populateEventsPage(eventPages[0], container);
+            // Create additional events pages if needed
+            if (eventPages.length > 1) {
+                const scenarioContent = document.getElementById('scenarioContent');
+                // Find the first events page to insert after it
+                const firstEventsPage = scenarioContent.querySelector('section:has(#eventsContainer)');
+                for (let pageIndex = 1; pageIndex < eventPages.length; pageIndex++) {
+                    const pageDiv = document.createElement('section');
+                    pageDiv.className = 'sheet padding-10mm';
+                    pageDiv.innerHTML = `
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>Event Timeline (Page ${pageIndex + 1})</h1>
+                                <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h2>Scenario Events (Continued)</h2>
+                            <div class="events-container" id="eventsContainer${pageIndex}"></div>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    `;
+                    // Insert event page after the first events page
+                    if (firstEventsPage) {
+                        firstEventsPage.parentNode.insertBefore(pageDiv, firstEventsPage.nextSibling);
+                    } else {
+                        // Fallback: append to scenarioContent
+                        scenarioContent.appendChild(pageDiv);
+                    }
+                    // Use querySelector to get the container in the new section
+                    const pageContainer = pageDiv.querySelector('.events-container');
+                    populateEventsPage(eventPages[pageIndex], pageContainer, eventPages.slice(0, pageIndex).reduce((a, b) => a + b.length, 0));
+                }
+            }
+            insertLogos();
+        }
+        function populateEventsPage(events, container, startIndex = 0) {
+            events.forEach((event, index) => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event-card';
+                const params = event.parameters || {};
+                // Updated ECG rhythm extraction logic
+                let ecgRhythmValue = params.ecgWaveform ?? params.ecgRhythm ?? params.ecg ?? params.ecgId ?? params.rhythm;
+                if (ecgRhythmValue === undefined || ecgRhythmValue === null || ecgRhythmValue === '') {
+                    ecgRhythmValue = 9; // default to Sinus
+                }
+                const ecgRhythm = ecgRhythmLookup[Number(ecgRhythmValue)] || `Unknown (${ecgRhythmValue})`;
+                const vitalsHtml = `
+                    <div class="vitals-grid">
+                        <div class="vital-item ecg-item">
+                            <span class="vital-label">ECG Rhythm</span>
+                            <span class="vital-value">${ecgRhythm}</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">HR</span>
+                            <span class="vital-value">${params.hr || '-'} bpm</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">BP</span>
+                            <span class="vital-value">${params.bpSys || '-'}/${params.bpDia || '-'} mmHg</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">SpO2</span>
+                            <span class="vital-value">${params.spo2 || '-'}%</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">EtCO2</span>
+                            <span class="vital-value">${params.etco2 || '-'} mmHg</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">RR</span>
+                            <span class="vital-value">${params.respRate || '-'}/min</span>
+                        </div>
+                        <div class="vital-item">
+                            <span class="vital-label">Temp</span>
+                            <span class="vital-value">${params.temp || '-'}°C</span>
+                        </div>
+                    </div>
+                `;
+                // Add checklist for this event
+                let checklistHtml = '';
+                if (event.relatedChecklist && scenarioData.checklist) {
+                    checklistHtml = '<div class="event-checklist"><h4>Checklist:</h4><ul>';
+                    event.relatedChecklist.forEach(checklistIndex => {
+                        if (scenarioData.checklist[checklistIndex]) {
+                            checklistHtml += `<li>${scenarioData.checklist[checklistIndex].title}</li>`;
+                        }
+                    });
+                    checklistHtml += '</ul></div>';
+                }
+                eventDiv.innerHTML = `
+                    <div class="event-header">
+                        Event ${startIndex + index + 1}: ${event.name || 'Unnamed Event'}
+                    </div>
+                    <div class="event-content">
+                        <div class="event-main">
+                            <div class="event-description">${event.description || 'No description provided'}</div>
+                            ${vitalsHtml}
+                        </div>
+                        ${checklistHtml}
+                    </div>
+                `;
+                container.appendChild(eventDiv);
+            });
+        }
+        function populateLabs(labs) {
+            const labPagesContainer = document.getElementById('labPagesContainer');
+            labPagesContainer.innerHTML = '';
+            if (labs.length === 0) {
+                return;
+            }
+            labs.forEach((lab, index) => {
+                const labName = lab.name || '';
+                const isBloodGas = labName.toLowerCase().includes('blood gas') || 
+                                 labName.toLowerCase().includes('abg') || 
+                                 labName.toLowerCase().includes('vbg');
+                // Create a new page for each lab test
+                const pageDiv = document.createElement('section');
+                pageDiv.className = 'sheet padding-10mm';
+                const isVenous = labName.toLowerCase().includes('venous');
+                const gasType = isVenous ? 'VBG' : 'ABG';
+                const pageTitle = isBloodGas ? `${gasType} Results` : `${labName} Results`;
+                pageDiv.innerHTML = `
+                    <div class="header">
+                        <div class="logo"></div>
+                        <div>
+                            <h1>${pageTitle}</h1>
+                            <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div id="labContent${index}"></div>
+                    </div>
+                    <div class="footer">
+                        <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                    </div>
+                `;
+                labPagesContainer.appendChild(pageDiv);
+                // Populate the lab content
+                const labContentContainer = document.getElementById(`labContent${index}`);
+                if (isBloodGas) {
+                    labContentContainer.appendChild(createBloodGasTable(lab, isVenous));
+                } else {
+                    labContentContainer.appendChild(createLabTable(lab));
+                }
+            });
+            insertLogos();
+        }
+        async function populateECGPages(data) {
+            const ecgPagesContainer = document.getElementById('ecgPagesContainer');
+            ecgPagesContainer.innerHTML = '';
+
+            try {
+                const ecgPreview = await import('/ecg12/ecg-preview.js');
+                const assets = await ecgPreview.preloadEcgAssets();
+                const groups = ecgPreview.buildEcgGroups(data, assets.waveforms);
+
+                if (groups.length === 0) {
+                    return;
+                }
+
+                groups.forEach((group, index) => {
+                    const pageDiv = document.createElement('section');
+                    pageDiv.className = 'sheet ecg-sheet';
+                    pageDiv.dataset.orientation = 'landscape';
+                    pageDiv.innerHTML = `
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>12-Lead ECG</h1>
+                                <div class="scenario-id">${scenarioData.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content ecg-content">
+                            <div class="ecg-page-title">${ecgPreview.formatStateTitle(group.stateIndices)}</div>
+                            <canvas class="ecg-canvas" id="ecgCanvas${index}"></canvas>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    `;
+                    ecgPagesContainer.appendChild(pageDiv);
+                });
+
+                insertLogos();
+
+                for (let index = 0; index < groups.length; index += 1) {
+                    const canvas = document.getElementById(`ecgCanvas${index}`);
+                    await ecgPreview.renderEcgToCanvas(canvas, groups[index].renderState);
+                }
+            } catch (error) {
+                console.error('Error rendering ECG pages:', error);
+                ecgPagesContainer.innerHTML = `
+                    <section class="sheet padding-10mm">
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div>
+                                <h1>12-Lead ECG</h1>
+                                <div class="scenario-id">${scenarioData?.scenarioName || 'Clinical Scenario'}</div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="ecg-error">Unable to render 12-lead ECG pages: ${error.message}</div>
+                        </div>
+                        <div class="footer">
+                            <div>iSimulate - Healthcare Simulation Technology | www.isimulate.com.au</div>
+                        </div>
+                    </section>
+                `;
+                insertLogos();
+            }
+        }
+        function createBloodGasTable(lab, isVenous) {
+            const table = document.createElement('table');
+            table.className = 'bloodgas';
+            const gasType = isVenous ? 'Venous' : 'Arterial';
+            const params = lab.parameters || {};
+            // Get patient name from scenario data and split into first/last names
+            const patientName = scenarioData?.patientInformation?.patientName || 'Sim Patient';
+            const nameParts = patientName.trim().split(/\s+/);
+            const firstName = nameParts[0] || 'Sim';
+            const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'Patient';
+            // Helper function to get parameter value and determine if abnormal
+            function getParamInfo(paramName) {
+                const param = params.find(p => p.name === paramName || p.name === paramName + '(T)' || 
+                    p.name === paramName + '+' || p.name === paramName + '++' || p.name === paramName + '–');
+                if (!param) return { value: '-', unit: '', arrow: '' };
+                const isAbnormal = isParameterAbnormal(param);
+                let arrow = '';
+                if (isAbnormal && param.healthy_min !== undefined && param.healthy_max !== undefined) {
+                    const value = parseFloat(param.value);
+                    const min = parseFloat(param.healthy_min);
+                    const max = parseFloat(param.healthy_max);
+                    if (!isNaN(value) && !isNaN(min) && !isNaN(max)) {
+                        arrow = value < min ? '↓' : value > max ? '↑' : '';
+                    }
+                }
+                return {
+                    value: param.value || '-',
+                    unit: param.unit || '',
+                    arrow: arrow
+                };
+            }
+            let html = `
+                <colgroup>
+                    <col style="width: 38%;">
+                    <col style="width: 17%; text-align: center;">
+                    <col style="width: 22%;">
+                    <col style="width: 13%;">
+                </colgroup>
+                <tr style="text-align: center !important;"><td colspan="4" style="text-align: center !important;font-size: 15px; padding-top:10% !important;"><strong>iSimuLab<sup>®</sup> 700x</strong></td></tr>
+                <tr><td>SAMPLE TYPE:</td><td colspan="3" style="text-align: left !important;">${gasType}</td></tr>
+                <tr><td>System Name:</td><td colspan="3" style="text-align: left !important;">St Elswhere</td></tr>
+                <tr><td>System ID:</td><td colspan="3" style="text-align: left !important;">0500-53992</td></tr>
+                <tr><td>Patient ID:</td><td colspan="3" style="text-align: left !important;">123456789</td></tr>
+                <tr><td>Lst Name:</td><td colspan="3" style="text-align: left !important;">${lastName}</td></tr>
+                <tr><td>Fst Name:</td><td colspan="3" style="text-align: left !important;">${firstName}</td></tr>
+                <tr><td colspan="4"><strong>ACID/BASE 37.0°C</strong></td></tr>
+            `;
+            // Add acid/base parameters
+            const acidBaseParams = [
+                { name: 'pH', display: 'pH' },
+                { name: 'pCO2', display: 'pCO2' },
+                { name: 'pO2', display: 'pO2' },
+                { name: 'HCO3-', display: 'HCO3-' },
+                { name: 'BE(B)', display: 'BE(B)' }
+            ];
+            acidBaseParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add Co-Oximetry section (ABG and VBG)
+            html += `<tr><td colspan="4"><strong>CO-OXIMETRY</strong></td></tr>`;
+            const coOxParams = [
+                { name: 'Hct', display: 'Hct' },
+                { name: 'tHb', display: 'tHb' },
+                { name: 'sO2', display: 'sO2' },
+                { name: 'FO2 Hb', display: 'FO2 Hb' },
+                { name: 'FCO Hb', display: 'FCO Hb' },
+                { name: 'FMet Hb', display: 'FMet Hb' },
+                { name: 'FHHb', display: 'FHHb' }
+            ];
+            coOxParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add corrected section
+            html += `<tr><td colspan="4"><strong>CORRECTED 37.0°</strong></td></tr>`;
+            const correctedParams = [
+                { name: 'pH(T)', display: 'pH(T)' },
+                { name: 'pCO2(T)', display: 'pCO2(T)' },
+                { name: 'pO2(T)', display: 'pO2(T)' }
+            ];
+            correctedParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add electrolytes section
+            html += `<tr><td colspan="4"><strong>ELECTROLYTES</strong></td></tr>`;
+            const electrolyteParams = [
+                { name: 'Na+', display: 'Na+' },
+                { name: 'K+', display: 'K+' },
+                { name: 'Ca++', display: 'Ca++' },
+                { name: 'Cl-', display: 'Cl-' }
+            ];
+            electrolyteParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add metabolites section
+            html += `<tr><td colspan="4"><strong>METABOLITES</strong></td></tr>`;
+            const metaboliteParams = [
+                { name: 'Glu', display: 'Glu' },
+                { name: 'Lac', display: 'Lac' }
+            ];
+            metaboliteParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add additional parameters
+            const additionalParams = [
+                { name: 'Temperature', display: 'Temperature' },
+                { name: 'FIO2', display: 'FIO2' },
+                { name: 'RespRate', display: 'Resp Rate' },
+                { name: 'PEEP', display: 'PEEP' },
+                { name: 'Vt', display: 'Vt' }
+            ];
+            additionalParams.forEach(param => {
+                const info = getParamInfo(param.name);
+                if (info.value !== '-') {
+                    html += `<tr><td>${param.display}</td><td>${info.value}</td><td>${info.unit}</td><td>${info.arrow}</td></tr>`;
+                }
+            });
+            // Add custom demographics and footer
+            html += `
+                <tr><td colspan="4"><strong>CUSTOM DEMOGRAPHICS</strong></td></tr>
+                <tr><td>MODE</td><td colspan="3">N/A</td></tr>
+                <tr><td colspan="4" style="text-align: center !important; padding-bottom:10% !important;padding-top:10% !important;"><strong>******************************</strong></td></tr>
+            `;
+            table.innerHTML = html;
+            return table;
+        }
+        function createLabTable(lab) {
+            const wrapper = document.createElement('div');
+            wrapper.style.marginBottom = '20px';
+            const title = document.createElement('h2');
+            title.textContent = lab.name || 'Laboratory Test';
+            wrapper.appendChild(title);
+            const table = document.createElement('table');
+            table.className = 'lab-table';
+            let html = `
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Unit</th>
+                        <th>Reference Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            const params = lab.parameters || [];
+            params.forEach(param => {
+                const isAbnormal = isParameterAbnormal(param);
+                const valueClass = isAbnormal ? 'abnormal' : '';
+                const referenceRange = param.healthy_min && param.healthy_max ? 
+                    `${param.healthy_min} - ${param.healthy_max}` : '-';
+                html += `
+                    <tr>
+                        <td>${param.name || '-'}</td>
+                        <td class="${valueClass}">${param.value || '-'}</td>
+                        <td>${param.unit || '-'}</td>
+                        <td>${referenceRange}</td>
+                    </tr>
+                `;
+            });
+            html += '</tbody>';
+            table.innerHTML = html;
+            wrapper.appendChild(table);
+            return wrapper;
+        }
+        function isParameterAbnormal(param) {
+            if (!param.value || param.healthy_min === undefined || param.healthy_max === undefined) {
+                return false;
+            }
+            const value = parseFloat(param.value);
+            const min = parseFloat(param.healthy_min);
+            const max = parseFloat(param.healthy_max);
+            return !isNaN(value) && !isNaN(min) && !isNaN(max) && (value < min || value > max);
+        }
+
+        // --- Show scenario and postMessage listener ---
+        const messageHandler = (event) => {
+            try {
+                let data = event.data;
+                if (typeof data === 'string') data = JSON.parse(data);
+                scenarioData = data;
+                if (scenarioData.payload && typeof scenarioData.payload.handshake !== 'undefined') {
+                    console.log('[messageHandler] Handshake received - will keep waiting for scenario data');
+                    return;
+                }
+                if (typeof scenarioData.hello !== 'undefined') {
+                    console.log('[messageHandler] "hello" received - will keep waiting for scenario data');
+                    return;
+                }
+                if (scenarioData.payload && typeof scenarioData.payload.settings !== 'undefined') {
+                    console.log('[messageHandler] settings received - will keep waiting for scenario data');
+                    return;
+                }
+                populateTemplate(scenarioData);
+                document.getElementById('scenarioContent').classList.add('active');
+                window.removeEventListener('message', messageHandler);
+            } catch (e) {
+                alert('Error loading scenario data: ' + e);
+            }
+        };
+        window.addEventListener('message', messageHandler, false);
+
+        // Optionally, support direct JSON in window.name for debugging
+        try {
+            if (window.name && window.name.startsWith('{')) {
+                showScenario(JSON.parse(window.name));
+            }
+        } catch {}
+
+        function insertLogos() {
+            const logoTemplate = document.getElementById('logo-template');
+            if (logoTemplate) {
+                const logoSVG = logoTemplate.content.firstElementChild;
+                document.querySelectorAll('.logo').forEach(function(logoDiv) {
+                    logoDiv.innerHTML = '';
+                    if (logoSVG) {
+                        logoDiv.appendChild(logoSVG.cloneNode(true));
+                    }
+                });
+            }
+        }
+
+        // Print optimization function
+        function optimizeForPrint() {
+            // Ensure all content is loaded
+            const sheets = document.querySelectorAll('.sheet');
+            sheets.forEach(sheet => {
+                // Force layout calculation
+                sheet.offsetHeight;
+            });
+            
+            // Add print-specific classes
+            document.body.classList.add('print-ready');
+            
+            // Small delay to ensure layout is complete
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        // PDF download function - original approach with high quality
+        async function embedScenarioJsonInPdf(pdf, data) {
+            if (!window.PDFLib) {
+                throw new Error('pdf-lib failed to load');
+            }
+
+            const { PDFDocument, PDFName } = window.PDFLib;
+            const pdfBytes = pdf.output('arraybuffer');
+            const pdfDoc = await PDFDocument.load(pdfBytes);
+            const projectStateBytes = new TextEncoder().encode(JSON.stringify(data));
+            const projectStateStream = pdfDoc.context.flateStream(projectStateBytes);
+            const projectStateRef = pdfDoc.context.register(projectStateStream);
+            const realiti360Ref = pdfDoc.context.register(pdfDoc.context.obj({
+                SchemaVersion: 1,
+                ProjectState: projectStateRef
+            }));
+
+            pdfDoc.catalog.set(PDFName.of('Realiti360'), realiti360Ref);
+            return pdfDoc.save();
+        }
+
+        function downloadPdfBytes(bytes, filename) {
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        async function downloadPDF() {
+            try {
+                await ecgPagesReady;
+
+                // Show loading state
+                const pdfButton = document.querySelector('.pdf-button');
+                const originalText = pdfButton.innerHTML;
+                pdfButton.innerHTML = '⏳ Generating...';
+                pdfButton.disabled = true;
+                
+                // Get scenario name for filename
+                const scenarioName = scenarioData?.scenarioName || 'Clinical Scenario';
+                const filename = `${scenarioName.replace(/[^a-zA-Z0-9\s-]/g, '')}.pdf`;
+                
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const sheets = document.querySelectorAll('.sheet');
+                const firstSheetIsLandscape = sheets[0]?.dataset.orientation === 'landscape';
+                const firstPageSize = firstSheetIsLandscape ? [297, 210] : [210, 297];
+                const pdf = new jsPDF({
+                    orientation: firstSheetIsLandscape ? 'landscape' : 'portrait',
+                    unit: 'mm',
+                    format: firstPageSize,
+                    compress: true
+                });
+
+                for (let i = 0; i < sheets.length; i++) {
+                    const sheet = sheets[i];
+                    const isLandscape = sheet.dataset.orientation === 'landscape';
+                    const pageWidth = isLandscape ? 297 : 210;
+                    const pageHeight = isLandscape ? 210 : 297;
+                    
+                    // Convert sheet to canvas - original settings
+                    const canvas = await html2canvas(sheet, {
+                        scale: 2, // Higher quality
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff',
+                        width: pageWidth * 3.779527559, // Convert mm to pixels
+                        height: pageHeight * 3.779527559, // Convert mm to pixels
+                        scrollX: 0,
+                        scrollY: 0
+                    });
+                    
+                    // Add page to PDF (except for first page)
+                    if (i > 0) {
+                        pdf.addPage([pageWidth, pageHeight], isLandscape ? 'landscape' : 'portrait');
+                    }
+                    
+                    // Convert canvas to image and add to PDF - original PNG approach
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
+                }
+                
+                // Save the PDF with the scenario JSON embedded as application data.
+                const enrichedPdfBytes = await embedScenarioJsonInPdf(pdf, scenarioData);
+                downloadPdfBytes(enrichedPdfBytes, filename);
+                
+                // Reset button state
+                pdfButton.innerHTML = originalText;
+                pdfButton.disabled = false;
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                
+                // Reset button state
+                const pdfButton = document.querySelector('.pdf-button');
+                pdfButton.innerHTML = '📄 PDF';
+                pdfButton.disabled = false;
+                
+                alert('Error generating PDF. Please try again.');
+            }
+        }
+
+        // Add print and PDF buttons when content is loaded
+        function addActionButtons() {
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'action-buttons';
+            buttonContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                display: flex;
+                gap: 10px;
+            `;
+            
+            // Print button
+            const printButton = document.createElement('button');
+            printButton.innerHTML = '🖨️ Print';
+            printButton.className = 'print-button';
+            printButton.style.cssText = `
+                padding: 10px 20px;
+                background: var(--brand-accent);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+            `;
+            printButton.addEventListener('click', optimizeForPrint);
+            
+            // PDF download button
+            const pdfButton = document.createElement('button');
+            pdfButton.innerHTML = '📄 PDF';
+            pdfButton.className = 'pdf-button';
+            pdfButton.style.cssText = `
+                padding: 10px 20px;
+                background: var(--brand-dark);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+            `;
+            pdfButton.addEventListener('click', downloadPDF);
+            
+            buttonContainer.appendChild(printButton);
+            buttonContainer.appendChild(pdfButton);
+            document.body.appendChild(buttonContainer);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+          if (window.opener) {
+            window.opener.postMessage('previewer-ready', '*');
+          }
+          
+          // Add action buttons after a short delay to ensure content is loaded
+          setTimeout(addActionButtons, 1000);
+        });
+    </script>
+</body>
+</html> 

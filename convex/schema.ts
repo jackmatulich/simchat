@@ -34,5 +34,34 @@ export default defineSchema({
     messages: v.array(messageValidator),
     // Legacy rows may omit this; new conversations always set it in `create`.
     createdAt: v.optional(v.number()),
-  }),
+    // WhatsApp integration fields
+    source: v.optional(v.union(v.literal("web"), v.literal("whatsapp"))),
+    userId: v.optional(v.id("users")),
+    isGroupChat: v.optional(v.boolean()),
+    whatsappGroupId: v.optional(v.string()),
+  })
+    .index("by_user", ["userId"])
+    .index("by_source", ["source"]),
+
+  users: defineTable({
+    phoneNumber: v.string(),
+    passwordHash: v.string(),
+    isAuthenticated: v.boolean(),
+    createdAt: v.number(),
+    lastActiveAt: v.number(),
+    displayName: v.optional(v.string()),
+  }).index("by_phone", ["phoneNumber"]),
+
+  whatsappSessions: defineTable({
+    phoneNumber: v.string(),
+    conversationContext: v.array(
+      v.object({
+        role: v.union(v.literal("user"), v.literal("assistant")),
+        content: v.string(),
+        timestamp: v.number(),
+      })
+    ),
+    lastMessageAt: v.number(),
+    isActive: v.boolean(),
+  }).index("by_phone", ["phoneNumber"]),
 });

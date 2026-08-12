@@ -2,7 +2,13 @@ import { PlusCircle, MessageCircle, Trash2, Edit2, Download, Eye, Clock, Users, 
 import { useState, useMemo } from 'react';
 
 interface SidebarProps {
-  conversations: Array<{ id: string; title: string; scenarioInfo?: any }>;
+  conversations: Array<{ 
+    id: string; 
+    title: string; 
+    scenarioInfo?: any;
+    source?: 'web' | 'whatsapp';
+    isGroupChat?: boolean;
+  }>;
   currentConversationId: string | null;
   handleNewChat: () => void;
   setCurrentConversationId: (id: string) => void;
@@ -257,6 +263,19 @@ export const Sidebar = ({
                     {chat.scenarioInfo?.scenarioName || chat.title}
                   </span>
                 )}
+                
+                {/* Source badges */}
+                {chat.source === 'whatsapp' && (
+                  <span className="px-1.5 py-0.5 text-[10px] font-medium bg-green-600 text-white rounded">
+                    WhatsApp
+                  </span>
+                )}
+                {chat.isGroupChat && (
+                  <span className="px-1.5 py-0.5 text-[10px] font-medium bg-blue-600 text-white rounded">
+                    Group
+                  </span>
+                )}
+                
                 <div className="items-center hidden gap-1 group-hover:flex">
                   <button
                     onClick={(e) => {

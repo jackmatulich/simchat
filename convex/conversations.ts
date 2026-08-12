@@ -115,3 +115,49 @@ export const remove = mutation({
     await ctx.db.delete(args.id);
   },
 });
+
+// Create conversation from WhatsApp
+export const createFromWhatsApp = mutation({
+  args: {
+    title: v.string(),
+    userId: v.id("users"),
+    message: messageValidator,
+    isGroupChat: v.optional(v.boolean()),
+    whatsappGroupId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("conversations", {
+      title: args.title,
+      messages: [args.message],
+      createdAt: Date.now(),
+      source: "whatsapp",
+      userId: args.userId,
+      isGroupChat: args.isGroupChat || false,
+      whatsappGroupId: args.whatsappGroupId,
+    });
+  },
+});
+
+// Get conversations by user
+export const getByUser = query({
+  args: { userId: v.id("users") },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("conversations")
+      .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .order("desc")
+      .collect();
+  },
+});
+
+// Get conversations by source
+export const getBySource = query({
+  args: { source: v.union(v.literal("web"), v.literal("whatsapp")) },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("conversations")
+      .withIndex("by_source", (q) => q.eq("source", args.source))
+      .order("desc")
+      .collect();
+  },
+});
