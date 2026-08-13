@@ -8,7 +8,7 @@ import {
   uploadPdfAndGetUrl,
 } from './convexClient.js';
 import { sendTextMessage, sendPDFMessage, sendTypingIndicator } from './twilioClient.js';
-import { generateScenario, extractScenarioJson, isScenarioRequest } from './scenarioGenerator.js';
+import { generateScenario, extractScenarioJson } from './scenarioGenerator.js';
 import { generateScenarioPDF, generateScenarioTitle } from './pdfGenerator.js';
 import { 
   extractMentions, 
@@ -41,12 +41,8 @@ export async function handleIncomingMessage(from, body, groupId, profileName) {
   if (cleanBody.startsWith('/')) {
     return await handleCommand(from, cleanBody);
   }
-  
-  if (isScenarioRequest(cleanBody)) {
-    return await handleScenarioGeneration(from, cleanBody, groupId, profileName);
-  }
-  
-  return await handleGeneralChat(from, cleanBody);
+
+  return await handleScenarioGeneration(from, cleanBody, groupId, profileName);
 }
 
 async function handleAuthentication(from, message, profileName) {
@@ -126,7 +122,10 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
     
     if (!scenarioJson) {
       await addMessageToSession(from, 'assistant', response.content);
-      await sendTextMessage(from, response.content);
+      const preview = response.content.length > 1400
+        ? `${response.content.slice(0, 1400)}\n\n(Reply was truncated. Ask me to generate a scenario PDF.)`
+        : response.content;
+      await sendTextMessage(from, preview);
       return;
     }
     
@@ -159,7 +158,7 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
       groupId
     );
     
-    const caption = `✅ *${scenarioTitle}*\n\nYour scenario is ready! This PDF has been saved to your sim.cool history.\n\nRequest another scenario anytime!`;
+    const caption = `${scenarioTitle}\n\nPDF attached and saved to sim.cool.`;
     
     console.log('Uploading PDF and sending via WhatsApp...');
     const uploaded = await uploadPdfAndGetUrl(pdfBuffer, `${scenarioJson.scenarioId || 'scenario'}.pdf`);
@@ -176,21 +175,3 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
   }
 }
 
-async function handleGeneralChat(from, message) {
-  try {
-    await addMessageToSession(from, 'user', message);
-    
-    const response = await generateScenario(from, message);
-    
-    await addMessageToSession(from, 'assistant', response.content);
-    
-    await sendTextMessage(from, response.content);
-    
-  } catch (error) {
-    console.error('Error in general chat:', error);
-    await sendTextMessage(
-      from,
-      '❌ Sorry, I encountered an error. Please try again.'
-    );
-  }
-}

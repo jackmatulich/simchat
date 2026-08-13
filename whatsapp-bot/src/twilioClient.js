@@ -16,27 +16,32 @@ export function getTwilioClient() {
   return twilioClient;
 }
 
+const WHATSAPP_TEXT_LIMIT = 1500;
+
 export async function sendTextMessage(to, body) {
   const client = getTwilioClient();
   const from = process.env.TWILIO_WHATSAPP_NUMBER;
-  
+
   if (!from) {
     throw new Error('Missing TWILIO_WHATSAPP_NUMBER');
   }
-  
-  try {
-    const message = await client.messages.create({
+
+  const text = String(body || '').trim() || ' ';
+  const chunks = [];
+  for (let i = 0; i < text.length; i += WHATSAPP_TEXT_LIMIT) {
+    chunks.push(text.slice(i, i + WHATSAPP_TEXT_LIMIT));
+  }
+
+  let lastMessage = null;
+  for (const chunk of chunks.slice(0, 3)) {
+    lastMessage = await client.messages.create({
       from: `whatsapp:${from}`,
       to: `whatsapp:${to}`,
-      body,
+      body: chunk,
     });
-    
-    console.log(`Message sent to ${to}: ${message.sid}`);
-    return message;
-  } catch (error) {
-    console.error('Error sending text message:', error);
-    throw error;
+    console.log(`Message sent to ${to}: ${lastMessage.sid}`);
   }
+  return lastMessage;
 }
 
 export async function sendPDFMessage(to, mediaUrl, caption) {
