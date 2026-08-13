@@ -130,13 +130,9 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
     }
     
     await addMessageToSession(from, 'assistant', response.content);
-    
-    console.log('Generating PDF...');
-    const pdfBuffer = await generateScenarioPDF(scenarioJson);
-    
+
     const user = await getUser(from);
     const scenarioTitle = generateScenarioTitle(scenarioJson);
-    
     const assistantMessage = {
       id: Date.now().toString(),
       role: 'assistant',
@@ -148,7 +144,7 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
       costAud: response.costs.costAud,
       exchangeRateAudPerUsd: response.costs.exchangeRateAudPerUsd,
     };
-    
+
     console.log('Saving to Convex...');
     await createWhatsAppConversation(
       scenarioTitle,
@@ -157,7 +153,20 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
       !!groupId,
       groupId
     );
-    
+
+    console.log('Generating PDF...');
+    let pdfBuffer;
+    try {
+      pdfBuffer = await generateScenarioPDF(scenarioJson);
+    } catch (pdfError) {
+      console.error('PDF generation failed, scenario still saved:', pdfError);
+      await sendTextMessage(
+        from,
+        `${scenarioTitle} was saved to sim.cool, but the PDF failed to generate. Open sim.cool to preview or download it.`,
+      );
+      return;
+    }
+
     const caption = `${scenarioTitle}\n\nPDF attached and saved to sim.cool.`;
     
     console.log('Uploading PDF and sending via WhatsApp...');

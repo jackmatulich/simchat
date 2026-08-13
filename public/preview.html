@@ -1176,6 +1176,7 @@
 
         // --- Helper functions ---
         function populateTemplate(data) {
+            scenarioData = data || {};
             console.log('[populateTemplate] Start', data);
             // Basic scenario info
             const scenarioNameEl = document.getElementById('scenarioName');
@@ -1274,6 +1275,10 @@
             populateLabs(data.labs || []);
             console.log('[populateTemplate] Populating ECG pages');
             ecgPagesReady = populateECGPages(data);
+            const scenarioContent = document.getElementById('scenarioContent');
+            if (scenarioContent) scenarioContent.classList.add('active');
+            const uploadSection = document.querySelector('.upload-section');
+            if (uploadSection) uploadSection.style.display = 'none';
             console.log('[populateTemplate] End');
         }
         function populateList(containerId, items, addCheckbox = false) {

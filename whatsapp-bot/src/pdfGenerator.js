@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { PDFDocument, PDFName } from 'pdf-lib';
@@ -23,20 +22,18 @@ export async function generateScenarioPDF(scenarioJson) {
     });
     
     const page = await browser.newPage();
-    
-    const templatePath = path.join(__dirname, '../templates/preview.html');
-    const templateContent = await readFile(templatePath, 'utf8');
-    
-    const baseUrl = `file://${path.join(__dirname, '../templates')}/`;
-    await page.setContent(templateContent, {
-      waitUntil: 'networkidle0',
+    page.on('pageerror', (err) => console.error('Preview page error:', err.message));
+
+    const previewUrl = process.env.PREVIEW_URL || 'http://127.0.0.1:3000/preview.html';
+    await page.goto(previewUrl, {
+      waitUntil: 'domcontentloaded',
       timeout: 30000,
     });
-    
+
     await page.waitForFunction(() => typeof window.populateTemplate === 'function', {
       timeout: 10000,
     });
-    
+
     console.log('Populating template with scenario data...');
     await page.evaluate((json) => {
       window.populateTemplate(json);
