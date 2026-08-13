@@ -15,6 +15,8 @@ import type {
 } from "convex/server";
 import type * as conversations from "../conversations.js";
 import type * as files from "../files.js";
+import type * as users from "../users.js";
+import type * as whatsappSessions from "../whatsappSessions.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -27,6 +29,8 @@ import type * as files from "../files.js";
 declare const fullApi: ApiFromModules<{
   conversations: typeof conversations;
   files: typeof files;
+  users: typeof users;
+  whatsappSessions: typeof whatsappSessions;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
