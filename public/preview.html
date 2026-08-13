@@ -1841,79 +1841,87 @@
             URL.revokeObjectURL(url);
         }
 
-        async function downloadPDF() {
-            try {
-                await ecgPagesReady;
+        async function exportScenarioPdfBytes() {
+            await ecgPagesReady;
 
-                // Show loading state
-                const pdfButton = document.querySelector('.pdf-button');
-                const originalText = pdfButton.innerHTML;
-                pdfButton.innerHTML = '⏳ Generating...';
-                pdfButton.disabled = true;
-                
-                // Get scenario name for filename
-                const scenarioName = scenarioData?.scenarioName || 'Clinical Scenario';
-                const filename = `${scenarioName.replace(/[^a-zA-Z0-9\s-]/g, '')}.pdf`;
-                
-                // Initialize jsPDF
-                const { jsPDF } = window.jspdf;
-                const sheets = document.querySelectorAll('.sheet');
-                const firstSheetIsLandscape = sheets[0]?.dataset.orientation === 'landscape';
-                const firstPageSize = firstSheetIsLandscape ? [297, 210] : [210, 297];
-                const pdf = new jsPDF({
-                    orientation: firstSheetIsLandscape ? 'landscape' : 'portrait',
-                    unit: 'mm',
-                    format: firstPageSize,
-                    compress: true
+            if (!scenarioData) {
+                throw new Error('No scenario data loaded');
+            }
+            if (!window.jspdf || !window.html2canvas || !window.PDFLib) {
+                throw new Error('PDF libraries failed to load');
+            }
+
+            const { jsPDF } = window.jspdf;
+            const sheets = document.querySelectorAll('.sheet');
+            const firstSheetIsLandscape = sheets[0]?.dataset.orientation === 'landscape';
+            const firstPageSize = firstSheetIsLandscape ? [297, 210] : [210, 297];
+            const pdf = new jsPDF({
+                orientation: firstSheetIsLandscape ? 'landscape' : 'portrait',
+                unit: 'mm',
+                format: firstPageSize,
+                compress: true
+            });
+
+            for (let i = 0; i < sheets.length; i++) {
+                const sheet = sheets[i];
+                const isLandscape = sheet.dataset.orientation === 'landscape';
+                const pageWidth = isLandscape ? 297 : 210;
+                const pageHeight = isLandscape ? 210 : 297;
+
+                const canvas = await html2canvas(sheet, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    width: pageWidth * 3.779527559,
+                    height: pageHeight * 3.779527559,
+                    scrollX: 0,
+                    scrollY: 0
                 });
 
-                for (let i = 0; i < sheets.length; i++) {
-                    const sheet = sheets[i];
-                    const isLandscape = sheet.dataset.orientation === 'landscape';
-                    const pageWidth = isLandscape ? 297 : 210;
-                    const pageHeight = isLandscape ? 210 : 297;
-                    
-                    // Convert sheet to canvas - original settings
-                    const canvas = await html2canvas(sheet, {
-                        scale: 2, // Higher quality
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff',
-                        width: pageWidth * 3.779527559, // Convert mm to pixels
-                        height: pageHeight * 3.779527559, // Convert mm to pixels
-                        scrollX: 0,
-                        scrollY: 0
-                    });
-                    
-                    // Add page to PDF (except for first page)
-                    if (i > 0) {
-                        pdf.addPage([pageWidth, pageHeight], isLandscape ? 'landscape' : 'portrait');
-                    }
-                    
-                    // Convert canvas to image and add to PDF - original PNG approach
-                    const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
+                if (i > 0) {
+                    pdf.addPage([pageWidth, pageHeight], isLandscape ? 'landscape' : 'portrait');
                 }
-                
-                // Save the PDF with the scenario JSON embedded as application data.
-                const enrichedPdfBytes = await embedScenarioJsonInPdf(pdf, scenarioData);
+
+                const imgData = canvas.toDataURL('image/png');
+                pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
+            }
+
+            return embedScenarioJsonInPdf(pdf, scenarioData);
+        }
+
+        async function downloadPDF() {
+            try {
+                const pdfButton = document.querySelector('.pdf-button');
+                const originalText = pdfButton ? pdfButton.innerHTML : '';
+                if (pdfButton) {
+                    pdfButton.innerHTML = '⏳ Generating...';
+                    pdfButton.disabled = true;
+                }
+
+                const scenarioName = scenarioData?.scenarioName || 'Clinical Scenario';
+                const filename = `${scenarioName.replace(/[^a-zA-Z0-9\s-]/g, '')}.pdf`;
+                const enrichedPdfBytes = await exportScenarioPdfBytes();
                 downloadPdfBytes(enrichedPdfBytes, filename);
-                
-                // Reset button state
-                pdfButton.innerHTML = originalText;
-                pdfButton.disabled = false;
-                
+
+                if (pdfButton) {
+                    pdfButton.innerHTML = originalText;
+                    pdfButton.disabled = false;
+                }
             } catch (error) {
                 console.error('Error generating PDF:', error);
-                
-                // Reset button state
+
                 const pdfButton = document.querySelector('.pdf-button');
-                pdfButton.innerHTML = '📄 PDF';
-                pdfButton.disabled = false;
-                
+                if (pdfButton) {
+                    pdfButton.innerHTML = '📄 PDF';
+                    pdfButton.disabled = false;
+                }
+
                 alert('Error generating PDF. Please try again.');
             }
         }
+
+        window.exportScenarioPdfBytes = exportScenarioPdfBytes;
 
         // Add print and PDF buttons when content is loaded
         function addActionButtons() {

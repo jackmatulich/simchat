@@ -1,14 +1,8 @@
 import puppeteer from 'puppeteer';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { PDFDocument, PDFName } from 'pdf-lib';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export async function generateScenarioPDF(scenarioJson) {
   let browser = null;
-  
+
   try {
     console.log('Launching browser for PDF generation...');
     browser = await puppeteer.launch({
@@ -20,83 +14,63 @@ export async function generateScenarioPDF(scenarioJson) {
         '--disable-gpu',
       ],
     });
-    
+
     const page = await browser.newPage();
     page.on('pageerror', (err) => console.error('Preview page error:', err.message));
+    await page.setViewport({ width: 1400, height: 1800, deviceScaleFactor: 1 });
 
     const previewUrl = process.env.PREVIEW_URL || 'http://127.0.0.1:3000/preview.html';
     await page.goto(previewUrl, {
-      waitUntil: 'domcontentloaded',
-      timeout: 30000,
+      waitUntil: 'networkidle0',
+      timeout: 45000,
     });
 
-    await page.waitForFunction(() => typeof window.populateTemplate === 'function', {
-      timeout: 10000,
-    });
+    await page.waitForFunction(
+      () =>
+        typeof window.populateTemplate === 'function' &&
+        typeof window.exportScenarioPdfBytes === 'function' &&
+        window.html2canvas &&
+        window.jspdf &&
+        window.PDFLib,
+      { timeout: 20000 },
+    );
 
     console.log('Populating template with scenario data...');
     await page.evaluate((json) => {
       window.populateTemplate(json);
     }, scenarioJson);
-    
-    await page.waitForFunction(
-      () => window.ecgPagesReady !== false,
-      { timeout: 15000 }
-    ).catch(() => {
+
+    await page.waitForFunction(() => window.ecgPagesReady !== false, {
+      timeout: 20000,
+    }).catch(() => {
       console.log('ECG rendering timeout (may not be needed)');
     });
-    
-    await page.evaluate(() => {
-      return new Promise((resolve) => setTimeout(resolve, 2000));
+
+    await page.evaluate(() => new Promise((resolve) => setTimeout(resolve, 1500)));
+
+    console.log('Exporting PDF with web preview html2canvas path...');
+    const base64 = await page.evaluate(async () => {
+      const bytes = await window.exportScenarioPdfBytes();
+      let binary = '';
+      const chunk = 0x8000;
+      for (let i = 0; i < bytes.length; i += chunk) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+      }
+      return btoa(binary);
     });
-    
-    console.log('Generating PDF...');
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      preferCSSPageSize: true,
-      margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    });
-    
+
     await browser.close();
     browser = null;
-    
-    console.log('Embedding scenario JSON in PDF...');
-    const enrichedPdf = await embedScenarioJsonInPdf(pdfBuffer, scenarioJson);
-    
-    console.log('PDF generation complete');
-    return enrichedPdf;
-    
+
+    const pdfBuffer = Buffer.from(base64, 'base64');
+    console.log(`PDF generation complete (${pdfBuffer.length} bytes)`);
+    return pdfBuffer;
   } catch (error) {
     console.error('Error generating PDF:', error);
     if (browser) {
       await browser.close();
     }
     throw error;
-  }
-}
-
-async function embedScenarioJsonInPdf(pdfBytes, scenarioData) {
-  try {
-    const pdfDoc = await PDFDocument.load(pdfBytes);
-    
-    const projectStateBytes = new TextEncoder().encode(JSON.stringify(scenarioData));
-    const projectStateStream = pdfDoc.context.flateStream(projectStateBytes);
-    const projectStateRef = pdfDoc.context.register(projectStateStream);
-    
-    const realiti360Ref = pdfDoc.context.register(
-      pdfDoc.context.obj({
-        SchemaVersion: 1,
-        ProjectState: projectStateRef,
-      })
-    );
-    
-    pdfDoc.catalog.set(PDFName.of('Realiti360'), realiti360Ref);
-    
-    return Buffer.from(await pdfDoc.save());
-  } catch (error) {
-    console.error('Error embedding JSON in PDF:', error);
-    return pdfBytes;
   }
 }
 
