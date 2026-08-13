@@ -39,31 +39,30 @@ export async function sendTextMessage(to, body) {
   }
 }
 
-export async function sendPDFMessage(to, pdfBuffer, caption, filename = 'scenario.pdf') {
+export async function sendPDFMessage(to, mediaUrl, caption) {
   const client = getTwilioClient();
   const from = process.env.TWILIO_WHATSAPP_NUMBER;
-  
+
   if (!from) {
     throw new Error('Missing TWILIO_WHATSAPP_NUMBER');
   }
-  
+
   try {
-    const base64Pdf = pdfBuffer.toString('base64');
-    const mediaUrl = `data:application/pdf;base64,${base64Pdf}`;
-    
     const message = await client.messages.create({
       from: `whatsapp:${from}`,
       to: `whatsapp:${to}`,
       body: caption,
       mediaUrl: [mediaUrl],
     });
-    
+
     console.log(`PDF sent to ${to}: ${message.sid}`);
     return message;
   } catch (error) {
     console.error('Error sending PDF message:', error);
-    
-    await sendTextMessage(to, '❌ Sorry, there was an error sending the PDF. The scenario has been saved to your history on sim.cool');
+    await sendTextMessage(
+      to,
+      'Sorry, there was an error sending the PDF. The scenario has been saved to your history on sim.cool',
+    );
     throw error;
   }
 }

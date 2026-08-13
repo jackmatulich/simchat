@@ -5,6 +5,7 @@ import {
   addMessageToSession,
   clearUserSession,
   createWhatsAppConversation,
+  uploadPdfAndGetUrl,
 } from './convexClient.js';
 import { sendTextMessage, sendPDFMessage, sendTypingIndicator } from './twilioClient.js';
 import { generateScenario, extractScenarioJson, isScenarioRequest } from './scenarioGenerator.js';
@@ -160,8 +161,9 @@ async function handleScenarioGeneration(from, message, groupId, profileName) {
     
     const caption = `✅ *${scenarioTitle}*\n\nYour scenario is ready! This PDF has been saved to your sim.cool history.\n\nRequest another scenario anytime!`;
     
-    console.log('Sending PDF via WhatsApp...');
-    await sendPDFMessage(from, pdfBuffer, caption, `${scenarioJson.scenarioId}.pdf`);
+    console.log('Uploading PDF and sending via WhatsApp...');
+    const uploaded = await uploadPdfAndGetUrl(pdfBuffer, `${scenarioJson.scenarioId || 'scenario'}.pdf`);
+    await sendPDFMessage(from, uploaded.url, caption);
     
     console.log('Scenario generation complete');
     

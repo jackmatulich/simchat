@@ -1,6 +1,8 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 import { getSession } from './convexClient.js';
-import { DEFAULT_SYSTEM_PROMPT } from './defaultSystemPrompt.cjs';
+import promptModule from './defaultSystemPrompt.cjs';
+
+const DEFAULT_SYSTEM_PROMPT = promptModule.DEFAULT_SYSTEM_PROMPT;
 
 let anthropicClient = null;
 

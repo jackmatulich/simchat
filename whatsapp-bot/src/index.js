@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import { handleIncomingMessage } from './messageHandler.js';
+import { normalizePhoneNumber } from './convexClient.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,17 +24,19 @@ app.get('/health', (req, res) => {
 app.post('/webhook/whatsapp', async (req, res) => {
   try {
     const { From, Body, WaId, ProfileName, GroupId } = req.body;
-    
+    const phoneNumber = normalizePhoneNumber(WaId || From);
+
     console.log('\n--- Incoming WhatsApp Message ---');
     console.log('From:', From);
+    console.log('Phone:', phoneNumber);
     console.log('Body:', Body);
     console.log('Profile:', ProfileName);
     console.log('Group ID:', GroupId || 'N/A');
     console.log('--------------------------------\n');
-    
+
     res.status(200).send('OK');
-    
-    handleIncomingMessage(From, Body, GroupId, ProfileName).catch(error => {
+
+    handleIncomingMessage(phoneNumber, Body, GroupId, ProfileName).catch((error) => {
       console.error('Error handling message:', error);
     });
     
