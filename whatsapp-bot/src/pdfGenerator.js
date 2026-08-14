@@ -7,6 +7,7 @@ export async function generateScenarioPDF(scenarioJson) {
     console.log('Launching browser for PDF generation...');
     browser = await puppeteer.launch({
       headless: 'new',
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
