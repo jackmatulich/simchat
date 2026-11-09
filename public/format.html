@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimChat Scenario Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #111827;
+    }
+
+    header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #374151;
+      background: #1f2937;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: #d1d5db;
+    }
+
+    .picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    input[type="file"] {
+      color: #f9fafb;
+    }
+
+    .status {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: #93c5fd;
+      font-weight: 600;
+    }
+
+    .status.error {
+      color: #fca5a5;
+    }
+
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: 0;
+      background: #f0f4fa;
+      min-height: 0;
+    }
+
+    iframe[hidden] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Scenario preview</h1>
+    <p>Choose a scenario JSON file. It opens in the same preview used from chat, including the 12-lead pages.</p>
+    <div class="picker">
+      <input id="jsonInput" type="file" accept="application/json,.json">
+    </div>
+    <div id="status" class="status">Waiting for a JSON file...</div>
+  </header>
+  <iframe id="previewFrame" hidden title="Scenario preview"></iframe>
+
+  <script>
+    const input = document.getElementById('jsonInput');
+    const statusEl = document.getElementById('status');
+    const frame = document.getElementById('previewFrame');
+    let pendingJson = '';
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('error', isError);
+    }
+
+    function parseScenario(text) {
+      let data;
+      try {
+        data = JSON.parse(text);
+        if (typeof data === 'string') data = JSON.parse(data);
+      } catch {
+        throw new Error('That file is not valid JSON.');
+      }
+      if (!data || typeof data !== 'object' || Array.isArray(data)) {
+        throw new Error('Scenario JSON must be an object.');
+      }
+      if (!data.scenarioName && !data.scenarioEvents && !data.events && !data.patientInformation) {
+        throw new Error('This file does not look like a scenario. It needs a scenario name, events, or patient information.');
+      }
+      return data;
+    }
+
+    function showPreview(data, label) {
+      pendingJson = JSON.stringify(data);
+      frame.hidden = false;
+      frame.src = '/preview.html?load=' + Date.now();
+      setStatus(`Loading ${label}...`);
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.source !== frame.contentWindow) return;
+      if (event.data !== 'previewer-ready' || !pendingJson) return;
+      frame.contentWindow.postMessage(pendingJson, '*');
+      setStatus('Preview ready.');
+    });
+
+    input.addEventListener('change', async () => {
+      const [file] = input.files || [];
+      if (!file) {
+        setStatus('Waiting for a JSON file...');
+        return;
+      }
+
+      try {
+        const data = parseScenario(await file.text());
+        showPreview(data, file.name);
+      } catch (error) {
+        pendingJson = '';
+        frame.hidden = true;
+        frame.removeAttribute('src');
+        setStatus(error.message || 'Unable to read that JSON file.', true);
+      }
+    });
+  </script>
+</body>
+</html>

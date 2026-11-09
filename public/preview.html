@@ -1976,8 +1976,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-          if (window.opener) {
-            window.opener.postMessage('previewer-ready', '*');
+          const previewHost = window.opener || (window.parent !== window ? window.parent : null);
+          if (previewHost) {
+            previewHost.postMessage('previewer-ready', '*');
           }
           
           // Add action buttons after a short delay to ensure content is loaded
