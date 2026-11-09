@@ -121,7 +121,7 @@ export function SettingsDialog({ isOpen, onClose }: SettingsDialogProps) {
                 ))}
               </div>
               <p className="text-xs text-gray-400">
-                Create and manage custom system prompts. Only one prompt can be active at a time.
+                Create and manage custom system prompts. Only one prompt can be active at a time. A custom prompt is added after the base prompt chosen in the header (current or v19).
               </p>
             </div>
 

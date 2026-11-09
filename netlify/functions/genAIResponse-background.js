@@ -2,7 +2,19 @@ const { Anthropic } = require('@anthropic-ai/sdk');
 const fetch = require('node-fetch');
 const { ConvexHttpClient } = require("convex/browser");
 
-const { DEFAULT_SYSTEM_PROMPT } = require('../../src/shared/defaultSystemPrompt.cjs');
+const { DEFAULT_SYSTEM_PROMPT: CURRENT_SYSTEM_PROMPT } = require('../../src/shared/defaultSystemPrompt.cjs');
+const { DEFAULT_SYSTEM_PROMPT: V19_SYSTEM_PROMPT } = require('../../src/shared/defaultSystemPrompt.draft.cjs');
+
+// Header menu sends promptVariant. SIMCHAT_PROMPT=v19|current is the fallback when a caller omits it.
+function resolveBasePrompt(promptVariant) {
+  const requested = typeof promptVariant === 'string' ? promptVariant.trim().toLowerCase() : '';
+  const fromEnv = (process.env.SIMCHAT_PROMPT || '').trim().toLowerCase();
+  const choice = requested || fromEnv || 'current';
+  if (choice === 'v19' || choice === 'draft') {
+    return { id: 'v19', text: V19_SYSTEM_PROMPT };
+  }
+  return { id: 'current', text: CURRENT_SYSTEM_PROMPT };
+}
 
 const ATTACHMENT_SYSTEM_NOTE = `
 When the user attaches files:
@@ -144,7 +156,7 @@ exports.handler = async (event) => {
 
   try {
     const body = event.body ? JSON.parse(event.body) : {};
-    const { messages, systemPrompt, conversationId, model } = body;
+    const { messages, systemPrompt, conversationId, model, promptVariant } = body;
     console.log('Received request for conversation:', conversationId);
     console.log('Message count:', Array.isArray(messages) ? messages.length : 0);
 
@@ -190,9 +202,11 @@ exports.handler = async (event) => {
       };
     }
 
+    const basePrompt = resolveBasePrompt(promptVariant);
+    console.log('System prompt variant:', basePrompt.id);
     let finalSystemPrompt = systemPrompt?.enabled
-      ? `${DEFAULT_SYSTEM_PROMPT}\n\n${systemPrompt.value}`
-      : DEFAULT_SYSTEM_PROMPT;
+      ? `${basePrompt.text}\n\n${systemPrompt.value}`
+      : basePrompt.text;
     if (messagesHaveAttachments(validMessages)) {
       finalSystemPrompt = `${finalSystemPrompt}\n\n${ATTACHMENT_SYSTEM_NOTE}`;
     }

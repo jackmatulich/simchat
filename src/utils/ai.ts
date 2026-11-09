@@ -28,11 +28,15 @@ export interface Message {
 }
 
 // Updated to use Netlify function instead of TanStack Start server function
+export type PromptVariant = 'current' | 'v19'
+
 export const genAIResponse = async (data: {
   messages: Array<Message>
   systemPrompt?: { value: string; enabled: boolean }
   conversationId: string
   model?: string
+  /** current = live prompt file. v19 = bench prompt in defaultSystemPrompt.draft.cjs */
+  promptVariant?: PromptVariant
 }) => {
   try {
     const response = await fetch('/.netlify/functions/genAIResponse-background', {

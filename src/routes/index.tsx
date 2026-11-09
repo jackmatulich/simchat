@@ -10,7 +10,7 @@ import {
   WelcomeScreen 
 } from '../components'
 import { useConversations, useAppState, store, actions } from '../store'
-import { genAIResponse, type Message } from '../utils'
+import { genAIResponse, type Message, type PromptVariant } from '../utils'
 import {
   AttachmentError,
   MAX_ATTACHMENTS,
@@ -46,6 +46,7 @@ function Home() {
   const [editingChatId, setEditingChatId] = useState<string | null>(null)
   const [editingTitle, setEditingTitle] = useState('')
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [promptVariant, setPromptVariant] = useState<PromptVariant>('current')
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const [pendingMessage, setPendingMessage] = useState<Message | null>(null)
   const [error, setError] = useState<string | null>(null);
@@ -58,6 +59,11 @@ function Home() {
         messagesContainerRef.current.scrollHeight
     }
   }, []);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('simchat-prompt-variant')
+    if (saved === 'v19' || saved === 'current') setPromptVariant(saved)
+  }, [])
 
   // Scroll to bottom when messages change or loading state changes
   useEffect(() => {
@@ -135,6 +141,7 @@ function Home() {
         systemPrompt,
         conversationId, // ensure conversationId is passed if needed
         model: selectedModel,
+        promptVariant,
       });
 
       // If using background function, response will be undefined
@@ -155,7 +162,7 @@ function Home() {
       }
       await addMessage(conversationId, errorMessage)
     }
-  }, [messages, getActivePrompt, addMessage, selectedModel]);
+  }, [messages, getActivePrompt, addMessage, selectedModel, promptVariant]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
@@ -308,6 +315,19 @@ function Home() {
     <div className="relative flex h-screen bg-gray-900">
       {/* Model Selector and Settings Button */}
       <div className="absolute z-50 flex items-center gap-3 top-5 right-5">
+        <select
+          value={promptVariant}
+          onChange={(e) => {
+            const next: PromptVariant = e.target.value === 'v19' ? 'v19' : 'current'
+            setPromptVariant(next)
+            window.localStorage.setItem('simchat-prompt-variant', next)
+          }}
+          title="Current is the live generator prompt. v19 is the bench prompt. The next message uses whichever is selected."
+          className="px-3 py-2 text-sm text-white border rounded-lg bg-gray-800/80 backdrop-blur-sm border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        >
+          <option value="current">Prompt: current</option>
+          <option value="v19">Prompt: v19</option>
+        </select>
         <select
           value={selectedModel}
           onChange={(e) => setSelectedModel(e.target.value)}
